@@ -4,13 +4,22 @@ server:
   servlet:
     context-path: /
 spring:
+  thymeleaf:
+    cache: false #关闭thymeleaf缓存，有利于开发阶段的调试
+    prefix: classpath:/templates/ #指定页面的存放位置（默认）
+    suffix: .html #指定页面的后缀（默认）
+    encoding: utf-8
+    mode: LEGACYHTML5
+    servlet:
+      content-type: text/html
+
   datasource:
    driver-class-name: com.mysql.cj.jdbc.Driver
    url: jdbc:mysql:///spring-test?serverTimezone=UTC
-   username: root
-   password: 7718
+   username: #数据库还没决定 暂无
+   password:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: sspu.edu.eduplatform.entity
+  type-aliases-package: sspu.informationsystem.entity
   configuration:
     map-underscore-to-camel-case: true
