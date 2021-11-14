@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sspu.informationsystem.mapper.ApplyMapper">
+  <resultMap id="BaseResultMap" type="sspu.informationsystem.entity.Apply">
+    <!--@Table apply-->
+    <id column="apply_id" jdbcType="INTEGER" property="applyId" />
+    <result column="a_type" jdbcType="INTEGER" property="aType" />
+    <result column="a_state" jdbcType="INTEGER" property="aState" />
+    <result column="a_date" jdbcType="TIMESTAMP" property="aDate" />
+    <result column="a_id" jdbcType="INTEGER" property="aId" />
+    <result column="deal_id" jdbcType="INTEGER" property="dealId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    apply_id, a_type, a_state, a_date, a_id, deal_id
+  </sql>
+  <insert id="insert" keyColumn="apply_id" keyProperty="applyId" parameterType="sspu.informationsystem.entity.Apply" useGeneratedKeys="true">
+    insert into apply (a_type, a_state, a_date, 
+      a_id, deal_id)
+    values (#{aType,jdbcType=INTEGER}, #{aState,jdbcType=INTEGER}, #{aDate,jdbcType=TIMESTAMP}, 
+      #{aId,jdbcType=INTEGER}, #{dealId,jdbcType=INTEGER})
+  </insert>
+</mapper>

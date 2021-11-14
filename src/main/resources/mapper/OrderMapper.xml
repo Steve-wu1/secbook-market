@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sspu.informationsystem.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="sspu.informationsystem.entity.Order">
+    <!--@Table `order`-->
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="o_time" jdbcType="TIMESTAMP" property="oTime" />
+    <result column="o_state" jdbcType="INTEGER" property="oState" />
+    <result column="o_require_time" jdbcType="TIMESTAMP" property="oRequireTime" />
+    <result column="o_user_id" jdbcType="INTEGER" property="oUserId" />
+    <result column="o_rank" jdbcType="INTEGER" property="oRank" />
+    <result column="o_comment" jdbcType="VARCHAR" property="oComment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, o_time, o_state, o_require_time, o_user_id, o_rank, o_comment
+  </sql>
+  <insert id="insert" keyColumn="order_id" keyProperty="orderId" parameterType="sspu.informationsystem.entity.Order" useGeneratedKeys="true">
+    insert into `order` (o_time, o_state, o_require_time, 
+      o_user_id, o_rank, o_comment
+      )
+    values (#{oTime,jdbcType=TIMESTAMP}, #{oState,jdbcType=INTEGER}, #{oRequireTime,jdbcType=TIMESTAMP}, 
+      #{oUserId,jdbcType=INTEGER}, #{oRank,jdbcType=INTEGER}, #{oComment,jdbcType=VARCHAR}
+      )
+  </insert>
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sspu.informationsystem.mapper.StoreMapper">
+  <resultMap id="BaseResultMap" type="sspu.informationsystem.entity.Store">
+    <!--@Table store-->
+    <id column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="s_name" jdbcType="VARCHAR" property="sName" />
+    <result column="s_phone" jdbcType="VARCHAR" property="sPhone" />
+    <result column="s_address" jdbcType="VARCHAR" property="sAddress" />
+    <result column="s_details" jdbcType="VARCHAR" property="sDetails" />
+    <result column="s_account" jdbcType="VARCHAR" property="sAccount" />
+    <result column="s_password" jdbcType="VARCHAR" property="sPassword" />
+    <result column="s_photo" jdbcType="VARCHAR" property="sPhoto" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    store_id, s_name, s_phone, s_address, s_details, s_account, s_password, s_photo
+  </sql>
+  <insert id="insert" keyColumn="store_id" keyProperty="storeId" parameterType="sspu.informationsystem.entity.Store" useGeneratedKeys="true">
+    insert into store (s_name, s_phone, s_address, 
+      s_details, s_account, s_password, 
+      s_photo)
+    values (#{sName,jdbcType=VARCHAR}, #{sPhone,jdbcType=VARCHAR}, #{sAddress,jdbcType=VARCHAR}, 
+      #{sDetails,jdbcType=VARCHAR}, #{sAccount,jdbcType=VARCHAR}, #{sPassword,jdbcType=VARCHAR}, 
+      #{sPhoto,jdbcType=VARCHAR})
+  </insert>
+</mapper>
