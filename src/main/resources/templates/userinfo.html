@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/userinfo.css">
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/navbar.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-dark fixed-top bg-success">
+    <div class="container-fluid">
+        <img src="#" alt="" width="138" height="44" class="d-inline-block align-text-top">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">食堂预约管理系统</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" style="color: #1a1e21" aria-current="page"
+                           href="stores.html">食堂商家</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #1a1e21" href="myorders.html">我的订单</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: #1a1e21" href="#" id="offcanvasNavbarDropdown"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            陈瀛
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                            <li><a class="dropdown-item" href="userinfo.html">我的信息</a></li>
+                            <li><a class="dropdown-item" href="login.html">退出账号</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<div style=" margin: 0 auto; left: 50%; position: absolute; margin: 0 0 0 -540px;">
+    <form class="main-panel row g-3 needs-validation" novalidate>
+        <div class="col-md-4 position-relative">
+            <label for="validationTooltip01" class="form-label">姓名</label>
+            <input type="text" class="form-control" id="validationTooltip01" value="陈瀛" required>
+            <div class="valid-tooltip">
+                Looks good!
+            </div>
+        </div>
+
+        <div class="col-md-4 position-relative">
+            <label for="validationTooltip04" class="form-label">性别</label>
+            <select class="form-select" id="validationTooltip04" required>
+                <option selected disabled value="">男</option>
+                <option>男</option>
+                <option>女</option>
+            </select>
+            <div class="invalid-tooltip">
+                Please select a valid state.
+            </div>
+        </div>
+
+        <div class="col-md-8 position-relative">
+            <label for="validationTooltip01" class="form-label">用户名</label>
+            <input type="text" class="form-control" id="validationTooltip02" value="188888888" required>
+            <div class="valid-tooltip">
+            </div>
+        </div>
+
+        <div class="col-md-8 position-relative">
+            <label for="validationTooltip01" class="form-label">联系方式</label>
+            <input type="text" class="form-control" id="validationTooltip07" value="13711111111" required>
+            <div class="valid-tooltip">
+            </div>
+        </div>
+
+
+        <div class="col-md-12 position-relative">
+            <button class="btn btn-primary" type="button" onclick=" myFunction()">修改</button>
+        </div>
+        <!--<div class="col-6">-->
+        <!--<button class="btn btn-primary" type="button" onclick=" history.go(-1)">返回</button>-->
+        <!--</div>-->
+
+        <script>
+            function myFunction() {
+                var txt;
+                if (confirm("确认上传")) {
+                    alert("上传成功");
+                } else {
+                }
+                document.getElementById("demo").innerHTML = txt;
+            }
+        </script>
+
+        <br/>
+        <br/><br/><br/>
+
+    </form>
+    <nav class=" navbar navbar-dark absolute-buttom bg-success" style="margin: 0 0 0 -220px;">
+        <div class="container-fluid">
+            <a style="display:inline-block; width:1500px; text-align:center; color: #dde0e3">食堂预约系统</a>
+        </div>
+    </nav>
+</div>
+
+
+</body>
+</html>

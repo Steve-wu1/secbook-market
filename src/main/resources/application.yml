@@ -15,9 +15,9 @@ spring:
 
   datasource:
    driver-class-name: com.mysql.cj.jdbc.Driver
-   url: jdbc:mysql:///spring-test?serverTimezone=UTC
-   username: #数据库还没决定 暂无
-   password:
+   url: jdbc:mysql://localhost:3306/canteen?serverTimezone=UTC
+   username: root
+   password: 1234
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: sspu.informationsystem.entity
