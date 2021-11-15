@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>食堂信息系统登录页面</title>
@@ -24,20 +26,27 @@
     <div class="brand-container">
         <img src="#" width="200" height="75">
     </div>
-    <div class="input-box-container">
-        <input type="text" class="form-control" id="phone" placeholder="请输入账号账号">
+    <div class="alert alert-danger alert-mg-b" th:style="${loginFail==null}?'display:none;'"
+         th:text="${loginFail}">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        Indicates a dangerous negative action.
     </div>
-    <div class="input-box-container">
-        <input type="password" class="form-control" id="password" placeholder="请输入密码">
-    </div>
-    <div class="login-btn-container">
-        <!--    <a href="#">-->
-        <!--    <button class="btn btn-primary login-btn">登录</button>-->
-        <!--    </a>-->
-        <a href="/userLogin">
-            <button class="btn btn-primary login-btn">登录</button>
-        </a>
-    </div>
+
+        <div class="input-box-container">
+            <input type="text" class="form-control" id="phone" placeholder="请输入账号账号">
+        </div>
+        <div class="input-box-container">
+            <input type="password" class="form-control" id="password" placeholder="请输入密码">
+        </div>
+        <div class="login-btn-container">
+            <a href="/toStoreList">
+                <button class="btn btn-primary login-btn">登录</button>
+            </a>
+        </div>
+
+
 </div>
 </body>
 </html>
