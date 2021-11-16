@@ -21,4 +21,14 @@ public class TestController {
     public String ToStoreList() {
         return "/stores";
     }
+
+    @GetMapping("/toUserInfo")
+    public String ToUserInfo() {
+        return "/userinfo";
+    }
+
+    @GetMapping("/toMyOrders")
+    public String ToMyOrders() {
+        return "/myorders";
+    }
 }
