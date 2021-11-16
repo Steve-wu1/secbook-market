@@ -24,11 +24,11 @@ public class TestController {
 
     @GetMapping("/toUserInfo")
     public String ToUserInfo() {
-        return "/userinfo";
+        return "/userInfo";
     }
 
     @GetMapping("/toMyOrders")
     public String ToMyOrders() {
-        return "/myorders";
+        return "/myOrders";
     }
 }
