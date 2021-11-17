@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Navbar</title>
@@ -29,18 +29,18 @@
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
                         <a class="nav-link active" style="color: #1a1e21" aria-current="page"
-                           href="/toStoreList">食堂商家</a>
+                           href="/toDataAnalysize">数据分析</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #1a1e21" href="/toMyOrders">我的订单</a>
+                        <a class="nav-link" style="color: #1a1e21" href="/toStoreOrder">历史订单</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" style="color: #1a1e21" href="#" id="offcanvasNavbarDropdown"
                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            陈瀛
+                            爱生炒饭
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                            <li><a class="dropdown-item" href="/toUserInfo">我的信息</a></li>
+                            <li><a class="dropdown-item" href="/toStoreMain">商家主页</a></li>
                             <li><a class="dropdown-item" href="/login">退出账号</a></li>
                         </ul>
                     </li>
@@ -49,6 +49,7 @@
         </div>
     </div>
 </nav>
+
 <br/><br/>
 
 <form class="main-panel row g-3 needs-validation"
@@ -58,8 +59,9 @@
         <tr>
             <th>#</th>
             <th>订餐时间</th>
-            <th>商家</th>
+            <th>用户</th>
             <th>价格</th>
+            <th>联系方式</th>
             <th>状态</th>
             <th>内容</th>
             <th>巴拉巴拉</th>
@@ -70,98 +72,22 @@
         <tr class="pure-table-odd">
             <td>1</td>
             <td>2001-01-01 00:00:00</td>
-            <td>爱生炒饭</td>
+            <td>陈瀛</td>
             <td>21</td>
+            <td>18888888</td>
+
             <td>已支付</td>
             <td>黄瓜炒饭+蛋+番茄炒饭</td>
             <td>
                 <a href="#">
-                    <button class="btn btn-primary login-btn">再来一单</button>
+                    <button class="btn btn-primary login-btn">确认完成</button>
                 </a>
                 <a href="#">
-                    <button class="btn btn-primary login-btn">评价</button>
-                </a>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">打分</button>
+                    <button class="btn btn-primary login-btn">取消订单</button>
                 </a>
             </td>
         </tr>
 
-        <tr>
-            <td>2</td>
-            <td>2051</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">再来一单</button>
-                </a>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">评价</button>
-                </a>
-            </td>
-        </tr>
-
-        <tr class="pure-table-odd">
-            <td>3</td>
-            <td>2041</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">再来一单</button>
-                </a>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">评价</button>
-                </a>
-            </td>
-        </tr>
-
-        <tr>
-            <td>4</td>
-            <td>2011</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="/toStoreList">
-                    <button class="btn btn-primary login-btn">登录</button>
-                </a>
-            </td>
-        </tr>
-
-        <tr class="pure-table-odd">
-            <td>5</td>
-            <td>2021</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="/toStoreList">
-                    <button class="btn btn-primary login-btn">登录</button>
-                </a>
-            </td>
-        </tr>
-
-        <tr>
-            <td>6</td>
-            <td>2031</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="/toStoreList">
-                    <button class="btn btn-primary login-btn">登录</button>
-                </a>
-            </td>
-        </tr>
 
         </tbody>
     </table>

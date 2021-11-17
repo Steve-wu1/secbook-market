@@ -38,21 +38,24 @@
             </div>
                 <input type="text" class="form-control" id="phone" name="uAccount" placeholder="请输入账号账号">
         </div>
-            <div class="input-box-container">
-                <input type="password" class="form-control" id="password" name="uPassword" placeholder="请输入密码">
-            </div>
-            <div class="login-btn-container">
-                    <button class="btn btn-primary login-btn" type="submit">登录</button>
-                </a>
+        <div class="input-box-container">
+            <input type="password" class="form-control" id="password" placeholder="请输入密码">
+        </div>
+        <div class="login-btn-container">
+            <a id="log" href="/toStoreList">
+                <button class="btn btn-primary login-btn">登录</button>
+            </a>
+            <a id="storelog" style="display: none" href="/toStoreMain">
+                <button class="btn btn-primary login-btn">登录</button>
+            </a>
+            <a id="reg" href="/toRegister">
+                <button class="btn btn-primary login-btn">注册</button>
+            </a>
+            <a id="storereg" style="display: none" href="/toStoreRegister">
+                <button class="btn btn-primary login-btn">商家注册</button>
+            </a>
+        </div>
 
-                <a id="reg" href="/toRegister">
-                    <button class="btn btn-primary login-btn">注册</button>
-                </a>
-                <a id="storereg" style="display: none" href="/toStoreRegister">
-                    <button class="btn btn-primary login-btn">商家注册</button>
-                </a>
-            </div>
-    </form>
 
 </div>
 <nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
@@ -69,13 +72,16 @@
         // document.getElementById("endTime").value = "用户";
         document.getElementById("storereg").style.display = 'none';
         document.getElementById("reg").style.display = 'unset';
+        document.getElementById("storelog").style.display = 'none';
+        document.getElementById("log").style.display = 'unset';
     }
 
     function fun2() {
         // document.getElementById("endTime").value = "s商家";
         document.getElementById("reg").style.display = 'none';
         document.getElementById("storereg").style.display = 'unset';
-
+        document.getElementById("log").style.display = 'none';
+        document.getElementById("storelog").style.display = 'unset';
 
     }
 

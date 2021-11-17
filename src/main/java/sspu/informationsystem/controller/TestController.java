@@ -56,4 +56,19 @@ public class TestController {
     public String ToStoreRegister() {
         return "/storeRegister";
     }
+
+    @GetMapping("/toStoreMain")
+    public String ToStoreMain() {
+        return "/storeMainPage";
+    }
+
+    @GetMapping("/toStoreOrder")
+    public String ToStoreOrder() {
+        return "/storeOrders";
+    }
+
+    @GetMapping("/toDataAnalysize")
+    public String ToDataAnalysize() {
+        return "/dataAnalysize";
+    }
 }
