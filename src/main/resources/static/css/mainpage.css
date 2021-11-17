@@ -10,3 +10,41 @@ a {
 .main-panel4 {
     margin-top: 40px;
 }
+
+/*----------------------------------------*/
+/*  3. All Nested Class
+/*----------------------------------------*/
+.product-sales-chart, .analytics-info-cs, .tranffic-als-inner, .analytics-rounded, .single-new-trend, .personal-info-wrap, .author-widgets-single, .calender-inner, .product-status-wrap, .review-tab-pro-inner, .income-dashone-total, .analytics-edu-wrap, .analytics-sparkle-line, .analysis-progrebar, .sparkline8-list, .sparkline9-list, .sparkline7-list, .sparkline10-list, .sparkline12-list, .sparkline13-list, .sparkline14-list, .sparkline13-list, .sparkline11-list, .x-editable-list, .code-editor-single, .blog-details-inner, .charts-single-pro, .about-sparkline, .sparkline-list, .button-ad-wrap, .tab-content-details, .sparkline16-list, .sparkline15-list, .tinymce-single, .single-product-item, .courses-inner, .single-latest-item, .product-payment-inner-st, .profile-info-inner, .contact-panel, .widget-int-shape, .social-media-edu {
+    padding: 20px;
+    background: #fff;
+}
+
+.main-sparkline8-hd h1, .main-sparkline9-hd h1, .main-spark7-hd h1, .main-sparkline10-hd h1, .main-sparkline11-hd h1, .main-sparkline12-hd h1, .main-sparkline13-hd h1, .main-sparkline14-hd h1 {
+    font-size: 20px;
+    color: #303030;
+}
+
+.datatable-dashv1-list .form-control {
+    border-radius: 3px;
+}
+
+.datatable-dashv1-list .form-control {
+    height: 35px;
+}
+
+.datatable-dashv1-list .btn-default {
+    outline: none
+}
+
+.datatable-dashv1-list .editable-submit {
+    background: #006DF0;
+    color: #fff;
+    border: 1px solid #006DF0;
+}
+
+.datatable-dashv1-list .btn-default:hover, .datatable-dashv1-list .btn-default:focus, .datatable-dashv1-list .btn-default:active, .datatable-dashv1-list .editable-submit:hover, .datatable-dashv1-list .editable-submit:focus, .datatable-dashv1-list .editable-submit:active {
+    background: #006DF0;
+    color: #fff;
+}
+
+

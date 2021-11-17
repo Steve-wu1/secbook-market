@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/mainpage.css">
     <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../js/navbar.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <nav class="navbar navbar-dark fixed-top bg-success">
@@ -50,46 +51,208 @@
 </nav>
 <br/><br/>
 
-<form class="main-panel row g-3 needs-validation" novalidate>
-<div class="main-panel2 row">
-    <div class="col-4">
-        <div class="list-group" id="list-tab" role="tablist">
-            <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list"
-               href="#list-home" role="tab" aria-controls="list-home"><strong>精品课程推荐</strong></a>
-            <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list"
-               href="#list-profile" role="tab" aria-controls="list-profile">高等数学</a>
-            <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list"
-               href="#list-messages" role="tab" aria-controls="list-messages">通用英语</a>
-            <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list"
-               href="#list-settings" role="tab" aria-controls="list-settings">大学物理</a>
-        </div>
-    </div>
-    <div class="col-8">
-        <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                精品课程是具有一流教师队伍、一流教学内容、一流教学方法、一流教材、一流教学管理等特点的示范性课程；是高等学校教学质量与教学改革工程的重要组成部分。为贯彻落实党的十六大精神，实践"三个代表"重要思想，切实推进教育创新，深化教学改革，促进现代信息技术在教学中的应用，共享优质教学资源，进一步促进教授上讲台，全面提高教育教学质量，造就数以千万计的专门人才和一大批拔尖创新人才，提升我国高等教育的综合实力和国际竞争能力，教育部决定在全国高等学校(包括高职高专院校)中启动高等学校教学质量与教学改革工程精品课程建设工作(以下简称精品课程建设)。
-            </div>
-            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                高等数学是由微所形成的一门基级数、常微分方程。工科、理科、财经类研究生考试的基础科目。
-                <li class="card-text">任课老师：小王</li>
-                <li class="card-text">开课时间：2021年5月1日-2021年12月11日</li>
-                <a href="login.html"><h5 class="card-title">查看详情</h5></a>
-            </div>
-            <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-                通用英语（一）是东北大学于2017年03月07日首次在中国大学MOOC开设的慕课课程、国家精品在线开放课程。该课程授课教师为赵雯、王勃然、卢卉艳。据2021年3月中国大学MOOC官网显示，该课程已开课9次。本次课程第10次开设。
-                <li class="card-text">任课老师：李民</li>
-                <li class="card-text">开课时间：2021年5月1日-2021年12月1日</li>
-                <a href="ClassInfo.html"><h5 class="card-title">查看详情</h5></a>
-            </div>
-        </div>
-    </div>
-</div>
+<form class="main-panel row g-3 needs-validation"
+      style=" margin: 0 auto; left: 20%;right: 20%; position: absolute; margin: 0 0 0 0;" novalidate>
+    <!--<div class="main-panel2 row">-->
+    <!--<div class="col-4">-->
+    <!--<div class="list-group" id="list-tab" role="tablist">-->
+    <!--<a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list"-->
+    <!--href="#list-home" role="tab" aria-controls="list-home"><strong>精品课程推荐</strong></a>-->
+    <!--<a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list"-->
+    <!--href="#list-profile" role="tab" aria-controls="list-profile">高等数学</a>-->
+    <!--<a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list"-->
+    <!--href="#list-messages" role="tab" aria-controls="list-messages">通用英语</a>-->
+    <!--<a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list"-->
+    <!--href="#list-settings" role="tab" aria-controls="list-settings">大学物理</a>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-8">-->
+    <!--<div class="tab-content" id="nav-tabContent">-->
+    <!--<div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">-->
+    <!--精品课程是具有一流教师队伍、一流教学内容、一流教学方法、一流教材、一流教学管理等特点的示范性课程；是高等学校教学质量与教学改革工程的重要组成部分。为贯彻落实党的十六大精神，实践"三个代表"重要思想，切实推进教育创新，深化教学改革，促进现代信息技术在教学中的应用，共享优质教学资源，进一步促进教授上讲台，全面提高教育教学质量，造就数以千万计的专门人才和一大批拔尖创新人才，提升我国高等教育的综合实力和国际竞争能力，教育部决定在全国高等学校(包括高职高专院校)中启动高等学校教学质量与教学改革工程精品课程建设工作(以下简称精品课程建设)。-->
+    <!--</div>-->
+    <!--<div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">-->
+    <!--高等数学是由微所形成的一门基级数、常微分方程。工科、理科、财经类研究生考试的基础科目。-->
+    <!--<li class="card-text">任课老师：小王</li>-->
+    <!--<li class="card-text">开课时间：2021年5月1日-2021年12月11日</li>-->
+    <!--<a href="login.html"><h5 class="card-title">查看详情</h5></a>-->
+    <!--</div>-->
+    <!--<div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">-->
+    <!--通用英语（一）是东北大学于2017年03月07日首次在中国大学MOOC开设的慕课课程、国家精品在线开放课程。该课程授课教师为赵雯、王勃然、卢卉艳。据2021年3月中国大学MOOC官网显示，该课程已开课9次。本次课程第10次开设。-->
+    <!--<li class="card-text">任课老师：李民</li>-->
+    <!--<li class="card-text">开课时间：2021年5月1日-2021年12月1日</li>-->
+    <!--<a href="ClassInfo.html"><h5 class="card-title">查看详情</h5></a>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <table class="pure-table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>订餐时间</th>
+            <th>商家</th>
+            <th>价格</th>
+            <th>巴拉巴拉</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr class="pure-table-odd">
+            <td>1</td>
+            <td>2001-01-01 00:00:00</td>
+            <td>爱生炒饭</td>
+            <td>21</td>
+            <td>
+                <a href="#">
+                    <button class="btn btn-primary login-btn">再来一单</button>
+                </a>
+                <a href="#">
+                    <button class="btn btn-primary login-btn">评价</button>
+                </a>
+                <a href="#">
+                    <button class="btn btn-primary login-btn">打分</button>
+                </a>
+            </td>
+        </tr>
+
+        <tr>
+            <td>2</td>
+            <td>2051</td>
+            <td>爱生炒饭</td>
+            <td>21</td>
+            <td>
+                <a href="#">
+                    <button class="btn btn-primary login-btn">再来一单</button>
+                </a>
+                <a href="#">
+                    <button class="btn btn-primary login-btn">评价</button>
+                </a>
+            </td>
+        </tr>
+
+        <tr class="pure-table-odd">
+            <td>3</td>
+            <td>2041</td>
+            <td>爱生炒饭</td>
+            <td>21</td>
+            <td>
+                <a href="#">
+                    <button class="btn btn-primary login-btn">再来一单</button>
+                </a>
+                <a href="#">
+                    <button class="btn btn-primary login-btn">评价</button>
+                </a>
+            </td>
+        </tr>
+
+        <tr>
+            <td>4</td>
+            <td>2011</td>
+            <td>爱生炒饭</td>
+            <td>21</td>
+            <td>
+                <a href="/toStoreList">
+                    <button class="btn btn-primary login-btn">登录</button>
+                </a>
+            </td>
+        </tr>
+
+        <tr class="pure-table-odd">
+            <td>5</td>
+            <td>2021</td>
+            <td>爱生炒饭</td>
+            <td>21</td>
+            <td>
+                <a href="/toStoreList">
+                    <button class="btn btn-primary login-btn">登录</button>
+                </a>
+            </td>
+        </tr>
+
+        <tr>
+            <td>6</td>
+            <td>2031</td>
+            <td>爱生炒饭</td>
+            <td>21</td>
+            <td>
+                <a href="/toStoreList">
+                    <button class="btn btn-primary login-btn">登录</button>
+                </a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
 </form>
-</div>
+
+
 <nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
     <div class="container-fluid">
         <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">食堂预约系统</a>
     </div>
 </nav>
 </body>
+
+<style type="text/css">
+    html {
+        font-family: sans-serif;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        margin: 10px;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    td, th {
+        padding: 0;
+    }
+
+    .pure-table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        empty-cells: show;
+        border: 1px solid #cbcbcb;
+    }
+
+    .pure-table caption {
+        color: #000;
+        font: italic 85%/1 arial, sans-serif;
+        padding: 1em 0;
+        text-align: center;
+    }
+
+    .pure-table td, .pure-table th {
+        border-left: 1px solid #cbcbcb;
+        border-width: 0 0 0 1px;
+        font-size: inherit;
+        margin: 0;
+        overflow: visible;
+        padding: .5em 1em;
+    }
+
+    .pure-table thead {
+        background-color: #e0e0e0;
+        color: #000;
+        text-align: left;
+        vertical-align: bottom;
+    }
+
+    .pure-table td {
+        background-color: transparent;
+    }
+
+    .pure-table-odd td {
+        background-color: #f2f2f2;
+    }
+</style>
+
+
 </html>
