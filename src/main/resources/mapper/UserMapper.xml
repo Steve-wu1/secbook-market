@@ -19,4 +19,9 @@
     values (#{uName,jdbcType=VARCHAR}, #{uSex,jdbcType=INTEGER}, #{uPhone,jdbcType=VARCHAR}, 
       #{uAccount,jdbcType=VARCHAR}, #{uPassword,jdbcType=VARCHAR})
   </insert>
+    <select id="getUserInfoByAccount" resultMap="BaseResultMap">
+      select *
+      from user
+      where u_account = #{account,jdbcType=VARCHAR}
+    </select>
 </mapper>

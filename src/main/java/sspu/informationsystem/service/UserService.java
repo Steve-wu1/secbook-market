@@ -6,4 +6,6 @@ public interface UserService{
 
     int insert(User record);
 
+    User getUserInfoByAccount(String account);
+
 }

@@ -16,4 +16,9 @@ public class UserServiceImpl implements UserService{
         return userMapper.insert(record);
     }
 
+    @Override
+    public User getUserInfoByAccount(String account) {
+        return userMapper.getUserInfoByAccount(account);
+    }
+
 }

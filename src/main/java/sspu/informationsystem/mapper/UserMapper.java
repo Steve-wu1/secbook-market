@@ -6,4 +6,7 @@ import sspu.informationsystem.entity.User;
 @Mapper
 public interface UserMapper {
     int insert(User record);
+
+
+    User getUserInfoByAccount(String account);
 }
