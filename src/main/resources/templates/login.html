@@ -30,7 +30,7 @@
         </button>
         Indicates a dangerous negative action.
     </div>
-    <form  method="post" th:action="@{/user/login}" enctype="multipart/form-data">
+    <form id="loginForm" method="post" action="/user/login" enctype="multipart/form-data">
         <div class="input-box-container">
             <div>您的身份是
                 <label><input name="ident" type="radio" value="1" ONCLICK="fun1()"/>用户 </label>
@@ -41,12 +41,13 @@
         <div class="input-box-container">
             <input type="password" class="form-control" id="password" name="uPassword"  placeholder="请输入密码">
         </div>
+    </form>
         <div class="login-btn-container">
-            <a id="log" type="submit">
-                <button class="btn btn-primary login-btn">登录</button>
+            <a id="log" >
+                <button class="btn btn-primary login-btn" onclick="tijiao()">登录</button>
             </a>
-            <a id="storelog" style="display: none" href="/toStoreMain">
-                <button class="btn btn-primary login-btn">登录</button>
+            <a id="storelog" style="display: none" >
+                <button class="btn btn-primary login-btn" onclick="tijiao2()">登录</button>
             </a>
             <a id="reg" href="/toRegister">
                 <button class="btn btn-primary login-btn">注册</button>
@@ -55,13 +56,7 @@
                 <button class="btn btn-primary login-btn">商家注册</button>
             </a>
         </div>
-    </form>
-    <a href="/toStoreList">
-        <button class="btn btn-primary">登录</button>
-    </a>
-    <a href="/toStoreMain">
-        <button class="btn btn-primary">登录</button>
-    </a>
+
 
 </div>
 <nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
@@ -89,6 +84,18 @@
         document.getElementById("log").style.display = 'none';
         document.getElementById("storelog").style.display = 'unset';
 
+    }
+
+    function tijiao(){
+        document.getElementById("loginForm").submit();
+    }
+
+    function tijiao2(){
+        document.getElementById("phone").name = "sAccount";
+        document.getElementById("password").name = "sPassword";
+        var loginForm = document.getElementById("loginForm");
+        loginForm.action = "/store/login";
+        loginForm.submit();
     }
 
 </script>

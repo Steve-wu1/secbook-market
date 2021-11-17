@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @Controller
-public class TestController {
+public class CommonController {
     @ResponseBody
     @GetMapping("/hello")
     public String hello(){

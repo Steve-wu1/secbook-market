@@ -5,5 +5,8 @@ import sspu.informationsystem.entity.Store;
 
 @Mapper
 public interface StoreMapper {
+
     int insert(Store record);
+
+    Store getStoreInfoByAccount(String account);
 }

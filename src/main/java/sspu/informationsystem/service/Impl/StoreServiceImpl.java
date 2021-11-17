@@ -16,4 +16,9 @@ public class StoreServiceImpl implements StoreService{
         return storeMapper.insert(record);
     }
 
+    @Override
+    public Store getStoreInfoByAccount(String account) {
+        return storeMapper.getStoreInfoByAccount(account);
+    }
+
 }

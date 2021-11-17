@@ -6,4 +6,5 @@ public interface StoreService{
 
     int insert(Store record);
 
+    Store getStoreInfoByAccount(String account);
 }

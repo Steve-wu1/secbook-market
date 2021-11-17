@@ -23,4 +23,9 @@
       #{sDetails,jdbcType=VARCHAR}, #{sAccount,jdbcType=VARCHAR}, #{sPassword,jdbcType=VARCHAR}, 
       #{sPhoto,jdbcType=VARCHAR})
   </insert>
+    <select id="getStoreInfoByAccount" resultMap="BaseResultMap">
+      select *
+      from store
+      where s_account = #{account,jdbcType=VARCHAR}
+    </select>
 </mapper>
