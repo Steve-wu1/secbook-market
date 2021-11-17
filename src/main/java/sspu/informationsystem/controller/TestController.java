@@ -67,8 +67,8 @@ public class TestController {
         return "/storeOrders";
     }
 
-    @GetMapping("/toDataAnalysize")
-    public String ToDataAnalysize() {
-        return "/dataAnalysize";
+    @GetMapping("/toDataAnalyze")
+    public String ToDataAnalyze() {
+        return "/dataAnalyze";
     }
 }
