@@ -47,10 +47,12 @@
             <input type="password" class="form-control" id="password" placeholder="请输入密码">
         </div>
         <div class="login-btn-container">
-            <a href="/toStoreList">
+            <a id="log" href="/toStoreList">
                 <button class="btn btn-primary login-btn">登录</button>
             </a>
-
+            <a id="storelog" style="display: none" href="/toStoreMain">
+                <button class="btn btn-primary login-btn">登录</button>
+            </a>
             <a id="reg" href="/toRegister">
                 <button class="btn btn-primary login-btn">注册</button>
             </a>
@@ -75,13 +77,16 @@
         // document.getElementById("endTime").value = "用户";
         document.getElementById("storereg").style.display = 'none';
         document.getElementById("reg").style.display = 'unset';
+        document.getElementById("storelog").style.display = 'none';
+        document.getElementById("log").style.display = 'unset';
     }
 
     function fun2() {
         // document.getElementById("endTime").value = "s商家";
         document.getElementById("reg").style.display = 'none';
         document.getElementById("storereg").style.display = 'unset';
-
+        document.getElementById("log").style.display = 'none';
+        document.getElementById("storelog").style.display = 'unset';
 
     }
 
