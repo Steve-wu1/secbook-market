@@ -47,4 +47,37 @@ a {
     color: #fff;
 }
 
+.file-upload-inner.ts-forms .prepend-small-btn .file-button, .file-upload-inner.ts-forms .prepend-big-btn .file-button {
+    left: 0px;
+}
 
+.file-upload-inner.ts-forms .file-button, .file-upload-inner.ts-forms .file-button:active, .file-upload-inner.ts-forms .file-button:focus {
+    background: #03a9f4;
+    border-radius: 0px;
+    width: 70px;
+    height: 35px;
+    line-height: 35px;
+    top: 0px;
+}
+
+.ts-forms .append-small-btn .file-button, .ts-forms .append-big-btn .file-button, .ts-forms .prepend-small-btn .file-button, .ts-forms .prepend-big-btn .file-button {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.ts-forms .file-button {
+    color: #fff;
+    display: block;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    top: 4px;
+    z-index: 1;
+}

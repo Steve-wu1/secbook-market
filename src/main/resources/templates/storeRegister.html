@@ -20,22 +20,17 @@
     <form class="main-panel row g-3 needs-validation" novalidate>
 
         <div class="col-md-4 position-relative">
-            <label for="validationTooltip01" class="form-label">姓名/店铺名</label>
+            <label for="validationTooltip01" class="form-label">店铺名</label>
             <input type="text" class="form-control" id="validationTooltip01" value="陈瀛" required>
             <div class="valid-tooltip">
                 Looks good!
             </div>
         </div>
 
-        <div class="col-md-4 position-relative" id="sex">
-            <label for="validationTooltip04" class="form-label">性别</label>
-            <select class="form-select" id="validationTooltip04" required>
-                <option selected disabled value="">男</option>
-                <option>男</option>
-                <option>女</option>
-            </select>
-            <div class="invalid-tooltip">
-                Please select a valid state.
+        <div class="col-md-8 position-relative" style="visibility: hidden">
+            <label for="validationTooltip01" class="form-label">联系方式</label>
+            <input type="text" class="form-control" id="validationTooltip07" value="13711111111" required>
+            <div class="valid-tooltip">
             </div>
         </div>
 
@@ -58,48 +53,49 @@
             <div class="valid-tooltip">
             </div>
         </div>
+        <div class="col-md-8 position-relative" id="address">
+            <label for="validationTooltip01" class="form-label">地址</label>
+            <input type="text" class="form-control" id="validationTooltip08" value="13711111111" required>
+            <div class="valid-tooltip">
+            </div>
+        </div>
 
-        <div class="col-md-8 position-relative" style=" margin: 20px 0 0 350px;">
+        <div class="col-md-8 position-relative" id="detail1">
+            <p>店铺简介</p>
+            <textarea id="detail" style="min-height: 100px;min-width: 756px;">
+            </textarea>
+            <div class="valid-tooltip">
+            </div>
+        </div>
+
+        <div class="col-md-8 position-relative" id="photo">
+            <label for="validationTooltip01" class="form-label">照片</label>
+
+
+            <div class="file-button">
+                选择文件
+                <input type="file"
+                       name="resumePath2"
+                       multiple="multiple"
+                       id="fileInput"
+                       accept="image/*">
+            </div>
+
+            <div class="valid-tooltip">
+            </div>
+        </div>
+
+
+        <div class="col-md-8 position-relative" style="  margin: 20px 0 0 350px;">
             <button class="btn btn-primary" type="button">修改</button>
         </div>
-        <!--<div class="col-6">-->
-        <!--<button class="btn btn-primary" type="button" onclick=" history.go(-1)">返回</button>-->
-        <!--</div>-->
 
-        <script>
-            function myFunction() {
-                var txt;
-                if (confirm("确认上传")) {
-                    alert("上传成功");
-                } else {
-                }
-                document.getElementById("demo").innerHTML = txt;
-            }
-
-
-            // function fun1() {
-            //     document.getElementById("endTime").value = document.getElementById('ident').value;
-            //     var a = document.getElementById('address');
-            //     var c = document.getElementById('photo');
-            //     var d = document.getElementById('detail');
-            //     var e = document.getElementById('sex');
-            //
-            //     if(document.getElementById('ident').value="1") {
-            //         a.style.visibility = "hidden";
-            //         c.style.visibility = "hidden";
-            //         d.style.visibility = "hidden";
-            //         e.style.visibility = "visible";
-            //     }
-            //
-            //     if(document.getElementById('ident').value="2"){
-            //         a.style.visibility = "visible";
-            //         c.style.visibility = "visible";
-            //         d.style.visibility = "visible";
-            //         e.style.visibility = "hidden";
-            //     }
-            // }
-        </script>
-
+        <div class="col-md-8 position-relative" style="visibility: hidden">
+            <label for="validationTooltip01" class="form-label"></label>
+            <input type="text" class="form-control" required>
+            <div class="valid-tooltip">
+            </div>
+        </div>
 
     </form>
 

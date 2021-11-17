@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js">
 
 <head>
     <meta charset="UTF-8">
@@ -13,28 +13,34 @@
     <script src="../js/navbar.js"></script>
 </head>
 <body>
-
-
 <nav class="navbar navbar-dark fixed-top bg-success">
     <div class="container-fluid">
         <img src="#" alt="" width="138" height="44" class="d-inline-block align-text-top">
     </div>
 </nav>
 
-
 <div class="login-form-container">
     <div class="brand-container">
         <img src="#" width="200" height="75">
     </div>
-    <div class="alert alert-danger alert-mg-b" th:style="${loginFail==null}?'display:none;'"
-         th:text="${loginFail}">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-        Indicates a dangerous negative action.
-    </div>
+    <!--<div class="alert alert-danger alert-mg-b" th:style="${loginFail==null}?'display:none;'"-->
+    <!--th:text="${loginFail}">-->
+    <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+    <!--<span aria-hidden="true">×</span>-->
+    <!--</button>-->
+    <!--Indicates a dangerous negative action.-->
+    <!--</div>-->
 
-        <div class="input-box-container">
+    <form class="input-box-container" action="" method="get">
+        您的身份是
+        <label><input name="ident" type="radio" value="1" ONCLICK="fun1()"/>用户 </label>
+        <label><input name="ident" type="radio" value="2" ONCLICK="fun2()"/>商家 </label>
+    </form>
+    <!--<label for="endTime" class="control-label">SJ</label>-->
+    <!--<input name="endTime" id="endTime" type="text"/>-->
+
+
+    <div class="input-box-container">
             <input type="text" class="form-control" id="phone" placeholder="请输入账号账号">
         </div>
         <div class="input-box-container">
@@ -43,6 +49,13 @@
         <div class="login-btn-container">
             <a href="/toStoreList">
                 <button class="btn btn-primary login-btn">登录</button>
+            </a>
+
+            <a id="reg" href="/toRegister">
+                <button class="btn btn-primary login-btn">注册</button>
+            </a>
+            <a id="storereg" style="display: none" href="/toStoreRegister">
+                <button class="btn btn-primary login-btn">商家注册</button>
             </a>
         </div>
 
@@ -53,5 +66,26 @@
         <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">食堂预约系统</a>
     </div>
 </nav>
+
+
+<script language="JavaScript">
+
+
+    function fun1() {
+        // document.getElementById("endTime").value = "用户";
+        document.getElementById("storereg").style.display = 'none';
+        document.getElementById("reg").style.display = 'unset';
+    }
+
+    function fun2() {
+        // document.getElementById("endTime").value = "s商家";
+        document.getElementById("reg").style.display = 'none';
+        document.getElementById("storereg").style.display = 'unset';
+
+
+    }
+
+</script>
+
 </body>
 </html>

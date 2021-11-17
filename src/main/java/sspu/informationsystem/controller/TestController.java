@@ -31,4 +31,14 @@ public class TestController {
     public String ToMyOrders() {
         return "/myOrders";
     }
+
+    @GetMapping("/toRegister")
+    public String ToRegister() {
+        return "/register";
+    }
+
+    @GetMapping("/toStoreRegister")
+    public String ToStoreRegister() {
+        return "/storeRegister";
+    }
 }
