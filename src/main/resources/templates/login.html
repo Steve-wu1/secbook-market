@@ -30,7 +30,7 @@
         </button>
         Indicates a dangerous negative action.
     </div>
-    <form  method="post" th:action="@{/user/login}" enctype="multipart/form-data">>
+    <form  method="post" th:action="@{/user/login}" enctype="multipart/form-data">
         <div class="input-box-container">
             <div>您的身份是
                 <label><input name="ident" type="radio" value="1" ONCLICK="fun1()"/>用户 </label>
@@ -39,10 +39,10 @@
                 <input type="text" class="form-control" id="phone" name="uAccount" placeholder="请输入账号账号">
         </div>
         <div class="input-box-container">
-            <input type="password" class="form-control" id="password" placeholder="请输入密码">
+            <input type="password" class="form-control" id="password" name="uPassword"  placeholder="请输入密码">
         </div>
         <div class="login-btn-container">
-            <a id="log" href="/toStoreList">
+            <a id="log" type="submit">
                 <button class="btn btn-primary login-btn">登录</button>
             </a>
             <a id="storelog" style="display: none" href="/toStoreMain">
@@ -55,7 +55,7 @@
                 <button class="btn btn-primary login-btn">商家注册</button>
             </a>
         </div>
-
+    </form>
 
 </div>
 <nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
