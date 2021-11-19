@@ -234,41 +234,6 @@
     }, 2500);
 
 
-    var chart2 = c3.generate({
-        bindto: '#chart2',
-        data: {
-            columns: [
-                ['data4', 91.4]
-            ],
-            type: 'gauge',
-            onclick: function (d, i) {
-                console.log("onclick", d, i);
-            },
-            onmouseover: function (d, i) {
-                console.log("onmouseover", d, i);
-            },
-            onmouseout: function (d, i) {
-                console.log("onmouseout", d, i);
-            }
-        },
-        gauge: {},
-        color: {
-            pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], // the three color levels for the percentage values.
-            threshold: {
-//            unit: 'value', // percentage is default
-//            max: 200, // 100 is default
-                values: [30, 60, 90, 100]
-            }
-        },
-        size: {
-            height: 80
-        }
-    });
-    setTimeout(function () {
-        chart2.load({
-            columns: [['data4', 100]]
-        });
-    }, 1000);
 
     var chart3 = c3.generate({
         bindto: '#chart3',
