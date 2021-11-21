@@ -31,7 +31,7 @@ public class UserController {
         }
         if (check.getUPassword().equals(user.getUPassword()))
         {
-            session.setAttribute("userAccount",user.getUAccount());
+            session.setAttribute("user",check);
             return "redirect:/toStoreList";
         }
         return "redirect:/loginFailure";
@@ -40,10 +40,17 @@ public class UserController {
     @PostMapping("/user/register")
     public String userRegister(User user,HttpSession session){
         userService.insert(user);
-        session.setAttribute("userAccount",user.getUAccount());
+        session.setAttribute("user",userService.getUserInfoByAccount(user.getUAccount()));
         return "redirect:/toStoreList";
 
     }
 
-
+    @PostMapping("/user/updateInfo")
+    public String userUpdateInfo(User user, HttpSession session){
+        User original =(User) session.getAttribute("user");
+        user.setUserId(original.getUserId());
+        userService.updateInfoById(user);
+        session.setAttribute("user", userService.getUserInfoById(original.getUserId()));
+        return "redirect:/toUserInfo";
+    }
 }

@@ -32,4 +32,18 @@
     select u_account
     from user
   </select>
+    <update id="updateInfoById">
+      update user
+      set
+      u_name = #{uName,jdbcType=VARCHAR},
+      u_account = #{uAccount,jdbcType=VARCHAR},
+      u_phone = #{uPhone,jdbcType=VARCHAR},
+      u_sex = #{uSex,jdbcType=INTEGER}
+      where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+  <select id="getUserInfoById" resultMap="BaseResultMap">
+    select *
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
 </mapper>

@@ -15,4 +15,8 @@ public interface UserMapper {
     List<String> getAllPhone();
 
     List<String> getAllAccount();
+
+    void updateInfoById(User user);
+
+    User getUserInfoById(Integer userId);
 }

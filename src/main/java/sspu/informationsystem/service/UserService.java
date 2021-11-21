@@ -15,6 +15,7 @@ public interface UserService{
 
     List<String> getAllAccount();
 
+    void updateInfoById(User user);
 
-
+    User getUserInfoById(Integer userId);
 }
