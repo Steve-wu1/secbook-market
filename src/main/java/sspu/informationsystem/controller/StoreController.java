@@ -38,4 +38,12 @@ public class StoreController {
         }
         return "redirect:/loginFailure";
     }
+
+    @PostMapping("/store/register")
+    public String userRegister(Store store,HttpSession session){
+        storeService.insert(store);
+        session.setAttribute("userAccount",store.getSAccount());
+        return "redirect:/toStoreList";
+
+    }
 }
