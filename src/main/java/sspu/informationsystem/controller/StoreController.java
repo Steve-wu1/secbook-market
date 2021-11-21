@@ -8,6 +8,7 @@ import sspu.informationsystem.entity.User;
 import sspu.informationsystem.service.StoreService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
@@ -23,7 +24,7 @@ public class StoreController {
      * @return 用户登录信息校验
      */
     @PostMapping("/store/login")
-    public String storeLogin(Store store ) {
+    public String storeLogin(Store store, HttpSession session) {
         log.debug("账号"+store.getSAccount()+"密码"+store.getSPassword());
         Store check = storeService.getStoreInfoByAccount(store.getSAccount());
         if (check.getStoreId()==null)
@@ -32,6 +33,7 @@ public class StoreController {
         }
         if (check.getSPassword().equals(store.getSPassword()))
         {
+            session.setAttribute("storeAccount",store.getSAccount());
             return "redirect:/toStoreMain";
         }
         return "redirect:/loginFailure";

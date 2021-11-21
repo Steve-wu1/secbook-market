@@ -6,10 +6,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sspu.informationsystem.service.UserService;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 @Slf4j
 @Controller
 public class CommonController {
+
+    @Resource
+    UserService userService;
+
     @ResponseBody
     @GetMapping("/hello")
     public String hello(){
@@ -32,11 +40,7 @@ public class CommonController {
         return "/login";
     }
 
-    /**
-     * 测试用链接
-     *
-     * @return 前往商店列表页面
-     */
+
     @GetMapping("/toStoreList")
     public String toStoreList() { return "/stores"; }
 
@@ -48,7 +52,11 @@ public class CommonController {
 
 
     @GetMapping("/toRegister")
-    public String ToRegister() {
+    public String ToRegister(Model model) {
+        List<String> phoneList = userService.getAllPhone();
+        model.addAttribute("phoneList",phoneList);
+        List<String> accountList = userService.getAllAccount();
+        model.addAttribute("accountList",accountList);
         return "/register";
     }
 

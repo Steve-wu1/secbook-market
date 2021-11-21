@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import sspu.informationsystem.service.UserService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
@@ -22,7 +23,7 @@ public class UserController {
      * @return 用户登录信息校验
      */
     @PostMapping("/user/login")
-    public String userLogin(User user ) {
+    public String userLogin(User user, HttpSession session) {
         User check = userService.getUserInfoByAccount(user.getUAccount());
         if (check.getUserId()==null)
         {
@@ -30,8 +31,19 @@ public class UserController {
         }
         if (check.getUPassword().equals(user.getUPassword()))
         {
+            session.setAttribute("userAccount",user.getUAccount());
             return "redirect:/toStoreList";
         }
         return "redirect:/loginFailure";
     }
+
+    @PostMapping("/user/register")
+    public String userRegister(User user,HttpSession session){
+        userService.insert(user);
+        session.setAttribute("userAccount",user.getUAccount());
+        return "redirect:/toStoreList";
+
+    }
+
+
 }

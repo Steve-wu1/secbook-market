@@ -24,4 +24,12 @@
       from user
       where u_account = #{account,jdbcType=VARCHAR}
     </select>
+    <select id="getAllPhone" resultType="java.lang.String">
+      select u_phone
+      from user
+    </select>
+  <select id="getAllAccount" resultType="java.lang.String">
+    select u_account
+    from user
+  </select>
 </mapper>

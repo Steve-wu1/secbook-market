@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+<html xmlns:th="http://www.thymeleaf.org" class="no-js">
 <head>
     <meta charset="UTF-8">
-    <title>Navbar</title>
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <title>注册</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/mainpage.css">
     <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="../js/navbar.js"></script>
 </head>
 <body>
@@ -17,22 +19,22 @@
     </div>
 </nav>
 <div style=" margin: 0 auto; left: 65%; position: absolute; margin: 0 0 0 -650px;height: 100%;">
-    <form class="main-panel row g-3 needs-validation" novalidate>
+    <form class="main-panel row g-3 needs-validation" novalidate id="registerForm" method="post" action="/user/register" enctype="multipart/form-data">
 
         <div class="col-md-4 position-relative">
-            <label for="validationTooltip01" class="form-label">姓名/店铺名</label>
-            <input type="text" class="form-control" id="validationTooltip01" value="陈瀛" required>
+            <label for="validationTooltip01" class="form-label">姓名</label>
+            <input type="text" class="form-control" id="validationTooltip01" name="uName" required>
             <div class="valid-tooltip">
                 Looks good!
             </div>
         </div>
 
         <div class="col-md-4 position-relative" id="sex">
-            <label for="validationTooltip04" class="form-label">性别</label>
-            <select class="form-select" id="validationTooltip04" required>
-                <option selected disabled value="">男</option>
-                <option>男</option>
-                <option>女</option>
+            <label for="validationTooltip04" class="form-label" >性别</label>
+            <select class="form-select" id="validationTooltip04" required name="uSex">
+                <!--<option selected disabled value="">男</option>-->
+                <option value="0">男</option>
+                <option value="1">女</option>
             </select>
             <div class="invalid-tooltip">
                 Please select a valid state.
@@ -40,65 +42,35 @@
         </div>
 
         <div class="col-md-8 position-relative">
-            <label for="validationTooltip01" class="form-label">账号</label>
-            <input type="text" class="form-control" id="validationTooltip10" value="13711111111" required>
-            <div class="valid-tooltip">
-            </div>
+            <label for="validationTooltip01" class="form-label" >账号</label>
+            <input type="text" class="form-control" id="validationTooltip10"  required name="uAccount">
+            <div class="valid-tooltip"></div>
+            <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">-->
+                <!--<p class="checkPoint" id="checkPointAccount">请输入账号</p>-->
+                <!--<p class="errorPoint" id="errorPointAccount" style="color: red" hidden></p>-->
+            <!--</div>-->
         </div>
         <div class="col-md-8 position-relative">
-            <label for="validationTooltip01" class="form-label">密码</label>
-            <input type="text" class="form-control" id="validationTooltip11" value="13711111111" required>
+            <label for="validationTooltip01" class="form-label" >密码</label>
+            <input type="text" class="form-control" id="validationTooltip11" name="uPassword"  required>
             <div class="valid-tooltip">
             </div>
         </div>
 
         <div class="col-md-8 position-relative">
             <label for="validationTooltip01" class="form-label">联系方式</label>
-            <input type="text" class="form-control" id="validationTooltip07" value="13711111111" required>
+            <input type="text" class="form-control" id="validationTooltip07" name="uPhone" required>
             <div class="valid-tooltip">
             </div>
         </div>
 
         <div class="col-md-8 position-relative" style=" margin: 20px 0 0 350px;">
-            <button class="btn btn-primary" type="button">修改</button>
+            <button class="btn btn-primary" type="submit">注册</button>
         </div>
-        <!--<div class="col-6">-->
-        <!--<button class="btn btn-primary" type="button" onclick=" history.go(-1)">返回</button>-->
-        <!--</div>-->
-
-        <script>
-            function myFunction() {
-                var txt;
-                if (confirm("确认上传")) {
-                    alert("上传成功");
-                } else {
-                }
-                document.getElementById("demo").innerHTML = txt;
-            }
 
 
-            // function fun1() {
-            //     document.getElementById("endTime").value = document.getElementById('ident').value;
-            //     var a = document.getElementById('address');
-            //     var c = document.getElementById('photo');
-            //     var d = document.getElementById('detail');
-            //     var e = document.getElementById('sex');
-            //
-            //     if(document.getElementById('ident').value="1") {
-            //         a.style.visibility = "hidden";
-            //         c.style.visibility = "hidden";
-            //         d.style.visibility = "hidden";
-            //         e.style.visibility = "visible";
-            //     }
-            //
-            //     if(document.getElementById('ident').value="2"){
-            //         a.style.visibility = "visible";
-            //         c.style.visibility = "visible";
-            //         d.style.visibility = "visible";
-            //         e.style.visibility = "hidden";
-            //     }
-            // }
-        </script>
+
+
 
 
     </form>
@@ -111,6 +83,66 @@
     </nav>
 </div>
 </body>
+<!--<script>-->
+    <!--console.log(jQuery)-->
+    <!--console.log($)-->
+    <!--console.log(jQuery === $)-->
+<!--</script>-->
+<script>
+//     $(document).ready(function () {
+//
+//          //验证用户名
+//         $("#uAccount").blur(function () {
+//             var account = $(this).val();
+//             var checkAccount = [[${accountList}]];
+//             if (account == '') {
+//                 $("#checkPointAccount").hide();
+//                 $("#errorPointAccount").addClass("glyphicon glyphicon-remove");
+//                 $("#errorPointAccount").text("账号不能为空");
+//                 $("#errorPointAccount").show();
+//             } else {
+//                 $(checkAccount).each(function (i, item) {
+//                 if (item == account) {
+//                     $("#checkPointAccount").hide();
+//                     $("#errorPointAccount").addClass("glyphicon glyphicon-remove");
+//                     $("#errorPointAccount").text("账号重复");
+//                     $("#errorPointAccount").show();
+//                     return false;
+//                 } else {
+//                     $("#checkPointAccount").hide();
+//                     $("#checkPointAccount").addClass("glyphicon glyphicon-ok");
+//                     $("#checkPointAccount").text("输入正确");
+//                     $("#checkPointAccount").css('color', 'green');
+//                     $("#checkPointAccount").show();
+//
+//                  }
+//                 })
+//             }
+//         })
+//     })
+
+// function fun1() {
+//     document.getElementById("endTime").value = document.getElementById('ident').value;
+//     var a = document.getElementById('address');
+//     var c = document.getElementById('photo');
+//     var d = document.getElementById('detail');
+//     var e = document.getElementById('sex');
+//
+//     if(document.getElementById('ident').value="1") {
+//         a.style.visibility = "hidden";
+//         c.style.visibility = "hidden";
+//         d.style.visibility = "hidden";
+//         e.style.visibility = "visible";
+//     }
+//
+//     if(document.getElementById('ident').value="2"){
+//         a.style.visibility = "visible";
+//         c.style.visibility = "visible";
+//         d.style.visibility = "visible";
+//         e.style.visibility = "hidden";
+//     }
+// }
+</script>
 
 
 </html>

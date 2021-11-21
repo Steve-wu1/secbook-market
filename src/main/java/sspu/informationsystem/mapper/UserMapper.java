@@ -3,10 +3,16 @@ package sspu.informationsystem.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import sspu.informationsystem.entity.User;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
     int insert(User record);
 
 
     User getUserInfoByAccount(String account);
+
+    List<String> getAllPhone();
+
+    List<String> getAllAccount();
 }
