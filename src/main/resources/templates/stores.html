@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Navbar</title>
@@ -56,89 +57,88 @@
      style=" margin: 0 auto; left: 20%;right: 20%; position: absolute; margin: 0 0 0 0;" novalidate>
 
 
-    <div class="col" style="margin: 20px 0 20px 0">
+    <div class="col" style="margin: 20px 0 20px 0"th:each="store:${storeList}">
         <div class="card">
             <img src="../images/chaofan.jpg" class="card-img-top" height="160" alt="...">
             <div class="card-body">
-                <a href="storeInfo.html"><h5 class="card-title">爱生炒饭</h5></a>
-                <p class="card-text">
-                    1.准备用料2.米饭准备好,切葱花、肉丁、胡萝卜丁3.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱炒熟4.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱..</p>
-                <p class="card-text">地址：西二食堂二楼</p>
-                <p class="card-text" style="color: red">联系方式：11111111</p>
+                <a href="storeInfo.html"><h5 class="card-title" th:text="${store.sName}"></h5></a>
+                <p class="card-text" th:text="${store.sDetails}"></p>
+                <p class="card-text" th:text="${store.sAddress}"></p>
+                <p class="card-text" style="color: red" th:text="联系电话：+${store.sPhone}"></p>
             </div>
         </div>
     </div>
-    <div class="col" style="margin:20px 0 20px 0">
-        <div class="card">
-            <img src="#" class="card-img-top" height="160" alt="...">
-            <div class="card-body">
-                <a href="storeInfo.html"><h5 class="card-title">水饺子</h5></a>
-                <p class="card-text"></p>
-                <p class="card-text"></p>
-                <p class="card-text"></p>
-            </div>
-        </div>
-    </div>
-    <div class="col" style="margin:20px 0 20px 0">
-            <div class="card">
-                <img src="../images/chaofan.jpg" class="card-img-top" height="160" alt="...">
-                <div class="card-body">
-                    <a href="storeInfo.html"><h5 class="card-title">爱生炒饭</h5></a>
-                    <p class="card-text">
-                        1.准备用料2.米饭准备好,切葱花、肉丁、胡萝卜丁3.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱炒熟4.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱..</p>
-                    <p class="card-text">地址：西二食堂二楼</p>
-                    <p class="card-text" style="color: red">联系方式：11111111</p>
-                </div>
-            </div>
-        </div>
-    <div class="col" style="margin:20px 0 20px 0">
-            <div class="card">
-                <img src="../images/chaofan.jpg" class="card-img-top" height="160" alt="...">
-                <div class="card-body">
-                    <a href="storeInfo.html"><h5 class="card-title">爱生炒饭</h5></a>
-                    <p class="card-text">
-                        1.准备用料2.米饭准备好,切葱花、肉丁、胡萝卜丁3.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱炒熟4.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱..</p>
-                    <p class="card-text">地址：西二食堂二楼</p>
-                    <p class="card-text" style="color: red">联系方式：11111111</p>
-                </div>
-            </div>
-        </div>
-    <div class="col" style="margin:20px 0 20px 0">
-            <div class="card">
-                <img src="../images/chaofan.jpg" class="card-img-top" height="160" alt="...">
-                <div class="card-body">
-                    <a href="storeInfo.html"><h5 class="card-title">爱生炒饭</h5></a>
-                    <p class="card-text">
-                        1.准备用料2.米饭准备好,切葱花、肉丁、胡萝卜丁3.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱炒熟4.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱..</p>
-                    <p class="card-text">地址：西二食堂二楼</p>
-                    <p class="card-text" style="color: red">联系方式：11111111</p>
-                </div>
-            </div>
-        </div>
-    <div class="col" style="margin:20px 0 20px 0">
-            <div class="card">
-                <img src="../images/chaofan.jpg" class="card-img-top" height="160" alt="...">
-                <div class="card-body">
-                    <a href="storeInfo.html"><h5 class="card-title">爱生炒饭</h5></a>
-                    <p class="card-text">
-                        1.准备用料2.米饭准备好,切葱花、肉丁、胡萝卜丁3.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱炒熟4.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱..</p>
-                    <p class="card-text">地址：西二食堂二楼</p>
-                    <p class="card-text" style="color: red">联系方式：11111111</p>
-                </div>
-            </div>
-        </div>
-    <div class="col" style="margin:20px 0 20px 0">
-            <div class="card">
-                <img src="../images/chaofan.jpg" class="card-img-top" height="160" alt="...">
-                <div class="card-body">
-                    <a href="storeInfo.html"><h5 class="card-title">爱生炒饭</h5></a>
-                    <p class="card-text">
-                        1.准备用料2.米饭准备好,切葱花、肉丁、胡萝卜丁3.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱炒熟4.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱..</p>
-                    <p class="card-text">地址：西二食堂二楼</p>
-                    <p class="card-text" style="color: red">联系方式：11111111</p>
-                </div>
-            </div>
-        </div>
+    <!--<div class="col" style="margin:20px 0 20px 0">-->
+        <!--<div class="card">-->
+            <!--<img src="#" class="card-img-top" height="160" alt="...">-->
+            <!--<div class="card-body">-->
+                <!--<a href="storeInfo.html"><h5 class="card-title">水饺子</h5></a>-->
+                <!--<p class="card-text"></p>-->
+                <!--<p class="card-text"></p>-->
+                <!--<p class="card-text"></p>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col" style="margin:20px 0 20px 0">-->
+            <!--<div class="card">-->
+                <!--<img src="../images/chaofan.jpg" class="card-img-top" height="160" alt="...">-->
+                <!--<div class="card-body">-->
+                    <!--<a href="storeInfo.html"><h5 class="card-title">爱生炒饭</h5></a>-->
+                    <!--<p class="card-text">-->
+                        <!--1.准备用料2.米饭准备好,切葱花、肉丁、胡萝卜丁3.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱炒熟4.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱..</p>-->
+                    <!--<p class="card-text">地址：西二食堂二楼</p>-->
+                    <!--<p class="card-text" style="color: red">联系方式：11111111</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--<div class="col" style="margin:20px 0 20px 0">-->
+            <!--<div class="card">-->
+                <!--<img src="../images/chaofan.jpg" class="card-img-top" height="160" alt="...">-->
+                <!--<div class="card-body">-->
+                    <!--<a href="storeInfo.html"><h5 class="card-title">爱生炒饭</h5></a>-->
+                    <!--<p class="card-text">-->
+                        <!--1.准备用料2.米饭准备好,切葱花、肉丁、胡萝卜丁3.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱炒熟4.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱..</p>-->
+                    <!--<p class="card-text">地址：西二食堂二楼</p>-->
+                    <!--<p class="card-text" style="color: red">联系方式：11111111</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--<div class="col" style="margin:20px 0 20px 0">-->
+            <!--<div class="card">-->
+                <!--<img src="../images/chaofan.jpg" class="card-img-top" height="160" alt="...">-->
+                <!--<div class="card-body">-->
+                    <!--<a href="storeInfo.html"><h5 class="card-title">爱生炒饭</h5></a>-->
+                    <!--<p class="card-text">-->
+                        <!--1.准备用料2.米饭准备好,切葱花、肉丁、胡萝卜丁3.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱炒熟4.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱..</p>-->
+                    <!--<p class="card-text">地址：西二食堂二楼</p>-->
+                    <!--<p class="card-text" style="color: red">联系方式：11111111</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--<div class="col" style="margin:20px 0 20px 0">-->
+            <!--<div class="card">-->
+                <!--<img src="../images/chaofan.jpg" class="card-img-top" height="160" alt="...">-->
+                <!--<div class="card-body">-->
+                    <!--<a href="storeInfo.html"><h5 class="card-title">爱生炒饭</h5></a>-->
+                    <!--<p class="card-text">-->
+                        <!--1.准备用料2.米饭准备好,切葱花、肉丁、胡萝卜丁3.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱炒熟4.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱..</p>-->
+                    <!--<p class="card-text">地址：西二食堂二楼</p>-->
+                    <!--<p class="card-text" style="color: red">联系方式：11111111</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--<div class="col" style="margin:20px 0 20px 0">-->
+            <!--<div class="card">-->
+                <!--<img src="../images/chaofan.jpg" class="card-img-top" height="160" alt="...">-->
+                <!--<div class="card-body">-->
+                    <!--<a href="storeInfo.html"><h5 class="card-title">爱生炒饭</h5></a>-->
+                    <!--<p class="card-text">-->
+                        <!--1.准备用料2.米饭准备好,切葱花、肉丁、胡萝卜丁3.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱炒熟4.锅上火,锅中倒入底油,六成热时倒入肉丁、胡萝卜丁、豌豆、辣酱..</p>-->
+                    <!--<p class="card-text">地址：西二食堂二楼</p>-->
+                    <!--<p class="card-text" style="color: red">联系方式：11111111</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
 
 </div>

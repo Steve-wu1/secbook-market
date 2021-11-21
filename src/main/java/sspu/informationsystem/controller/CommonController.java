@@ -17,6 +17,8 @@ public class CommonController {
 
     @Resource
     UserService userService;
+    @Resource
+    StoreService storeService;
 
     @ResponseBody
     @GetMapping("/hello")
@@ -42,7 +44,9 @@ public class CommonController {
 
 
     @GetMapping("/toStoreList")
-    public String toStoreList() { return "/stores"; }
+    public String toStoreList(Model model) {
+        model.addAttribute("storeList",storeService.getAllStore());
+        return "/stores"; }
 
     @GetMapping("/toUserInfo")
     public String ToUserInfo() { return "/userInfo"; }

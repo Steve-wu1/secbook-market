@@ -28,4 +28,8 @@
       from store
       where s_account = #{account,jdbcType=VARCHAR}
     </select>
+  <select id="getAllStore" resultMap="BaseResultMap">
+    select  *
+    from store
+  </select>
 </mapper>

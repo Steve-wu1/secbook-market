@@ -5,6 +5,9 @@ import javax.annotation.Resource;
 import sspu.informationsystem.mapper.StoreMapper;
 import sspu.informationsystem.entity.Store;
 import sspu.informationsystem.service.StoreService;
+
+import java.util.List;
+
 @Service
 public class StoreServiceImpl implements StoreService{
 
@@ -20,5 +23,11 @@ public class StoreServiceImpl implements StoreService{
     public Store getStoreInfoByAccount(String account) {
         return storeMapper.getStoreInfoByAccount(account);
     }
+
+    @Override
+    public List<Store> getAllStore() {
+        return storeMapper.getAllStore();
+    }
+
 
 }
