@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sspu.informationsystem.service.StoreService;
 import sspu.informationsystem.service.UserService;
 
 import javax.annotation.Resource;
@@ -82,5 +83,10 @@ public class CommonController {
     @GetMapping("/toDataAnalyze")
     public String ToDataAnalyze() {
         return "/dataAnalyze";
+    }
+
+    @GetMapping("/toStoreInfo")
+    public String ToStoreInfo() {
+        return "/storeInfo";
     }
 }
