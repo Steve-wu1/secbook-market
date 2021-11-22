@@ -127,22 +127,22 @@
         })
 
         $("#uPhone").blur(function () {
-            var uPhone = $(this).val();
+            var Phone = $(this).val();
             var checkPhone = [[${phoneList}]];
 
-            if (uPhone == '') {
+            if (Phone == '') {
                 $("#checkPointPhone").hide();
                 $("#errorPointPhone").text("请输入11位的手机号码");
                 $("#errorPointPhone").show();
             } else {
                 $(checkPhone).each(function (i, item) {
-                    if (item == uPhone) {
+                    if (item == Phone) {
                         $("#checkPointPhone").hide();
                         $("#errorPointPhone").text("手机号已存在");
                         $("#errorPointPhone").show();
                         return false;
                     } else {
-                        if(uPhone.length != 11){
+                        if(Phone.length != 11){
                             $("#checkPointPhone").hide();
                             $("#errorPointPhone").text("请输入正确的手机号码");
                             $("#errorPointPhone").show();

@@ -62,15 +62,15 @@ public class CommonController {
 
     @GetMapping("/toRegister")
     public String ToRegister(Model model) {
-        List<String> phoneList = userService.getAllPhone();
-        model.addAttribute("phoneList",phoneList);
-        List<String> accountList = userService.getAllAccount();
-        model.addAttribute("accountList",accountList);
+        model.addAttribute("phoneList",userService.getAllPhone());
+        model.addAttribute("accountList",userService.getAllAccount());
         return "/register";
     }
 
     @GetMapping("/toStoreRegister")
-    public String ToStoreRegister() {
+    public String ToStoreRegister(Model model) {
+        model.addAttribute("phoneList",storeService.getALlPhone());
+        model.addAttribute("accountList",storeService.getAllAccount());
         return "/storeRegister";
     }
 

@@ -32,4 +32,22 @@
     select  *
     from store
   </select>
+    <select id="getStoreInfoById" resultMap="BaseResultMap">
+      select *
+      from store
+      where store_id = #{storeId,jdbcType=INTEGER}
+    </select>
+  <select id="getDishesById" resultType="sspu.informationsystem.entity.Dishes">
+    select *
+    from dishes
+    where d_store_id = #{storeId,jdbcType=INTEGER}
+  </select>
+  <select id="getALlPhone" resultType="java.lang.String">
+    select s_phone
+    from store
+  </select>
+  <select id="getAllAccount" resultType="java.lang.String">
+    select s_account
+    from store
+  </select>
 </mapper>
