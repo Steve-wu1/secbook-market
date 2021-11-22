@@ -6,11 +6,11 @@
     <title>注册</title>
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/mainpage.css">
-    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="../js/navbar.js"></script>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/mainpage.css">
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/vendor/jquery-1.12.4.js"></script>
+    <script src="/js/navbar.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-dark fixed-top bg-success">
@@ -23,43 +23,53 @@
         <div class="col-md-4 position-relative">
             <label for="validationTooltip01" class="form-label">姓名</label>
             <input type="text" class="form-control" id="validationTooltip01" name="uName" required>
-            <div class="valid-tooltip">
-                Looks good!
-            </div>
         </div>
 
         <div class="col-md-4 position-relative" id="sex">
             <label for="validationTooltip04" class="form-label" >性别</label>
             <select class="form-select" id="validationTooltip04" required name="uSex">
-                <!--<option selected disabled value="">男</option>-->
                 <option value="0">男</option>
                 <option value="1">女</option>
             </select>
-            <div class="invalid-tooltip">
-                Please select a valid state.
-            </div>
         </div>
 
         <div class="col-md-8 position-relative">
             <label for="validationTooltip01" class="form-label" >账号</label>
-            <input type="text" class="form-control" id="validationTooltip10"  required name="uAccount">
+            <input type="text" class="form-control" id="uAccount"  required name="uAccount">
             <div class="valid-tooltip"></div>
-            <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">-->
-                <!--<p class="checkPoint" id="checkPointAccount">请输入账号</p>-->
-                <!--<p class="errorPoint" id="errorPointAccount" style="color: red" hidden></p>-->
-            <!--</div>-->
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <p class="checkPoint" id="checkPointAccount">请输入账号</p>
+                <p class="errorPoint" id="errorPointAccount" style="color: red"></p>
+            </div>
         </div>
-        <div class="col-md-8 position-relative">
+        <div class="col-md-1 position-relative" style="visibility: hidden">
+        </div>
+        <div class="col-md-4 position-relative">
             <label for="validationTooltip01" class="form-label" >密码</label>
-            <input type="text" class="form-control" id="validationTooltip11" name="uPassword"  required>
+            <input type="text" class="form-control" id="password1" name="uPassword"  required>
             <div class="valid-tooltip">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <p class="errorPoint" id="errorPointPassword1" style="color: red" ></p>
+            </div>
+        </div>
+        <div class="col-md-4 position-relative">
+            <label for="validationTooltip01" class="form-label" >再次输入密码</label>
+            <input type="text" class="form-control" id="password2"  required>
+            <div class="valid-tooltip">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <p class="checkPoint" id="checkPointPassword2">两次输入不一致</p>
+                <p class="errorPoint" id="errorPointPassword2" style="color: red" ></p>
             </div>
         </div>
 
         <div class="col-md-8 position-relative">
             <label for="validationTooltip01" class="form-label">联系方式</label>
-            <input type="text" class="form-control" id="validationTooltip07" name="uPhone" required>
-            <div class="valid-tooltip">
+            <input type="text" class="form-control" id="uPhone" name="uPhone" required>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <p class="checkPoint" id="checkPointPhone">请输入11位的手机号码</p>
+                <p class="errorPoint" id="errorPointPhone" style="color: red"></p>
             </div>
         </div>
 
@@ -87,39 +97,107 @@
     <!--console.log($)-->
     <!--console.log(jQuery === $)-->
 <!--</script>-->
-<script>
-//     $(document).ready(function () {
-//
-//          //验证用户名
-//         $("#uAccount").blur(function () {
-//             var account = $(this).val();
-//             var checkAccount = [[${accountList}]];
-//             if (account == '') {
-//                 $("#checkPointAccount").hide();
-//                 $("#errorPointAccount").addClass("glyphicon glyphicon-remove");
-//                 $("#errorPointAccount").text("账号不能为空");
-//                 $("#errorPointAccount").show();
-//             } else {
-//                 $(checkAccount).each(function (i, item) {
-//                 if (item == account) {
-//                     $("#checkPointAccount").hide();
-//                     $("#errorPointAccount").addClass("glyphicon glyphicon-remove");
-//                     $("#errorPointAccount").text("账号重复");
-//                     $("#errorPointAccount").show();
-//                     return false;
-//                 } else {
-//                     $("#checkPointAccount").hide();
-//                     $("#checkPointAccount").addClass("glyphicon glyphicon-ok");
-//                     $("#checkPointAccount").text("输入正确");
-//                     $("#checkPointAccount").css('color', 'green');
-//                     $("#checkPointAccount").show();
-//
-//                  }
-//                 })
-//             }
-//         })
-//     })
+<script th:inline="javascript">
+    $(document).ready(function () {
 
+         //验证用户名
+        $("#uAccount").blur(function () {
+            var account = $(this).val();
+            var checkAccount = [[${accountList}]];
+            if (account == '') {
+                $("#checkPointAccount").hide();
+                $("#errorPointAccount").text("账号不能为空");
+                $("#errorPointAccount").show();
+            } else {
+                $(checkAccount).each(function (i, item) {
+                if (item == account) {
+                    $("#checkPointAccount").hide();
+                    $("#errorPointAccount").text("账号重复");
+                    $("#errorPointAccount").show();
+                    return false;
+                } else {
+                    $("#errorPointAccount").hide();
+                    $("#checkPointAccount").text("输入正确");
+                    $("#checkPointAccount").css('color', 'green');
+                    $("#checkPointAccount").show();
+
+                 }
+                })
+            }
+        })
+
+        $("#uPhone").blur(function () {
+            var uPhone = $(this).val();
+            var checkPhone = [[${phoneList}]];
+
+            if (uPhone == '') {
+                $("#checkPointPhone").hide();
+                $("#errorPointPhone").text("请输入11位的手机号码");
+                $("#errorPointPhone").show();
+            } else {
+                $(checkPhone).each(function (i, item) {
+                    if (item == uPhone) {
+                        $("#checkPointPhone").hide();
+                        $("#errorPointPhone").text("手机号已存在");
+                        $("#errorPointPhone").show();
+                        return false;
+                    } else {
+                        if(uPhone.length != 11){
+                            $("#checkPointPhone").hide();
+                            $("#errorPointPhone").text("请输入正确的手机号码");
+                            $("#errorPointPhone").show();
+                        }
+                        else{
+                            $("#errorPointPhone").hide();
+                            $("#checkPointPhone").text("输入正确");
+                            $("#checkPointPhone").css('color', 'green');
+                            $("#checkPointPhone").show();
+                        }
+                    }
+                })
+            }
+
+        })
+
+        $("#password1").blur(function () {
+            var password1 = $(this).val();
+            if (password1 == "") {
+                $("#checkPointPassword1").hide();
+                $("#errorPointPassword1").text("密码不能为空");
+                $("#errorPointPassword1").show();
+            } else {
+                $("#errorPointPassword1").hide();
+                $("#checkPointPassword1").text("密码可行");
+                $("#checkPointPassword1").css('color', 'green');
+                $("#checkPointPassword1").show();
+                }
+            })
+
+        //验证重写密码
+        $("#password2").blur(function () {
+            var password2 = $(this).val();
+            var password1 = $("#password1").val();
+            if (password2 == '') {
+                $("#checkPointPassword2").hide();
+                $("#errorPointPassword2").text("验证密码不能为空");
+                $("#errorPointPassword2").show();
+            } else {
+                if (password1 != password2) {
+                    $("#checkPointPassword2").hide();
+                    $("#errorPointPassword2").text("两次密码输入不一致");
+                    $("#errorPointPassword2").show();
+                    return false;
+                } else {
+                    $("#errorPointPassword2").hide();
+                    $("#checkPointPassword2").text("输入正确");
+                    $("#checkPointPassword2").css('color', 'green');
+                    $("#checkPointPassword2").show();
+                }
+            }
+        })
+    })
+
+//
 // function fun1() {
 //     document.getElementById("endTime").value = document.getElementById('ident').value;
 //     var a = document.getElementById('address');
