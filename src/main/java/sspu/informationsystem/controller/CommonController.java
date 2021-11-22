@@ -10,6 +10,7 @@ import sspu.informationsystem.service.StoreService;
 import sspu.informationsystem.service.UserService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
@@ -50,7 +51,10 @@ public class CommonController {
         return "/stores"; }
 
     @GetMapping("/toUserInfo")
-    public String ToUserInfo() { return "/userInfo"; }
+    public String ToUserInfo(Model model, HttpSession session) {
+        model.addAttribute("user",session.getAttribute("user"));
+        return "/userInfo";
+    }
 
     @GetMapping("/toMyOrders")
     public String ToMyOrders() { return "/myOrders"; }

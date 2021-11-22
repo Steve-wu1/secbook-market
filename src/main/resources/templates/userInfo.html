@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Navbar</title>
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <title>个人中心</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/mainpage.css">
-    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/navbar.js"></script>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/mainpage.css">
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/navbar.js"></script>
 </head>
 
 <body>
@@ -51,10 +52,10 @@
     </div>
 </nav>
 <div style=" margin: 0 auto; left: 65%; position: absolute; margin: 0 0 0 -590px;height: 100%;">
-    <form class="main-panel row g-3 needs-validation" novalidate>
+    <form class="main-panel row g-3 needs-validation" novalidate id="registerForm" method="post" action="/user/updateInfo" enctype="multipart/form-data">
         <div class="col-md-4 position-relative">
             <label for="validationTooltip01" class="form-label">姓名</label>
-            <input type="text" class="form-control" id="validationTooltip01" value="陈瀛" required>
+            <input type="text" class="form-control" id="validationTooltip01" th:value="${user.uName}" name="uName" required>
             <div class="valid-tooltip">
                 Looks good!
             </div>
@@ -62,10 +63,10 @@
 
         <div class="col-md-4 position-relative">
             <label for="validationTooltip04" class="form-label">性别</label>
-            <select class="form-select" id="validationTooltip04" required>
-                <option selected disabled value="">男</option>
-                <option>男</option>
-                <option>女</option>
+            <select class="form-select" id="validationTooltip04" name="uSex" required>
+                <!--<option selected disabled value="">男</option>-->
+                <option th:selected="${user.uSex}==0" value="0">男</option>
+                <option th:selected="${user.uSex}==1" value="1">女</option>
             </select>
             <div class="invalid-tooltip">
                 Please select a valid state.
@@ -74,35 +75,21 @@
 
         <div class="col-md-8 position-relative">
             <label for="validationTooltip01" class="form-label">用户名</label>
-            <input type="text" class="form-control" id="validationTooltip02" value="188888888" required>
+            <input type="text" class="form-control" id="validationTooltip02" th:value="${user.uAccount}" name="uAccount" required>
             <div class="valid-tooltip">
             </div>
         </div>
 
         <div class="col-md-8 position-relative">
             <label for="validationTooltip01" class="form-label">联系方式</label>
-            <input type="text" class="form-control" id="validationTooltip07" value="13711111111" required>
+            <input type="text" class="form-control" id="validationTooltip07" th:value="${user.uPhone}" name="uPhone" required>
             <div class="valid-tooltip">
             </div>
         </div>
 
         <div class="col-md-9 position-relative" style="  margin: 150px 0 0 290px;">
-            <button class="btn btn-primary" type="button" onclick=" myFunction()">修改</button>
+            <button class="btn btn-primary" type="submit" onclick="return confirm('确认提交注册信息？')">修改</button>
         </div>
-        <!--<div class="col-6">-->
-        <!--<button class="btn btn-primary" type="button" onclick=" history.go(-1)">返回</button>-->
-        <!--</div>-->
-
-        <script>
-            function myFunction() {
-                var txt;
-                if (confirm("确认上传")) {
-                    alert("上传成功");
-                } else {
-                }
-                document.getElementById("demo").innerHTML = txt;
-            }
-        </script>
     </form>
 
 
