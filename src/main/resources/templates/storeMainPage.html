@@ -125,7 +125,9 @@
     </div>
     <!--底部-->
     <div class="modal-box-bottom">
-        <button class="btn btn-success" onclick="return confirm('确认提交？')">提交</button>
+        <a href="/toStoreMain">
+            <input type="button" class="btn btn-success" onclick="change()" value="提交">
+        </a>
     </div>
 </div>
 
@@ -289,6 +291,15 @@
 
 <script type="text/javascript">
     $("#modal").modal("hide");
+
+    function change() {
+        var txt;
+        if (confirm("确认上传")) {
+            alert("上传成功");
+        } else {
+        }
+        document.getElementById("demo").innerHTML = txt;
+    }
 
     function modalOpen() {
         //获取模态框对象   getElementsByClassName获取到的是一个数组对象
