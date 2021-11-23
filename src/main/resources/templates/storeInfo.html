@@ -57,233 +57,109 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>订餐时间</th>
-            <th>商家</th>
+            <th>菜名</th>
             <th>价格</th>
-            <th>状态</th>
-            <th>内容</th>
-            <th>巴拉巴拉</th>
+            <th>简介</th>
+            <th>数量</th>
+            <th>订单选择</th>
+
         </tr>
         </thead>
 
         <tbody>
         <tr class="pure-table-odd">
             <td>1</td>
-            <td>2001-01-01 00:00:00</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>已支付</td>
-            <td>黄瓜炒饭+蛋+番茄炒饭</td>
+            <td>番茄炒蛋</td>
+            <td>8</td>
+            <td>番茄+鸡蛋1111111111111111111111</td>
             <td>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">再来一单</button>
-                </a>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">评价</button>
-                </a>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">打分</button>
-                </a>
+                <p>数量: <input value="-" type="button" onclick="numDec()"> <input type="text" value="0" id="quantity"/>
+                    <input value="+" type="button" onclick="numAdd()"></p>
+            </td>
+            <td>
+                <label><input name="1" type="checkbox" value=""/>加入订单</label>
+
             </td>
         </tr>
 
-        <tr>
-            <td>2</td>
-            <td>2051</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">再来一单</button>
-                </a>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">评价</button>
-                </a>
-            </td>
-        </tr>
-
-        <tr class="pure-table-odd">
-            <td>3</td>
-            <td>2041</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">再来一单</button>
-                </a>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">评价</button>
-                </a>
-            </td>
-        </tr>
-
-        <tr>
-            <td>4</td>
-            <td>2011</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="/toStoreList">
-                    <button class="btn btn-primary login-btn">登录</button>
-                </a>
-            </td>
-        </tr>
-
-        <tr class="pure-table-odd">
-            <td>5</td>
-            <td>2021</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="/toStoreList">
-                    <button class="btn btn-primary login-btn">登录</button>
-                </a>
-            </td>
-        </tr>
-
-        <tr>
-            <td>6</td>
-            <td>2031</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="/toStoreList">
-                    <button class="btn btn-primary login-btn">登录</button>
-                </a>
-            </td>
-        </tr>
 
         </tbody>
     </table>
     <div class="col-md-8 position-relative" style=" margin: 20px 0 0 350px;">
-        <button class="btn btn-primary">加入订单</button>
-        <button class="btn btn-primary">移除</button>
+
         <button class="btn btn-primary">提交订单</button>
     </div>
-    <table class="pure-table">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>订餐时间</th>
-            <th>商家</th>
-            <th>价格</th>
-            <th>状态</th>
-            <th>内容</th>
-            <th>巴拉巴拉</th>
-        </tr>
-        </thead>
 
-        <tbody>
-        <tr class="pure-table-odd">
-            <td>1</td>
-            <td>2001-01-01 00:00:00</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>已支付</td>
-            <td>黄瓜炒饭+蛋+番茄炒饭</td>
-            <td>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">再来一单</button>
-                </a>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">评价</button>
-                </a>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">打分</button>
-                </a>
-            </td>
-        </tr>
-
-        <tr>
-            <td>2</td>
-            <td>2051</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">再来一单</button>
-                </a>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">评价</button>
-                </a>
-            </td>
-        </tr>
-
-        <tr class="pure-table-odd">
-            <td>3</td>
-            <td>2041</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">再来一单</button>
-                </a>
-                <a href="#">
-                    <button class="btn btn-primary login-btn">评价</button>
-                </a>
-            </td>
-        </tr>
-
-        <tr>
-            <td>4</td>
-            <td>2011</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="/toStoreList">
-                    <button class="btn btn-primary login-btn">登录</button>
-                </a>
-            </td>
-        </tr>
-
-        <tr class="pure-table-odd">
-            <td>5</td>
-            <td>2021</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="/toStoreList">
-                    <button class="btn btn-primary login-btn">登录</button>
-                </a>
-            </td>
-        </tr>
-
-        <tr>
-            <td>6</td>
-            <td>2031</td>
-            <td>爱生炒饭</td>
-            <td>21</td>
-            <td>21</td>
-            <td>21</td>
-            <td>
-                <a href="/toStoreList">
-                    <button class="btn btn-primary login-btn">登录</button>
-                </a>
-            </td>
-        </tr>
-
-        </tbody>
-    </table>
 
 </form>
+
+
+<!--<script type="text/javascript">-->
+<!--/*或者不用jquery*/-->
+<!--/*商品数量框输入*/-->
+<!--function keyup(){-->
+<!--var quantity = document.getElementById("quantity").value;-->
+<!--if(isNaN(quantity) ||  parseInt(quantity)!=quantity || parseInt(quantity)<1){-->
+<!--quantity = 1;-->
+<!--return;-->
+<!--}-->
+<!--if(quantity>=10){-->
+<!--document.getElementById("quantity").value=quantity.substring(0,quantity.length-1);-->
+<!--alert("商品数量不能大于10");-->
+<!--}-->
+<!--}-->
+
+<!--/*商品数量+1*/-->
+<!--function numAdd(){-->
+<!--var quantity = document.getElementById("quantity").value;-->
+<!--var num_add = parseInt(quantity)+1;-->
+<!--var price=document.getElementById("price").value;-->
+<!--if(quantity==""){-->
+<!--num_add = 1;-->
+<!--}-->
+<!--if(num_add>=10){-->
+<!--document.getElementById("quantity").value=num_add-1;-->
+<!--alert("商品数量不能大于10");-->
+<!--}else{-->
+<!--document.getElementById("quantity").value=num_add;-->
+<!--var Num=price*num_add;-->
+<!--document.getElementById("totalPrice").innerHTML=Num.toFixed(2);-->
+<!--}-->
+<!--}-->
+<!--/*商品数量-1*/-->
+<!--function numDec(){-->
+<!--var quantity = document.getElementById("quantity").value;-->
+<!--var price=document.getElementById("price").value;-->
+<!--var num_dec = parseInt(quantity)-1;-->
+<!--if(num_dec>0){-->
+<!--document.getElementById("quantity").value=num_dec;-->
+<!--var Num=price*num_dec;-->
+<!--document.getElementById("totalPrice").innerHTML=Num.toFixed(2);-->
+<!--}-->
+<!--}-->
+<!--function show()-->
+<!--{-->
+<!--document.getElementById("totalPrice").innerHTML=3.25*3;-->
+<!--}-->
+<!--</script>-->
+
+<!--</head>-->
+<!--<body>-->
+<!--<p>Quantity: <span οnclick="numDec()">-</span> <input type="text" id="quantity" /> <span οnclick="numAdd()">+</span></p>-->
+<!--<p class="sdsd">Total Price: <span id="totalPrice">28.10</span></p>-->
+<!--<input type="hidden" value="28.1" id="price" />&lt;!&ndash;单价&ndash;&gt;-->
+<!--<input type="button" value="展示" οnclick="show()"/>-->
+<!--————————————————-->
+<!--版权声明：本文为CSDN博主「sdsxc」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。-->
+<!--原文链接：https://blog.csdn.net/energeticsunxiaocong/article/details/50742331-->
+
+
+<script language="javascript">
+    function fun1() {
+        var $tr = $("#table2 tr:eq(2)");
+        $("#table1").append($tr);
+    }
+</script>
 
 
 <nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
@@ -350,5 +226,54 @@
         background-color: #f2f2f2;
     }
 </style>
+
+<script type="text/javascript">
+    /*或者不用jquery*/
+    /*商品数量框输入*/
+    function keyup() {
+        var quantity = document.getElementById("quantity").value;
+        if (isNaN(quantity) || parseInt(quantity) != quantity || parseInt(quantity) < 1) {
+            quantity = 1;
+            return;
+        }
+        if (quantity >= 10) {
+            document.getElementById("quantity").value = quantity.substring(0, quantity.length - 1);
+            alert("商品数量不能大于10");
+        }
+    }
+
+    /*商品数量+1*/
+    function numAdd() {
+        var quantity = document.getElementById("quantity").value;
+        var num_add = parseInt(quantity) + 1;
+        if (quantity == "") {
+            num_add = 1;
+        }
+        if (num_add >= 10) {
+            document.getElementById("quantity").value = num_add - 1;
+            alert("商品数量不能大于10");
+        } else {
+            document.getElementById("quantity").value = num_add;
+            var Num = price * num_add;
+
+        }
+    }
+
+    /*商品数量-1*/
+    function numDec() {
+        var quantity = document.getElementById("quantity").value;
+
+        var num_dec = parseInt(quantity) - 1;
+        if (num_dec > -1) {
+            document.getElementById("quantity").value = num_dec;
+            var Num = price * num_dec;
+        }
+    }
+
+    function show() {
+        document.getElementById("totalPrice").innerHTML = 3.25 * 3;
+    }
+</script>
+
 
 </html>
