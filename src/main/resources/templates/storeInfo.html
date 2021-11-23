@@ -87,11 +87,12 @@
     </table>
     <div class="col-md-8 position-relative" style=" margin: 20px 0 0 350px;">
 
-        <button class="btn btn-primary">提交订单</button>
+        <button class="btn btn-primary" onclick="return confirm('确认下此订单？')">提交订单</button>
     </div>
 
 
 </form>
+
 
 
 <!--<script type="text/javascript">-->
@@ -152,6 +153,7 @@
 <!--————————————————-->
 <!--版权声明：本文为CSDN博主「sdsxc」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。-->
 <!--原文链接：https://blog.csdn.net/energeticsunxiaocong/article/details/50742331-->
+
 
 
 <script language="javascript">
@@ -258,7 +260,6 @@
 
         }
     }
-
     /*商品数量-1*/
     function numDec() {
         var quantity = document.getElementById("quantity").value;
