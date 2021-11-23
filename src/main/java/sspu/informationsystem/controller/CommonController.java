@@ -11,7 +11,6 @@ import sspu.informationsystem.service.UserService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -92,5 +91,20 @@ public class CommonController {
     @GetMapping("/toStoreInfo")
     public String ToStoreInfo() {
         return "/storeInfo";
+    }
+
+    @GetMapping("/toAdminStores")
+    public String ToAdminStores() {
+        return "/adminStores";
+    }
+
+    @GetMapping("/toAdminUsers")
+    public String ToAdminUsers() {
+        return "/adminUsers";
+    }
+
+    @GetMapping("/toAdminApply")
+    public String ToAdminApply() {
+        return "/adminApply";
     }
 }
