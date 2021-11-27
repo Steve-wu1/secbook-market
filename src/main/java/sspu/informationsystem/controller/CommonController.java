@@ -6,11 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sspu.informationsystem.entity.Store;
 import sspu.informationsystem.service.StoreService;
 import sspu.informationsystem.service.UserService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -40,71 +42,74 @@ public class CommonController {
     @RequestMapping("/loginFailure")
     public String loginFailure(Model model) {
         model.addAttribute("loginFail", "用户名或密码错误");
-        return "/login";
+        return "login";
     }
 
 
     @GetMapping("/toStoreList")
     public String toStoreList(Model model) {
-        model.addAttribute("storeList",storeService.getAllStore());
-        return "/stores"; }
+        List<Store> storeList = storeService.getAllStore();
+        storeList = storeService.getAddress(storeList);
+        model.addAttribute("storeList",storeList);
+        return "stores";
+    }
 
     @GetMapping("/toUserInfo")
     public String ToUserInfo(Model model, HttpSession session) {
         model.addAttribute("user",session.getAttribute("user"));
-        return "/userInfo";
+        return "userInfo";
     }
 
     @GetMapping("/toMyOrders")
-    public String ToMyOrders() { return "/myOrders"; }
+    public String ToMyOrders() { return "myOrders"; }
 
 
     @GetMapping("/toRegister")
     public String ToRegister(Model model) {
         model.addAttribute("phoneList",userService.getAllPhone());
         model.addAttribute("accountList",userService.getAllAccount());
-        return "/register";
+        return "register";
     }
 
     @GetMapping("/toStoreRegister")
     public String ToStoreRegister(Model model) {
         model.addAttribute("phoneList",storeService.getALlPhone());
         model.addAttribute("accountList",storeService.getAllAccount());
-        return "/storeRegister";
+        return "storeRegister";
     }
 
     @GetMapping("/toStoreMain")
     public String ToStoreMain() {
-        return "/storeMainPage";
+        return "storeMainPage";
     }
 
     @GetMapping("/toStoreOrder")
     public String ToStoreOrder() {
-        return "/storeOrders";
+        return "storeOrders";
     }
 
     @GetMapping("/toDataAnalyze")
     public String ToDataAnalyze() {
-        return "/dataAnalyze";
+        return "dataAnalyze";
     }
 
     @GetMapping("/toStoreInfo")
     public String ToStoreInfo() {
-        return "/storeInfo";
+        return "storeInfo";
     }
 
     @GetMapping("/toAdminStores")
     public String ToAdminStores() {
-        return "/adminStores";
+        return "adminStores";
     }
 
     @GetMapping("/toAdminUsers")
     public String ToAdminUsers() {
-        return "/adminUsers";
+        return "adminUsers";
     }
 
     @GetMapping("/toAdminApply")
     public String ToAdminApply() {
-        return "/adminApply";
+        return "adminApply";
     }
 }

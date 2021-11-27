@@ -45,5 +45,24 @@ public class StoreServiceImpl implements StoreService{
     @Override
     public List<String> getAllAccount() { return storeMapper.getAllAccount(); }
 
+    @Override
+    public List<Store> getAddress(List<Store> storeList) {
+        for (Store store:storeList){
+            switch (store.getSAddress()){
+                case "W1": store.setSAddress("西食堂一楼");
+                    break;
+                case "W2": store.setSAddress("西食堂二楼");
+                    break;
+                case "E1": store.setSAddress("东食堂一楼");
+                    break;
+                case "E2": store.setSAddress("东食堂二楼");
+                    break;
+                case "E3": store.setSAddress("东食堂三楼");
+            }
+
+        }
+        return storeList;
+    }
+
 
 }

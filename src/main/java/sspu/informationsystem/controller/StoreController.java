@@ -2,9 +2,11 @@ package sspu.informationsystem.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import sspu.informationsystem.entity.Store;
-import sspu.informationsystem.entity.User;
 import sspu.informationsystem.service.StoreService;
 
 import javax.annotation.Resource;
@@ -46,4 +48,12 @@ public class StoreController {
         return "redirect:/toStoreList";
 
     }
+
+    @GetMapping("/store/info/id={storeId}")
+    public String toStoreInfo(@PathVariable("storeId")Integer storeId, Model model){
+        model.addAttribute("store",storeService.getStoreInfoById(storeId));
+        model.addAttribute("dishList",storeService.getDishesById(storeId));
+        return "storeInfo";
+    }
+
 }

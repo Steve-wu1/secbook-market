@@ -21,4 +21,6 @@ public interface StoreService{
     List<String> getALlPhone();
 
     List<String> getAllAccount();
+
+    List<Store> getAddress(List<Store> storeList);
 }
