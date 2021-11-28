@@ -46,13 +46,7 @@ public class CommonController {
     }
 
 
-    @GetMapping("/toStoreList")
-    public String toStoreList(Model model) {
-        List<Store> storeList = storeService.getAllStore();
-        storeList = storeService.getAddress(storeList);
-        model.addAttribute("storeList",storeList);
-        return "stores";
-    }
+
 
     @GetMapping("/toUserInfo")
     public String ToUserInfo(Model model, HttpSession session) {
@@ -98,10 +92,7 @@ public class CommonController {
         return "storeInfo";
     }
 
-    @GetMapping("/toAdminStores")
-    public String ToAdminStores() {
-        return "adminStores";
-    }
+
 
     @GetMapping("/toAdminUsers")
     public String ToAdminUsers() {

@@ -10,7 +10,7 @@ public interface ApplyService{
 
     int insert(Apply record);
 
-    void addStoreRegisterApply(Store store);
+    void addStoreRegisterApply(Integer storeId);
 
     List<Apply> getAllApplyUndealed();
 

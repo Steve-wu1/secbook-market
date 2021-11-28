@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<html class="no-js">
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -62,17 +62,17 @@
         </thead>
 
         <tbody>
-        <tr class="pure-table-odd">
-            <td>1</td>
-            <td>爱生炒饭</td>
-            <td>188888888</td>
-            <td>西二</td>
+        <tr class="pure-table-odd" th:each="store,a:${storeList}">
+            <td th:text="${a.count}"></td>
+            <td th:text="${store.sName}"></td>
+            <td th:text="${store.sPhone}"></td>
+            <td th:text="${store.sAddress}"></td>
             <td>
-                <a href="#">
-                    <button class="btn btn-danger">删除</button>
+                <a th:href="@{'/store/delete/id='+${store.storeId}}" onclick="return confirm('是否删除该商家?此操作不可逆！')">
+                    <button class="btn btn-danger" type="button">删除</button>
                 </a>
-                <a href="#">
-                    <button class="btn btn-primary">查看菜单</button>
+                <a th:href="@{'/store/info/id='+ ${store.storeId}}">
+                    <button class="btn btn-primary" type="button">查看菜单</button>
                 </a>
             </td>
         </tr>

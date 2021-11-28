@@ -53,6 +53,10 @@
     <select id="checkApplyState" resultType="int">
       select a_state
       from apply
-      where a_type = 1 and a_id
+      where a_type = 1 and a_id = #{storeId,jdbcType=INTEGER}
     </select>
+  <delete id="deleteStore">
+    delete from store
+    where store_id = #{storeId,jdbcType=INTEGER}
+  </delete>
 </mapper>

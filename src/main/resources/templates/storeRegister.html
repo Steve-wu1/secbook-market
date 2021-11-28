@@ -43,7 +43,7 @@
 
         <div class="col-md-4 position-relative">
             <label for="validationTooltip01" class="form-label">密码</label>
-            <input type="text" class="form-control" id="sPassword" name="sPassword" required>
+            <input type="text" class="form-control" id="password1" name="sPassword" required>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <p class="errorPoint" id="errorPointPassword1" style="color: red" ></p>
             </div>
@@ -208,7 +208,7 @@
         $("#password2").blur(function () {
             var password2 = $(this).val();
             var password1 = $("#password1").val();
-            if (password2 == '') {
+            if (password2 == "") {
                 $("#checkPointPassword2").hide();
                 $("#errorPointPassword2").text("验证密码不能为空");
                 $("#errorPointPassword2").show();

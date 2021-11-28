@@ -70,5 +70,10 @@ public class StoreServiceImpl implements StoreService{
         return storeMapper.checkApplyState(storeId);
     }
 
+    @Override
+    public void deleteStore(Integer storeId) {
+        storeMapper.deleteStore(storeId);
+    }
+
 
 }

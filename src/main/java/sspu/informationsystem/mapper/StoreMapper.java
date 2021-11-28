@@ -24,4 +24,6 @@ public interface StoreMapper {
     List<String> getAllAccount();
 
     int checkApplyState(Integer storeId);
+
+    void deleteStore(Integer storeId);
 }

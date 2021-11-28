@@ -22,8 +22,8 @@ public class ApplyServiceImpl implements ApplyService{
     }
 
     @Override
-    public void addStoreRegisterApply(Store store) {
-        applyMapper.addStoreRegisterApply(store);
+    public void addStoreRegisterApply(Integer storeId) {
+        applyMapper.addStoreRegisterApply(storeId);
     }
 
     @Override

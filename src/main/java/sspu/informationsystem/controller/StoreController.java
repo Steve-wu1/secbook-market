@@ -14,6 +14,7 @@ import sspu.informationsystem.service.StoreService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -40,7 +41,7 @@ public class StoreController {
         }
         if (check.getSPassword().equals(store.getSPassword()))
         {
-            switch (storeService.checkApplyState(store.getStoreId())){
+            switch (storeService.checkApplyState(check.getStoreId())){
                 case 2: return "redirect:/store/registerFailure";
                 case 1: session.setAttribute("storeAccount",store.getSAccount());
                     return "redirect:/toStoreMain";
@@ -57,13 +58,14 @@ public class StoreController {
     }
 
     @PostMapping("/store/register")
-    public String userRegister(Store store, RedirectAttributes redAtt){
+    public String userRegister(Store store){
         storeService.insert(store);
-        applyService.addStoreRegisterApply(store);
-        redAtt.addAttribute("store",store);
+        applyService.addStoreRegisterApply(store.getStoreId());
         return "redirect:/store/registering";
 
     }
+
+
     /**
      * 临时顶替 后期可能用页面
      */
@@ -84,11 +86,33 @@ public class StoreController {
 
     }
 
+    @GetMapping("/toStoreList")
+    public String toStoreList(Model model) {
+        List<Store> storeList = storeService.getAllStore();
+        storeList = storeService.getAddress(storeList);
+        model.addAttribute("storeList",storeList);
+        return "stores";
+    }
+
     @GetMapping("/store/info/id={storeId}")
     public String toStoreInfo(@PathVariable("storeId")Integer storeId, Model model){
         model.addAttribute("store",storeService.getStoreInfoById(storeId));
         model.addAttribute("dishList",storeService.getDishesById(storeId));
         return "storeInfo";
+    }
+
+    @GetMapping("/toAdminStores")
+    public String ToAdminStores(Model model) {
+        List<Store> storeList = storeService.getAllStore();
+        storeList = storeService.getAddress(storeList);
+        model.addAttribute("storeList",storeList);
+        return "adminStores";
+    }
+
+    @GetMapping("/store/delete/id={storeId}")
+    public String storeDelete(@PathVariable("storeId")Integer storeId){
+        storeService.deleteStore(storeId);
+        return "redirect:/toAdminStores";
     }
 
 }

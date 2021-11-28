@@ -25,4 +25,6 @@ public interface StoreService{
     List<Store> getAddress(List<Store> storeList);
 
     Integer checkApplyState(Integer storeId);
+
+    void deleteStore(Integer storeId);
 }
