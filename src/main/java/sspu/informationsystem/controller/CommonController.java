@@ -39,7 +39,7 @@ public class CommonController {
         return "/login";
     }
 
-    @RequestMapping("/loginFailure")
+    @GetMapping("/loginFailure")
     public String loginFailure(Model model) {
         model.addAttribute("loginFail", "用户名或密码错误");
         return "login";

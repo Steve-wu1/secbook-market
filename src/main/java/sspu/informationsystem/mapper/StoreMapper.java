@@ -22,4 +22,6 @@ public interface StoreMapper {
     List<String> getALlPhone();
 
     List<String> getAllAccount();
+
+    int checkApplyState(Integer storeId);
 }

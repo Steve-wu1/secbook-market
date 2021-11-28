@@ -6,7 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sspu.informationsystem.entity.Store;
+import sspu.informationsystem.service.ApplyService;
 import sspu.informationsystem.service.StoreService;
 
 import javax.annotation.Resource;
@@ -18,6 +21,8 @@ public class StoreController {
 
     @Resource
     StoreService storeService;
+    @Resource
+    ApplyService applyService;
 
     /**
      * 商家登录验证
@@ -35,17 +40,47 @@ public class StoreController {
         }
         if (check.getSPassword().equals(store.getSPassword()))
         {
+            switch (storeService.checkApplyState(store.getStoreId())){
+                case 2: return "redirect:/store/registerFailure";
+                case 1: session.setAttribute("storeAccount",store.getSAccount());
+                    return "redirect:/toStoreMain";
+                case 0: return "redirect:/store/registering";
+
+            }
+
+
             session.setAttribute("storeAccount",store.getSAccount());
             return "redirect:/toStoreMain";
+
         }
         return "redirect:/loginFailure";
     }
 
     @PostMapping("/store/register")
-    public String userRegister(Store store,HttpSession session){
+    public String userRegister(Store store, RedirectAttributes redAtt){
         storeService.insert(store);
-        session.setAttribute("userAccount",store.getSAccount());
-        return "redirect:/toStoreList";
+        applyService.addStoreRegisterApply(store);
+        redAtt.addAttribute("store",store);
+        return "redirect:/store/registering";
+
+    }
+    /**
+     * 临时顶替 后期可能用页面
+     */
+    @ResponseBody
+    @GetMapping("/store/registering")
+    public String userRegistering(){
+        return "注册申请正在审核中 请耐心等待";
+
+    }
+
+    /**
+     * 临时顶替 后期可能用页面
+     */
+    @ResponseBody
+    @GetMapping("/store/registerFailure")
+    public String userFailure(){
+        return "您的申请已被管理员拒绝！";
 
     }
 

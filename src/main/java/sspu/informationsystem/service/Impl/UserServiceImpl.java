@@ -1,5 +1,6 @@
 package sspu.informationsystem.service.Impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import sspu.informationsystem.entity.User;
@@ -8,6 +9,7 @@ import sspu.informationsystem.service.UserService;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -42,6 +44,16 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getUserInfoById(Integer userId) {
         return userMapper.getUserInfoById(userId);
+    }
+
+
+    @Override
+    public Boolean checkAdminState(Integer userId) {
+        if (userMapper.checkAdminState(userId) != null)
+        {
+            return  true;
+        }
+        else {return  false;}
     }
 
 }

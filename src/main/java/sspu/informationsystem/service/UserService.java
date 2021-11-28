@@ -18,4 +18,6 @@ public interface UserService{
     void updateInfoById(User user);
 
     User getUserInfoById(Integer userId);
+
+    Boolean checkAdminState(Integer userId);
 }

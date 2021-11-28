@@ -23,4 +23,6 @@ public interface StoreService{
     List<String> getAllAccount();
 
     List<Store> getAddress(List<Store> storeList);
+
+    Integer checkApplyState(Integer storeId);
 }

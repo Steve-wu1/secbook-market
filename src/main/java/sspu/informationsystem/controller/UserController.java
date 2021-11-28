@@ -25,14 +25,20 @@ public class UserController {
     @PostMapping("/user/login")
     public String userLogin(User user, HttpSession session) {
         User check = userService.getUserInfoByAccount(user.getUAccount());
-        if (check.getUserId()==null)
+        if (check == null)
         {
             return "redirect:/loginFailure";
         }
         if (check.getUPassword().equals(user.getUPassword()))
         {
             session.setAttribute("user",check);
-            return "redirect:/toStoreList";
+            if (userService.checkAdminState((check.getUserId()))){
+                return "redirect:/apply/list";
+            }
+            else{
+                return "redirect:/toStoreList";
+            }
+
         }
         return "redirect:/loginFailure";
     }

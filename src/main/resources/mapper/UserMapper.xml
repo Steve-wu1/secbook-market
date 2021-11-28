@@ -46,4 +46,9 @@
     from user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
+    <select id="checkAdminState" resultType="integer">
+      select *
+      from admin_user_bind
+      where user_id = #{userId,jdbcType=INTEGER}
+    </select>
 </mapper>

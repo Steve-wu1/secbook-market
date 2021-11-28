@@ -9,6 +9,7 @@
     <result column="a_date" jdbcType="TIMESTAMP" property="aDate" />
     <result column="a_id" jdbcType="INTEGER" property="aId" />
     <result column="deal_id" jdbcType="INTEGER" property="dealId" />
+    <result column="examination_time" jdbcType="TIMESTAMP" property="examinationTime"/>
   </resultMap>
   <sql id="Base_Column_List">
     apply_id, a_type, a_state, a_date, a_id, deal_id
@@ -19,4 +20,35 @@
     values (#{aType,jdbcType=INTEGER}, #{aState,jdbcType=INTEGER}, #{aDate,jdbcType=TIMESTAMP}, 
       #{aId,jdbcType=INTEGER}, #{dealId,jdbcType=INTEGER})
   </insert>
+  <insert id="addStoreRegisterApply">
+    insert into apply (a_type, a_state, a_date,
+    a_id)
+    values (1, 0,now(),
+    #{storeId,jdbcType=INTEGER} )
+  </insert>
+  <select id="getAllApplyUndealed" resultMap="BaseResultMap">
+    select *
+    from apply
+    where a_type = 1 and a_state = 0;
+  </select>
+  <select id="getStateNameForStore" resultType="java.lang.String">
+    select state_name
+    from type_state_bind
+    where type_id = 1 and state_id = #{aState,jdbcType=INTEGER}
+  </select>
+  <select id="getApplyNameForStore" resultType="java.lang.String">
+    select s_name
+    from store
+    where store_id = #{aId,jdbcType=INTEGER};
+  </select>
+  <update id="setApplyPass">
+    update apply
+    set a_state = 1,examination_time = now(),deal_id = #{param2,jdbcType=INTEGER}
+    where apply_id = #{param1,jdbcType=INTEGER}
+  </update>
+  <update id="setApplyDeny">
+    update apply
+    set a_state = 2,examination_time = now(),deal_id = #{param2,jdbcType=INTEGER}
+    where apply_id = #{param1,jdbcType=INTEGER}
+  </update>
 </mapper>

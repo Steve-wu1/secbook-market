@@ -50,4 +50,9 @@
     select s_account
     from store
   </select>
+    <select id="checkApplyState" resultType="int">
+      select a_state
+      from apply
+      where a_type = 1 and a_id
+    </select>
 </mapper>

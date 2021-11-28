@@ -19,4 +19,6 @@ public interface UserMapper {
     void updateInfoById(User user);
 
     User getUserInfoById(Integer userId);
+
+    Integer checkAdminState(Integer userId);
 }

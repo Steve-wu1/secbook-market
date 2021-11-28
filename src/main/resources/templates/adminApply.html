@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<html class="no-js">
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -64,18 +64,18 @@
         </thead>
 
         <tbody>
-        <tr class="pure-table-odd">
-            <td>1</td>
-            <td>2001-01-01 00:00:00</td>
-            <td>1</td>
-            <td>爱生炒饭</td>
-            <td>2</td>
+        <tr class="pure-table-odd" th:each="apply,a:${applyList}">
+            <td th:text="${a.count}"></td>
+            <td th:text="${apply.aDate}"></td>
+            <td th:text="${apply.aType}==1?'入驻申请':''"></td>
+            <td th:text="${apply.aName}"></td>
+            <td th:text="${apply.stateName}"></td>
             <td>
-                <a href="#">
-                    <button class="btn btn-primary">通过</button>
+                <a th:href="@{'/apply/pass/id='+${apply.applyId}}">
+                    <button class="btn btn-primary" type="button">通过</button>
                 </a>
-                <a href="#">
-                    <button class="btn btn-danger">打回</button>
+                <a th:href="@{'/apply/deny/id='+${apply.applyId}}">
+                    <button class="btn btn-danger" type="button">打回</button>
                 </a>
             </td>
         </tr>

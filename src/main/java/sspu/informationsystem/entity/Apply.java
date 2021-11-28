@@ -12,11 +12,17 @@ public class Apply implements Serializable {
 
     private Integer aState;
 
+    private String stateName;
+
     private Date aDate;
 
     private Integer aId;
 
+    private String aName;
+
     private Integer dealId;
+
+    private Date examinationTime;
 
     private static final long serialVersionUID = 1L;
 }

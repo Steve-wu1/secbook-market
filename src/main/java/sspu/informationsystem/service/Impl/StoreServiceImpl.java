@@ -1,5 +1,6 @@
 package sspu.informationsystem.service.Impl;
 
+import com.sun.xml.internal.ws.runtime.config.TubelineFeatureReader;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
@@ -62,6 +63,11 @@ public class StoreServiceImpl implements StoreService{
 
         }
         return storeList;
+    }
+
+    @Override
+    public Integer checkApplyState(Integer storeId) {
+        return storeMapper.checkApplyState(storeId);
     }
 
 
