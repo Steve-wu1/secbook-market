@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<html class="no-js">
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -62,14 +62,14 @@
         </thead>
 
         <tbody>
-        <tr class="pure-table-odd">
-            <td>1</td>
-            <td>陈瀛</td>
-            <td>男</td>
-            <td>13777777777</td>
+        <tr class="pure-table-odd" th:each="user,a:${userList}">
+            <td th:text="${a.count}"></td>
+            <td th:text="${user.uName}"></td>
+            <td th:text="${user.uSex}==0?'男':'女'"></td>
+            <td th:text="${user.uPhone}"></td>
             <td>
-                <a href="#">
-                    <button class="btn btn-danger">删除</button>
+                <a th:href="@{'/user/delete/id='+${user.userId}}">
+                    <button class="btn btn-danger" type="button" onclick="return confirm('是否删除该用户?此操作不可逆！')">删除</button>
                 </a>
             </td>
         </tr>

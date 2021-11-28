@@ -51,4 +51,13 @@
       from admin_user_bind
       where user_id = #{userId,jdbcType=INTEGER}
     </select>
+  <select id="getAllUser" resultMap="BaseResultMap">
+    select *
+    from user
+    where user_id not in (select user_id from admin_user_bind)
+  </select>
+  <delete id="deleteUser">
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
 </mapper>

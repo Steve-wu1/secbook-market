@@ -1,6 +1,9 @@
 package sspu.informationsystem.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import sspu.informationsystem.entity.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,5 +61,23 @@ public class UserController {
         userService.updateInfoById(user);
         session.setAttribute("user", userService.getUserInfoById(original.getUserId()));
         return "redirect:/toUserInfo";
+    }
+
+    @GetMapping("/toUserInfo")
+    public String ToUserInfo(Model model, HttpSession session) {
+        model.addAttribute("user",session.getAttribute("user"));
+        return "userInfo";
+    }
+
+    @GetMapping("/toAdminUsers")
+    public String ToAdminUsers(Model model) {
+        model.addAttribute("userList",userService.getAllUser());
+        return "adminUsers";
+    }
+
+    @GetMapping("/user/delete/id={userId}")
+    public String userDelete(@PathVariable("userId")Integer userId){
+        userService.deleteUser(userId);
+        return "redirect:/toAdminUsers";
     }
 }

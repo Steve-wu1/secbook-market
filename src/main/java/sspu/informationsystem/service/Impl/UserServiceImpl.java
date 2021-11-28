@@ -56,4 +56,14 @@ public class UserServiceImpl implements UserService{
         else {return  false;}
     }
 
+    @Override
+    public List<User> getAllUser() {
+        return userMapper.getAllUser();
+    }
+
+    @Override
+    public void deleteUser(Integer userId) {
+        userMapper.deleteUser(userId);
+    }
+
 }

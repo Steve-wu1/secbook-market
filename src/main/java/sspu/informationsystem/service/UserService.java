@@ -20,4 +20,8 @@ public interface UserService{
     User getUserInfoById(Integer userId);
 
     Boolean checkAdminState(Integer userId);
+
+    List<User> getAllUser();
+
+    void deleteUser(Integer userId);
 }

@@ -21,4 +21,8 @@ public interface UserMapper {
     User getUserInfoById(Integer userId);
 
     Integer checkAdminState(Integer userId);
+
+    List<User> getAllUser();
+
+    void deleteUser(Integer userId);
 }

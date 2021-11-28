@@ -39,4 +39,9 @@ public class ApplyController {
         applyService.setApplyDeny(applyId,admin.getUserId());
         return "redirect:/apply/list";
     }
+
+    @GetMapping("/toAdminApply")
+    public String ToAdminApply() {
+        return "adminApply";
+    }
 }

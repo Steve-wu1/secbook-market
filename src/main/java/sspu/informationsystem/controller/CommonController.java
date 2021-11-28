@@ -48,11 +48,7 @@ public class CommonController {
 
 
 
-    @GetMapping("/toUserInfo")
-    public String ToUserInfo(Model model, HttpSession session) {
-        model.addAttribute("user",session.getAttribute("user"));
-        return "userInfo";
-    }
+
 
     @GetMapping("/toMyOrders")
     public String ToMyOrders() { return "myOrders"; }
@@ -93,14 +89,4 @@ public class CommonController {
     }
 
 
-
-    @GetMapping("/toAdminUsers")
-    public String ToAdminUsers() {
-        return "adminUsers";
-    }
-
-    @GetMapping("/toAdminApply")
-    public String ToAdminApply() {
-        return "adminApply";
-    }
 }
