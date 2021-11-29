@@ -4,15 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import sspu.informationsystem.entity.Store;
 import sspu.informationsystem.service.StoreService;
 import sspu.informationsystem.service.UserService;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -88,5 +84,8 @@ public class CommonController {
         return "storeInfo";
     }
 
-
+    @GetMapping("/toAdminStoreInfo")
+    public String ToAdminStoreInfo() {
+        return "adminStoreInfo";
+    }
 }
