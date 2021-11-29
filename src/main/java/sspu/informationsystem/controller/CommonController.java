@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import sspu.informationsystem.service.StoreService;
 import sspu.informationsystem.service.UserService;
+import sspu.informationsystem.entity.Store;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
@@ -65,7 +67,9 @@ public class CommonController {
     }
 
     @GetMapping("/toStoreMain")
-    public String ToStoreMain() {
+    public String ToStoreMain(Model model, HttpSession session) {
+        Store store = (Store) session.getAttribute("store");
+        model.addAttribute("dishesList",storeService.getDishesById(store.getStoreId()));
         return "storeMainPage";
     }
 

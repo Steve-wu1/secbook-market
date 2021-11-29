@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sspu.informationsystem.entity.Dishes;
 import sspu.informationsystem.entity.Store;
 import sspu.informationsystem.service.ApplyService;
+import sspu.informationsystem.service.DishesService;
 import sspu.informationsystem.service.StoreService;
 
 import javax.annotation.Resource;
@@ -23,6 +25,8 @@ public class StoreController {
     StoreService storeService;
     @Resource
     ApplyService applyService;
+    @Resource
+    DishesService dishesService;
 
     /**
      * 商家登录验证
@@ -90,7 +94,6 @@ public class StoreController {
 
     @GetMapping("/store/info/id={storeId}")
     public String toStoreInfo(@PathVariable("storeId")Integer storeId, Model model){
-        model.addAttribute("store",storeService.getStoreInfoById(storeId));
         model.addAttribute("dishesList",storeService.getDishesById(storeId));
         return "storeInfo";
     }
@@ -114,5 +117,13 @@ public class StoreController {
         model.addAttribute("dishesList",storeService.getDishesById(storeId));
         return "adminStoreInfo";
     }
+
+    @PostMapping("/store/addDish/id={storeId}")
+    public String storeAddDish(@PathVariable("storeId")Integer storeId,Dishes dishes){
+        dishes.setDStoreId(storeId);
+        dishesService.insert(dishes);
+        return "redirect:/toStoreMain";
+    }
+
 
 }

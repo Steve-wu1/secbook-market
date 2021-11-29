@@ -54,7 +54,7 @@
 <br><br>
 
 
-<form class="main-panel row g-3 needs-validation"
+<div class="main-panel row g-3 needs-validation"
       style=" margin: 0 auto; left: 15%;right: 15%; position: absolute; margin: 0 0 0 0;" novalidate>
     <table class="pure-table">
         <thead>
@@ -67,14 +67,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="pure-table-odd">
-            <td>1</td>
-            <td>番茄炒蛋</td>
-            <td>8</td>
-            <td>番茄+鸡蛋1111111111111111111111</td>
+        <tr class="pure-table-odd" th:each="dishes,a:${dishesList}">
+            <td th:text="${a.count}"></td>
+            <td th:text="${dishes.dName}"></td>
+            <td th:text="${dishes.dPrice}"></td>
+            <td th:text="${dishes.dDetails}"></td>
             <td>
                 <input type="button" class="btn btn-primary" onclick="modalOpen()" value="修改">
-                <button class="btn btn-danger">删除</button>
+                <button class="btn btn-danger" onclick="return confirm('是否删除该商家?此操作不可逆！')">删除</button>
             </td>
         </tr>
         </tbody>
@@ -85,7 +85,7 @@
         <input type="button" class="btn btn-primary" onclick="modalOpen()" value="添加">
     </div>
 
-</form>
+</div>
 <div class="modal-box" id="modal"
      style="margin: 0 auto; left: 15%;right: 15%;top: 15%; position: absolute; visibility: hidden">
     <!--顶部-->
@@ -97,38 +97,40 @@
         </button>
     </div>
     <!--主体-->
-    <div class="modal-box-content">
-        <label for="dName"
-               class="control-label"
-               style="font-size: medium">菜名:</label>
-        <input name="dName"
-               id="dName"
-               type="text"
-               class="form-control "
-               placeholder=" "/>
-        <label for="dPrice"
-               class="control-label"
-               style="font-size: medium">价格:</label>
-        <input name="dPrice"
-               id="dPrice"
-               type="text"
-               class="form-control "
-               placeholder=" "/>
-        <label for="dDetail"
-               class="control-label"
-               style="font-size: medium">简介:</label>
-        <input name="dDetail"
-               id="dDetail"
-               type="month"
-               class="form-control "
-               placeholder="">
-    </div>
-    <!--底部-->
-    <div class="modal-box-bottom">
-        <a href="/toStoreMain">
-            <input type="button" class="btn btn-success" onclick="change()" value="提交">
-        </a>
-    </div>
+    <form th:action="@{'/store/addDish/id='+${session.store.storeId}}" method="post">
+        <div class="modal-box-content">
+            <label for="dName"
+                   class="control-label"
+                   style="font-size: medium">菜名:</label>
+            <input name="dName"
+                   id="dName"
+                   type="text"
+                   class="form-control "
+                   placeholder=" "/>
+            <label for="dPrice"
+                   class="control-label"
+                   style="font-size: medium">价格:</label>
+            <input name="dPrice"
+                   id="dPrice"
+                   type="text"
+                   class="form-control "
+                   placeholder=" "/>
+            <label for="dDetail"
+                   class="control-label"
+                   style="font-size: medium">简介:</label>
+            <input name="dDetail"
+                   id="dDetail"
+                   class="form-control "
+                   placeholder="">
+        </div>
+        <!--底部-->
+        <div class="modal-box-bottom">
+            <a>
+                <button type="submit" class="btn btn-success" onclick="change()">提交</button>
+            </a>
+        </div>
+    </form>
+
 </div>
 
 <nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
