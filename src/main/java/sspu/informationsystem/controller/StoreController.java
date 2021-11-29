@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sspu.informationsystem.entity.Store;
 import sspu.informationsystem.service.ApplyService;
 import sspu.informationsystem.service.StoreService;
@@ -43,16 +42,11 @@ public class StoreController {
         {
             switch (storeService.checkApplyState(check.getStoreId())){
                 case 2: return "redirect:/store/registerFailure";
-                case 1: session.setAttribute("storeAccount",store.getSAccount());
+                case 1: session.setAttribute("store",check);
                     return "redirect:/toStoreMain";
                 case 0: return "redirect:/store/registering";
 
             }
-
-
-            session.setAttribute("storeAccount",store.getSAccount());
-            return "redirect:/toStoreMain";
-
         }
         return "redirect:/loginFailure";
     }
@@ -115,6 +109,10 @@ public class StoreController {
         return "redirect:/toAdminStores";
     }
 
-
+    @GetMapping("/store/infoForAdmin/id={storeId}")
+    public String storeInfoForAdmin(@PathVariable("storeId")Integer storeId,Model model){
+        model.addAttribute("dishesList",storeService.getDishesById(storeId));
+        return "adminStoreInfo";
+    }
 
 }

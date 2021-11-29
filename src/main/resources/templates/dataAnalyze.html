@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+<html xmlns:th="http://www.thymeleaf.org" class="no-js">
 <head>
     <meta charset="UTF-8">
     <title>Navbar</title>
@@ -38,8 +39,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" style="color: #1a1e21" href="#" id="offcanvasNavbarDropdown"
-                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            爱生炒饭
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${session.store.sName}">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
                             <li><a class="dropdown-item" href="/toStoreMain">商家主页</a></li>
