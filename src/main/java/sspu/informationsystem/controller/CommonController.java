@@ -79,10 +79,6 @@ public class CommonController {
         return "dataAnalyze";
     }
 
-    @GetMapping("/toStoreInfo")
-    public String ToStoreInfo() {
-        return "storeInfo";
-    }
 
     @GetMapping("/toAdminStoreInfo")
     public String ToAdminStoreInfo() {

@@ -86,7 +86,7 @@ public class StoreController {
 
     }
 
-    @GetMapping("/toStoreList")
+    @GetMapping("/store/list")
     public String toStoreList(Model model) {
         List<Store> storeList = storeService.getAllStore();
         storeList = storeService.getAddress(storeList);
@@ -97,7 +97,7 @@ public class StoreController {
     @GetMapping("/store/info/id={storeId}")
     public String toStoreInfo(@PathVariable("storeId")Integer storeId, Model model){
         model.addAttribute("store",storeService.getStoreInfoById(storeId));
-        model.addAttribute("dishList",storeService.getDishesById(storeId));
+        model.addAttribute("dishesList",storeService.getDishesById(storeId));
         return "storeInfo";
     }
 
@@ -114,5 +114,7 @@ public class StoreController {
         storeService.deleteStore(storeId);
         return "redirect:/toAdminStores";
     }
+
+
 
 }

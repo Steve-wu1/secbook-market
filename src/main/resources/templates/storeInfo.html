@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>商家详情</title>
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/mainpage.css">
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/vendor/jquery-1.12.4.js"></script>
     <script src="/js/navbar.js"></script>
 </head>
 <body>
@@ -28,7 +30,7 @@
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
                         <a class="nav-link active" style="color: #1a1e21" aria-current="page"
-                           href="/toStoreList">食堂商家</a>
+                           href="/store/list">食堂商家</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" style="color: #1a1e21" href="/toMyOrders">我的订单</a>
@@ -51,9 +53,9 @@
 <br/><br/>
 
 
-<form class="main-panel row g-3 needs-validation"
+<form class="main-panel row g-3 needs-validation" action="/order/submit" name="data" method="post" id="form"
       style=" margin: 0 auto; left: 15%;right: 15%; position: absolute; margin: 0 0 0 0;" novalidate>
-    <table class="pure-table">
+    <table class="pure-table" id="table">
         <thead>
         <tr>
             <th>#</th>
@@ -65,32 +67,29 @@
 
         </tr>
         </thead>
+            <tbody>
+            <tr class="pure-table-odd" th:each="dishes,a:${dishesList}">
+                <td th:text="${dishes.dishesId}" hidden></td>
+                <td th:text="${a.count}"></td>
+                <td th:text="${dishes.dName}"></td>
+                <td th:text="${dishes.dPrice}"></td>
+                <td th:text="${dishes.dDetails}"></td>
+                <td>
+                    数量: <input value="-" type="button" onclick="numDec()"> <input type="text" value="0" id="quantity"/>
+                    <input value="+" type="button" onclick="numAdd()">
+                </td>
+                <td>
+                    <label><input name="1" type="checkbox" value=""/>加入订单</label>
 
-        <tbody>
-        <tr class="pure-table-odd">
-            <td>1</td>
-            <td>番茄炒蛋</td>
-            <td>8</td>
-            <td>番茄+鸡蛋1111111111111111111111</td>
-            <td>
-                数量: <input value="-" type="button" onclick="numDec()"> <input type="text" value="0" id="quantity"/>
-                <input value="+" type="button" onclick="numAdd()">
-            </td>
-            <td>
-                <label><input name="1" type="checkbox" value=""/>加入订单</label>
+                </td>
+            </tr>
+            </tbody>
 
-            </td>
-        </tr>
-
-
-        </tbody>
     </table>
     <div class="col-md-8 position-relative" style=" margin: 20px 0 0 350px;">
-
-        <button class="btn btn-primary" onclick="return confirm('确认下此订单？')">提交订单</button>
+        <input hidden name="table_data" value="" id="hidTD">
+        <button class="btn btn-primary" onclick="return confirm('确认下此订单？')" id="btnSubmit" type="button">提交订单</button>
     </div>
-
-
 </form>
 
 
@@ -161,6 +160,28 @@
         var $tr = $("#table2 tr:eq(2)");
         $("#table1").append($tr);
     }
+.
+    // $(document).ready(function(){
+    //     $("#btnSubmit").click(function () {
+    //         var result = getTableData();
+    //         console.log(result);
+    //         $("#hidTD").val(JSON.stringify(result));
+    //         $("#form").submit();
+    //     });
+    // });
+    //
+    // function getTableData() {
+    //     var tr = $("table tr");
+    //     var result = [];
+    //     for (var i = 0;i<tr.length;i++){
+    //         var tds = $(tr[i]).find("td");
+    //         if (tds.length>0){
+    //             result.push({'dId':$(tds[0]).html(),'dNumber':$(tds[3]).html()});
+    //         }
+    //
+    //     }
+    //
+    // }
 </script>
 
 

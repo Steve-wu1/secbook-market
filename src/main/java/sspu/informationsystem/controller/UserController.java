@@ -39,7 +39,7 @@ public class UserController {
                 return "redirect:/apply/list";
             }
             else{
-                return "redirect:/toStoreList";
+                return "redirect:/store/list";
             }
 
         }
@@ -50,7 +50,7 @@ public class UserController {
     public String userRegister(User user,HttpSession session){
         userService.insert(user);
         session.setAttribute("user",userService.getUserInfoByAccount(user.getUAccount()));
-        return "redirect:/toStoreList";
+        return "redirect:/store/list";
 
     }
 
