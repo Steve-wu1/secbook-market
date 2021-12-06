@@ -53,8 +53,8 @@
 <br/><br/>
 
 
-<form class="main-panel row g-3 needs-validation" action="/order/submit" name="data" method="post" id="form"
-      style=" margin: 0 auto; left: 15%;right: 15%; position: absolute; margin: 0 0 0 0;" novalidate>
+<div class="main-panel row g-3 needs-validation" action="/order/submit" name="data" method="post" id="form"
+     style=" margin: 0 auto; left: 10%;right: 10%; position: absolute; margin: 0 0 0 0;" novalidate>
     <table class="pure-table" id="table">
         <thead>
         <tr>
@@ -62,35 +62,36 @@
             <th>菜名</th>
             <th>价格</th>
             <th>简介</th>
+            <th>金额</th>
             <th>数量</th>
-            <th>订单选择</th>
+            <th>总价</th>
 
         </tr>
         </thead>
-            <tbody>
-            <tr class="pure-table-odd" th:each="dishes,a:${dishesList}">
-                <td th:text="${dishes.dishesId}" hidden></td>
-                <td th:text="${a.count}"></td>
-                <td th:text="${dishes.dName}"></td>
-                <td th:text="${dishes.dPrice}"></td>
-                <td th:text="${dishes.dDetails}"></td>
-                <td>
-                    数量: <input value="-" type="button" onclick="numDec()"> <input type="text" value="0" id="quantity"/>
-                    <input value="+" type="button" onclick="numAdd()">
-                </td>
-                <td>
-                    <label><input name="1" type="checkbox" value=""/>加入订单</label>
-
-                </td>
-            </tr>
-            </tbody>
-
+        <tbody>
+        <tr class="pure-table-odd" th:each="dishes,a:${dishesList}">
+            <td th:text="${dishes.dishesId}" hidden></td>
+            <td th:text="${a.count}"></td>
+            <td th:text="${dishes.dName}"></td>
+            <td><input type="text" th:name="price" th:value="${dishes.dPrice}"></td>
+            <td th:text="${dishes.dDetails}"></td>
+            <td><input type="text" th:id="price+${a.index}" th:value="${dishes.dPrice}"></td>
+            <td>
+                数量: <input type="button" th:name="minus" value="-"
+                           th:onclick="minus([[${a.index}]]);"><input type="text" width="10px" th:name="amount"
+                                                                      value="0"><input type="button" name="plus"
+                                                                                       value="+"
+                                                                                       th:onclick="plus([[${a.index}]])">
+            </td>
+            <td th:id="totalPrice"></td>
+        </tr>
+        </tbody>
     </table>
     <div class="col-md-8 position-relative" style=" margin: 20px 0 0 350px;">
         <input hidden name="table_data" value="" id="hidTD">
         <button class="btn btn-primary" onclick="return confirm('确认下此订单？')" id="btnSubmit" type="button">提交订单</button>
     </div>
-</form>
+</div>
 
 
 
@@ -160,7 +161,101 @@
         var $tr = $("#table2 tr:eq(2)");
         $("#table1").append($tr);
     }
-.
+
+    //减法
+    function minus(index) {
+        //获取当前数量的值
+        var amounts = document.getElementsByName("amount");
+
+        //得到第一个amount的元素的value属性的值
+        var count = parseInt(amounts[index].value); //数量加1
+
+        if (count <= 0) {
+            alert("不能再减了，快没了！！");
+        } else {
+            //得到第一个amount的元素的value属性的值
+            var count = parseInt(amounts[index].value) - 1; //数量加1
+
+            //重新把count的值绑定在数量文本框里
+            amounts[index].value = count;
+            var prices = document.getElementsByName("price");
+            var price = parseFloat(prices[index].value);
+            //乘以Math.pow(10,2)的原因为避免失真
+            var totalMoney = ((price * Math.pow(10, 2)) * count) / Math.pow(10, 2);
+
+            document.getElementById("price" + index).innerHTML = "¥：" + totalMoney;
+        }
+
+        total();
+
+    }
+
+    //加法
+    function plus(index) {
+
+        //获取当前数量的值
+        var amounts = document.getElementsByName("amount");
+
+        //得到第一个amount的元素的value属性的值
+        var count = parseInt(amounts[index].value) + 1; //数量加1
+
+        //重新把count的值绑定在数量文本框里
+        amounts[index].value = count;
+
+        //当前操作端口的价格也要重新计算
+        //得到当前端口的单价
+        var prices = document.getElementsByName("price");
+        var price = parseFloat(prices[index].value);
+        //乘以Math.pow(10,2)的原因为避免失真
+        var totalMoney = ((price * Math.pow(10, 2)) * count) / Math.pow(10, 2);
+
+        //把当前价格显示在文本中
+        document.getElementById("price" + index).innerHTML = "¥：" + totalMoney;
+
+        total();
+    }
+
+
+    //求总金额
+
+    function total() {
+
+        //得到所有的数量
+        var counts = document.getElementsByName("amount");
+
+        //得到所有的单价
+        var prices = document.getElementsByName("price");
+
+        var sumMoney = 0;
+
+        for (var i = 0; i < counts.length; i++) {
+
+            //乘以Math.pow(10,2)的原因为避免失真
+            sumMoney += (parseFloat(prices[i].value) * Math.pow(10, 2) * parseInt(counts[i].value) / Math.pow(10, 2));
+        }
+
+        //把总金额显示再指定的元素中
+        document.getElementById("totalPrice").innerHTML = "¥：" + sumMoney;
+
+    }
+
+
+    //加入收藏
+    function save() {
+        if (confirm("确认要收藏吗？")) {
+            alert("收藏成功！");
+        }
+
+    }
+
+    //删除
+    function delete1() {
+        if (confirm("确认要删除吗？")) {
+            var del = document.getElementById("first");
+            del.parentNode.removeChild(del);
+            alert("删除成功！！");
+        }
+    }
     // $(document).ready(function(){
     //     $("#btnSubmit").click(function () {
     //         var result = getTableData();
