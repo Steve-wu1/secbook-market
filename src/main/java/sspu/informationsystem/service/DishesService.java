@@ -6,4 +6,7 @@ public interface DishesService{
 
     int insert(Dishes record);
 
+    void updateDish(Dishes dishes);
+
+    void deleteDishById(Integer dishesId);
 }

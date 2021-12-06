@@ -66,17 +66,9 @@ public class CommonController {
         return "storeRegister";
     }
 
-    @GetMapping("/toStoreMain")
-    public String ToStoreMain(Model model, HttpSession session) {
-        Store store = (Store) session.getAttribute("store");
-        model.addAttribute("dishesList",storeService.getDishesById(store.getStoreId()));
-        return "storeMainPage";
-    }
 
-    @GetMapping("/toStoreOrder")
-    public String ToStoreOrder() {
-        return "storeOrders";
-    }
+
+
 
     @GetMapping("/toDataAnalyze")
     public String ToDataAnalyze() {

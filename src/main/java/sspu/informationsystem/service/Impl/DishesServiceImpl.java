@@ -16,4 +16,14 @@ public class DishesServiceImpl implements DishesService{
         return dishesMapper.insert(record);
     }
 
+    @Override
+    public void updateDish(Dishes dishes) {
+        dishesMapper.updateDish(dishes);
+    }
+
+    @Override
+    public void deleteDishById(Integer dishesId) {
+        dishesMapper.deleteDish(dishesId);
+    }
+
 }

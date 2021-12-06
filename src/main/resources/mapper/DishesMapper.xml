@@ -19,4 +19,16 @@
     values (#{dName,jdbcType=VARCHAR}, #{dPrice,jdbcType=DECIMAL}, #{dDetails,jdbcType=VARCHAR}, 
       #{dPhoto,jdbcType=VARCHAR}, #{dStoreId,jdbcType=INTEGER})
   </insert>
+    <update id="updateDish">
+      update dishes
+      set
+      d_name = #{dName,jdbcType=VARCHAR},
+      d_price = #{dPrice,jdbcType=DECIMAL},
+      d_details = #{dDetails,jdbcType=VARCHAR}
+      where dishes_id = #{dishesId,jdbcType=INTEGER}
+    </update>
+  <delete id="deleteDish">
+    delete from dishes
+    where dishes_id = #{dishesId,jdbcType=INTEGER}
+  </delete>
 </mapper>

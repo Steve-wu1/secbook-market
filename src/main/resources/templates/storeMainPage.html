@@ -74,15 +74,9 @@
             <td th:text="${dishes.dPrice}"></td>
             <td th:text="${dishes.dDetails}"></td>
             <td>
-                <input type="button" class="btn btn-primary" onclick="modalOpen1(1,2,3)"  value="修改">
-                <script type="javascript">
-                    function modalOpen1(dName,dPrice,dDetail) {
-                        console.debug("hererererererererere");
-                        // modalOpen();
-                        // inputData(dName,dPrice,dDetail);
-                    }
-                </script>
-                <button class="btn btn-danger" onclick="return confirm('是否删除该商家?此操作不可逆！')">删除</button>
+
+                <input type="button" class="btn btn-primary" th:onclick="modalOpen1([[${dishes.dName}]],[[${dishes.dPrice}]],[[${dishes.dDetails}]],[[${dishes.dishesId}]])"  value="修改">
+                <a th:href="@{'/store/deleteDish/id='+${dishes.dishesId}}" onclick="return confirm('是否删除该菜品?此操作不可逆！')"><button class="btn btn-danger" >删除</button></a>
             </td>
 
         </tr>
@@ -106,7 +100,7 @@
         </button>
     </div>
     <!--主体-->
-    <form th:action="@{'/store/addDish/id='+${session.store.storeId}}" method="post">
+    <form th:action="@{'/store/alterDish/id='+${session.store.storeId}}" method="post">
         <div class="modal-box-content">
             <label for="dName"
                    class="control-label"
@@ -131,7 +125,7 @@
                    id="dDetail"
                    class="form-control "
                    placeholder="">
-            <input name="dishesId" hidden>
+            <input name="dishesId" id="dishesId" hidden/>
         </div>
         <!--底部-->
         <div class="modal-box-bottom">
@@ -314,7 +308,10 @@
         document.getElementById("demo").innerHTML = txt;
     }
 
-
+    function modalOpen1(dName,dPrice,dDetail,dishesId) {
+        modalOpen();
+        inputData(dName,dPrice,dDetail,dishesId);
+    }
 
     function modalOpen() {
         //获取模态框对象   getElementsByClassName获取到的是一个数组对象
@@ -339,10 +336,11 @@
         modal.style.visibility = "hidden";
     }
 
-    function inputData(dName,dPrice,dDetail){
-        $(".modal-box #dName").val("dName");
+    function inputData(dName,dPrice,dDetail,dishesId){
+        $(".modal-box #dName").val(dName);
         $(".modal-box #dPrice").val(dPrice);
         $(".modal-box #dDetail").val(dDetail);
+        $(".modal-box #dishesId").val(dishesId);
     }
 
 

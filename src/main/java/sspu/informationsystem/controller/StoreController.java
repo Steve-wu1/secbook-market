@@ -11,6 +11,7 @@ import sspu.informationsystem.entity.Dishes;
 import sspu.informationsystem.entity.Store;
 import sspu.informationsystem.service.ApplyService;
 import sspu.informationsystem.service.DishesService;
+import sspu.informationsystem.service.OrderService;
 import sspu.informationsystem.service.StoreService;
 
 import javax.annotation.Resource;
@@ -27,6 +28,8 @@ public class StoreController {
     ApplyService applyService;
     @Resource
     DishesService dishesService;
+    @Resource
+    OrderService orderService;
 
     /**
      * 商家登录验证
@@ -106,6 +109,13 @@ public class StoreController {
         return "adminStores";
     }
 
+    @GetMapping("/toStoreMain")
+    public String ToStoreMain(Model model, HttpSession session) {
+        Store store = (Store) session.getAttribute("store");
+        model.addAttribute("dishesList",storeService.getDishesById(store.getStoreId()));
+        return "storeMainPage";
+    }
+
     @GetMapping("/store/delete/id={storeId}")
     public String storeDelete(@PathVariable("storeId")Integer storeId){
         storeService.deleteStore(storeId);
@@ -118,12 +128,30 @@ public class StoreController {
         return "adminStoreInfo";
     }
 
-    @PostMapping("/store/addDish/id={storeId}")
-    public String storeAddDish(@PathVariable("storeId")Integer storeId,Dishes dishes){
-        dishes.setDStoreId(storeId);
-        dishesService.insert(dishes);
-        return "redirect:/toStoreMain";
+    @GetMapping("/toStoreOrder")
+    public String ToStoreOrder(Model model,HttpSession session) {
+        Store store = (Store)session.getAttribute("store");
+        model.addAttribute("orderList",orderService.getOrderByStoreId(store.getStoreId()));
+        return "storeOrders";
     }
 
+    @PostMapping("/store/alterDish/id={storeId}")
+    public String storeAlterDish(@PathVariable("storeId")Integer storeId,Dishes dishes){
+        if (dishes.getDishesId()==null){
+            dishes.setDStoreId(storeId);
+            dishesService.insert(dishes);
+        }
+        else {
+            dishesService.updateDish(dishes);
+        }
+        return "redirect:/toStoreMain";
+
+    }
+
+    @GetMapping("/store/deleteDish/id={dishesId}")
+    public String storeDeleteDish(@PathVariable("dishesId")Integer dishesId){
+        dishesService.deleteDishById(dishesId);
+        return "redirect:/toStoreMain";
+    }
 
 }
