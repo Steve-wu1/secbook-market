@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/mainpage.css">
     <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/vendor/jquery-1.12.4.js"></script>
     <script src="../js/navbar.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -73,16 +74,24 @@
             <td th:text="${dishes.dPrice}"></td>
             <td th:text="${dishes.dDetails}"></td>
             <td>
-                <input type="button" class="btn btn-primary" onclick="modalOpen()" value="修改">
+                <input type="button" class="btn btn-primary" onclick="modalOpen1(1,2,3)"  value="修改">
+                <script type="javascript">
+                    function modalOpen1(dName,dPrice,dDetail) {
+                        console.debug("hererererererererere");
+                        // modalOpen();
+                        // inputData(dName,dPrice,dDetail);
+                    }
+                </script>
                 <button class="btn btn-danger" onclick="return confirm('是否删除该商家?此操作不可逆！')">删除</button>
             </td>
+
         </tr>
         </tbody>
     </table>
 
 
     <div class="col-md-8 position-relative" style=" margin: 20px 0 0 350px;">
-        <input type="button" class="btn btn-primary" onclick="modalOpen()" value="添加">
+        <input type="button" class="btn btn-primary" onclick="modalOpen()"  value="添加">
     </div>
 
 </div>
@@ -122,6 +131,7 @@
                    id="dDetail"
                    class="form-control "
                    placeholder="">
+            <input name="dishesId" hidden>
         </div>
         <!--底部-->
         <div class="modal-box-bottom">
@@ -132,6 +142,7 @@
     </form>
 
 </div>
+
 
 <nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
     <div class="container-fluid">
@@ -303,6 +314,8 @@
         document.getElementById("demo").innerHTML = txt;
     }
 
+
+
     function modalOpen() {
         //获取模态框对象   getElementsByClassName获取到的是一个数组对象
         let modal = document.getElementsByClassName("modal-box")[0];
@@ -325,6 +338,13 @@
         //设置为不可见
         modal.style.visibility = "hidden";
     }
+
+    function inputData(dName,dPrice,dDetail){
+        $(".modal-box #dName").val("dName");
+        $(".modal-box #dPrice").val(dPrice);
+        $(".modal-box #dDetail").val(dDetail);
+    }
+
 
 </script>
 </html>
