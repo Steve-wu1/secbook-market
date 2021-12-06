@@ -78,7 +78,8 @@
             <td><input type="text" th:id="price+${a.index}" th:value="${dishes.dPrice}"></td>
             <td>
                 数量: <input type="button" th:name="minus" value="-"
-                           th:onclick="minus([[${a.index}]]);"><input type="text" width="10px" th:name="amount"
+                           th:onclick="minus([[${a.index}]]);"><input type="text" readonly="readonly" width="10px"
+                                                                      th:name="amount"
                                                                       value="0"><input type="button" name="plus"
                                                                                        value="+"
                                                                                        th:onclick="plus([[${a.index}]])">
