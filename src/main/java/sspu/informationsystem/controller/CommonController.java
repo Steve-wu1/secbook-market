@@ -5,9 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sspu.informationsystem.entity.Store;
 import sspu.informationsystem.service.StoreService;
 import sspu.informationsystem.service.UserService;
-import sspu.informationsystem.entity.Store;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -88,4 +88,5 @@ public class CommonController {
     public String ToAdminStoreInfo() {
         return "adminStoreInfo";
     }
+
 }
