@@ -63,7 +63,6 @@
             <th>#</th>
             <th>菜名</th>
             <th>价格</th>
-            <th>简介</th>
             <th>金额</th>
             <th>数量</th>
             <th>总价</th>
@@ -77,10 +76,9 @@
         <tr class="pure-table-odd" th:each="dishes,a:${dishesList}">
             <td th:text="${dishes.dishesId}" hidden></td>
             <td th:text="${a.count}"></td>
-            <td th:text="${dishes.dName}" th:onmouseover="showImg(a[[${a.index}]])"
-                th:onmouseout="hideImg(a[[${a.index}]])"><img src="/images/logo.jpg" th:id="a+${a.index}"></td>
+            <td th:text="${dishes.dName}" style="color: #0a58ca" th:onmouseover="" th:onmouseout=""
+                th:onclick="modalOpen1([[${dishes.dName}]],[[${dishes.dPrice}]],[[${dishes.dDetails}]],[[${dishes.dishesId}]])"></td>
             <td><input type="text" th:name="price" th:value="${dishes.dPrice}"></td>
-            <td th:text="${dishes.dDetails}"></td>
             <td><input type="text" th:id="price+${a.index}" th:value="${dishes.dPrice}"></td>
             <td>
                 数量: <input type="button" th:name="minus" value="-"
@@ -91,6 +89,7 @@
                                                                                        th:onclick="plus([[${a.index}]])">
             </td>
             <td th:id="totalPrice"></td>
+
         </tr>
         </tbody>
     </table>
@@ -100,7 +99,49 @@
     </div>
 </div>
 
+<div class="modal-box" id="modal"
+     style="margin: 0 auto; left: 15%;right: 15%;top: 15%; position: absolute; visibility: hidden">
+    <!--顶部-->
+    <div class="modal-box-top">
+        <div class="modal-box-title">菜品信息</div>
+        <!--关闭按钮 &times;会被转义成乘号（×）看上去就是关闭符号-->
+        <!--关闭逻辑-->
+        <button onclick="modalClose()" class="modal-close">&times;
+        </button>
+    </div>
+    <!--主体-->
+    <div class="modal-box-photo" style=" left: 25%;right: 25%;">
+        <img src="/images/logo.jpg">
+    </div>
+    <div class="modal-box-content">
+        <label for="dName"
+               class="control-label"
+               style="font-size: medium">菜名:</label>
+        <input name="dName"
+               id="dName"
+               type="text"
+               class="form-control " readonly="readonly"
+               placeholder=" "/>
+        <label for="dPrice"
+               class="control-label"
+               style="font-size: medium">价格:</label>
+        <input name="dPrice"
+               id="dPrice"
+               type="text"
+               class="form-control " readonly="readonly"
+               placeholder=" "/>
+        <label for="dDetail"
+               class="control-label"
+               style="font-size: medium">简介:</label>
+        <input name="dDetail"
+               id="dDetail"
+               class="form-control " readonly="readonly"
+               placeholder="">
+        <input name="dishesId" id="dishesId" hidden/>
+    </div>
 
+
+</div>
 
 <!--<script type="text/javascript">-->
 <!--/*或者不用jquery*/-->
@@ -164,6 +205,7 @@
 
 
 <script language="javascript">
+
 
     function showImg(imgid) {
         document.getElementById(imgid).style.display = "block";
@@ -348,6 +390,53 @@
     function show() {
         document.getElementById("totalPrice").innerHTML = 3.25 * 3;
     }
+
+    $("#modal").modal("hide");
+
+    function change() {
+        var txt;
+        if (confirm("确认上传")) {
+            alert("上传成功");
+        } else {
+        }
+        document.getElementById("demo").innerHTML = txt;
+    }
+
+    function modalOpen1(dName, dPrice, dDetail, dishesId) {
+        modalOpen();
+        inputData(dName, dPrice, dDetail, dishesId);
+    }
+
+    function modalOpen() {
+        //获取模态框对象   getElementsByClassName获取到的是一个数组对象
+        let modal = document.getElementsByClassName("modal-box")[0];
+        //获取浏览器当前宽高
+        let documentWidth = window.innerWidth;
+        let documentHeight = window.innerHeight;
+        //获取模态框宽度
+        let modalWidth = modal.offsetWidth;
+        //模态框距离浏览器右侧的距离就是（浏览器宽度-模态框宽）/ 2.0
+        //注意，需要把结果转为字符串类型
+        modal.style.left = ((documentWidth - modalWidth) / 2.0).toString();
+        //设置为可见
+        modal.style.visibility = "visible";
+    }
+
+    //模态框关闭
+    function modalClose() {
+        //获取模态框
+        let modal = document.getElementsByClassName("modal-box")[0];
+        //设置为不可见
+        modal.style.visibility = "hidden";
+    }
+
+    function inputData(dName, dPrice, dDetail, dishesId) {
+        $(".modal-box #dName").val(dName);
+        $(".modal-box #dPrice").val(dPrice);
+        $(".modal-box #dDetail").val(dDetail);
+        $(".modal-box #dishesId").val(dishesId);
+    }
+
 </script>
 
 

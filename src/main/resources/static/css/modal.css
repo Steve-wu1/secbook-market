@@ -46,6 +46,18 @@
     overflow: hidden;
 }
 
+.modal-box-photo {
+
+    /*相对于之前自己的位置定位，这个设置不会影响元素的位置，会影响子元素使用absolute定位 先不管*/
+    position: relative;
+    /*宽度随父div*/
+    width: 100%;
+    /*边框线放在下面*/
+    padding: 0.5rem;
+    /*使用此属性后 元素宽高固定，边距大小会从原大小中减去，也就是设置边距后元素宽高不表*/
+    box-sizing: border-box;
+    overflow: hidden;
+}
 /*模态框主体*/
 .modal-box-content {
     width: 100%;
