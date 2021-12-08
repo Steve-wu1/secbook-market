@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/mainpage.css">
+    <link rel="stylesheet" href="/css/table.css">
+    <link rel="stylesheet" href="/css/modal.css">
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/vendor/jquery-1.12.4.js"></script>
     <script src="/js/navbar.js"></script>
 </head>
-<body>
+<body onload="total()">
 <nav class="navbar navbar-dark fixed-top bg-success">
     <div class="container-fluid">
-        <img src="#" alt="" width="138" height="44" class="d-inline-block align-text-top">
+        <img src="/images/logo.jpg" alt="" width="138" height="44" class="d-inline-block align-text-top">
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                 aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -69,16 +71,20 @@
         </tr>
         </thead>
         <tbody>
+
+
+        、
         <tr class="pure-table-odd" th:each="dishes,a:${dishesList}">
             <td th:text="${dishes.dishesId}" hidden></td>
             <td th:text="${a.count}"></td>
-            <td th:text="${dishes.dName}"></td>
+            <td th:text="${dishes.dName}" th:onmouseover="showImg(a[[${a.index}]])"
+                th:onmouseout="hideImg(a[[${a.index}]])"><img src="/images/logo.jpg" th:id="a+${a.index}"></td>
             <td><input type="text" th:name="price" th:value="${dishes.dPrice}"></td>
             <td th:text="${dishes.dDetails}"></td>
             <td><input type="text" th:id="price+${a.index}" th:value="${dishes.dPrice}"></td>
             <td>
                 数量: <input type="button" th:name="minus" value="-"
-                           th:onclick="minus([[${a.index}]]);"><input type="text" readonly="readonly" width="10px"
+                           th:onclick="minus([[${a.index}]]);"><input type="text" oninput="total()" width="10px"
                                                                       th:name="amount"
                                                                       value="0"><input type="button" name="plus"
                                                                                        value="+"
@@ -158,6 +164,15 @@
 
 
 <script language="javascript">
+
+    function showImg(imgid) {
+        document.getElementById(imgid).style.display = "block";
+    }
+
+    function hideImg(imgid) {
+        document.getElementById(imgid).style.display = "none";
+    }
+
     function fun1() {
         var $tr = $("#table2 tr:eq(2)");
         $("#table1").append($tr);
@@ -287,64 +302,6 @@
     </div>
 </nav>
 </body>
-<style type="text/css">
-    html {
-        font-family: sans-serif;
-        -ms-text-size-adjust: 100%;
-        -webkit-text-size-adjust: 100%;
-    }
-
-    body {
-        margin: 10px;
-    }
-
-    table {
-        border-collapse: collapse;
-        border-spacing: 0;
-    }
-
-    td, th {
-        padding: 0;
-    }
-
-    .pure-table {
-        border-collapse: collapse;
-        border-spacing: 0;
-        empty-cells: show;
-        border: 1px solid #cbcbcb;
-    }
-
-    .pure-table caption {
-        color: #000;
-        font: italic 85%/1 arial, sans-serif;
-        padding: 1em 0;
-        text-align: center;
-    }
-
-    .pure-table td, .pure-table th {
-        border-left: 1px solid #cbcbcb;
-        border-width: 0 0 0 1px;
-        font-size: inherit;
-        margin: 0;
-        overflow: visible;
-        padding: .5em 1em;
-    }
-
-    .pure-table thead {
-        background-color: #e0e0e0;
-        color: #000;
-        text-align: left;
-        vertical-align: bottom;
-    }
-
-    .pure-table td {
-        background-color: transparent;
-    }
-
-    .pure-table-odd td {
-        background-color: #f2f2f2;
-    }
-</style>
 
 <script type="text/javascript">
     /*或者不用jquery*/

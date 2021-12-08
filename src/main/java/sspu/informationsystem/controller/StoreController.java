@@ -131,7 +131,7 @@ public class StoreController {
     @GetMapping("/toStoreOrder")
     public String ToStoreOrder(Model model,HttpSession session) {
         Store store = (Store)session.getAttribute("store");
-        model.addAttribute("orderList",orderService.getOrderByStoreId(store.getStoreId()));
+//        model.addAttribute("orderList",orderService.getOrderByStoreId(store.getStoreId()));
         return "storeOrders";
     }
 
