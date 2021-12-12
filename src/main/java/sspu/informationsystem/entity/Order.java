@@ -20,6 +20,10 @@ public class Order implements Serializable {
 
     private String oName;
 
+    private String oStore;
+
+    private Integer oStoreId;
+
     private String oPhone;
 
     private String oContent;

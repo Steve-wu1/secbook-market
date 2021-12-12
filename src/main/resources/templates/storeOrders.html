@@ -78,7 +78,10 @@
             <td th:text="${order.oStateName}"></td>
             <td th:text="${order.oContent}"></td>
             <td>
-                <a th:href="@{'/order/complete/id='+${order.orderId}}" th:hidden="${order.oState}!=0?'true':'false'">
+                <a th:href="@{'/order/accept/id='+${order.orderId}}" th:hidden="${order.oState}!=0?'true':'false'">
+                    <button class="btn btn-primary" type="button">接受订单</button>
+                </a>
+                <a th:href="@{'/order/complete/id='+${order.orderId}}" th:hidden="${order.oState}!=1?'true':'false'">
                     <button class="btn btn-primary" type="button">确认完成</button>
                 </a>
                 <a th:href="@{'/order/cancel/id='+${order.orderId}}" th:hidden="${order.oState}!=0?'true':'false'">

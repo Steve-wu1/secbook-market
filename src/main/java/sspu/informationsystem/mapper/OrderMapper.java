@@ -19,4 +19,12 @@ public interface OrderMapper {
     void orderComplete(Integer orderId);
 
     void orderCancel(Integer orderId);
+
+    List<Order> getOrderByUserId(Integer userId);
+
+    Integer getStoreId(Integer orderId);
+
+    void orderAccept(Integer orderId);
+
+    void orderAddComment(Integer oRank, String oComment, Integer orderId);
 }

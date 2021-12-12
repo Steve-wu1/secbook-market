@@ -37,7 +37,6 @@ public class OrderController {
 
     @GetMapping("/order/complete/id={orderId}")
     public String orderComplete(@PathVariable("orderId")Integer orderId){
-        log.debug("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         orderService.orderComplete(orderId);
         return "redirect:/toStoreOrder";
     }
@@ -47,4 +46,18 @@ public class OrderController {
         orderService.orderCancel(orderId);
         return "redirect:/toStoreOrder";
     }
+
+    @GetMapping("/order/accept/id={orderId}")
+    public String orderAccept(@PathVariable("orderId")Integer orderId){
+        orderService.orderAccept(orderId);
+        return "redirect:/toStoreOrder";
+    }
+
+    @PostMapping("/order/addComment")
+    public String orderAddComment(Integer orderId,Integer oRank,String oComment){
+        log.debug("你已进入此方法，参数为"+orderId+oRank+oComment);
+        orderService.orderAddComment(oRank,oComment,orderId);
+        return "redirect:/toMyOrders";
+    }
+
 }

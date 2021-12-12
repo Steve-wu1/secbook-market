@@ -41,15 +41,6 @@ public class CommonController {
         return "login";
     }
 
-
-
-
-
-
-    @GetMapping("/toMyOrders")
-    public String ToMyOrders() { return "myOrders"; }
-
-
     @GetMapping("/toRegister")
     public String ToRegister(Model model) {
         model.addAttribute("phoneList",userService.getAllPhone());

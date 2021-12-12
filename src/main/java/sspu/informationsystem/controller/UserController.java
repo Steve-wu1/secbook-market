@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import sspu.informationsystem.entity.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import sspu.informationsystem.service.OrderService;
 import sspu.informationsystem.service.UserService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -18,6 +20,8 @@ public class UserController {
 
     @Resource
     UserService userService;
+    @Resource
+    OrderService orderService;
 
     /**
      * 用户登录验证
@@ -80,4 +84,11 @@ public class UserController {
         userService.deleteUser(userId);
         return "redirect:/toAdminUsers";
     }
+
+    @GetMapping("/toMyOrders")
+    public String ToMyOrders(HttpSession session,Model model) {
+        User user = (User) session.getAttribute("user");
+        List<Order> orderList = orderService.getOrderByUserId(user.getUserId());
+        model.addAttribute("orderList",orderList);
+        return "myOrders"; }
 }

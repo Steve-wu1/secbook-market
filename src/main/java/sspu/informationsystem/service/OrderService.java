@@ -19,4 +19,12 @@ public interface OrderService{
     void orderComplete(Integer orderId);
 
     void orderCancel(Integer orderId);
+
+    List<Order> getOrderByUserId(Integer userId);
+
+    void dealOrderInfo(Order order);
+
+    void orderAccept(Integer orderId);
+
+    void orderAddComment(Integer oRank, String oComment, Integer orderId);
 }
