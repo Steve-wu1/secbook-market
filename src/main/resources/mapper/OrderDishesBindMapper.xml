@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sspu.informationsystem.mapper.OrderDishesBindMapper">
+  <resultMap id="BaseResultMap" type="sspu.informationsystem.entity.OrderDishesBind">
+    <!--@Table order_dishes_bind-->
+    <id column="order_dishes_id" jdbcType="INTEGER" property="orderDishesId" />
+    <result column="o_id" jdbcType="INTEGER" property="oId" />
+    <result column="d_id" jdbcType="INTEGER" property="dId" />
+    <result column="d_number" jdbcType="INTEGER" property="dNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_dishes_id, o_id, d_id, d_number
+  </sql>
+  <insert id="insert" parameterType="sspu.informationsystem.entity.OrderDishesBind">
+    insert into order_dishes_bind (order_dishes_id, o_id, d_id, 
+      d_number)
+    values (#{orderDishesId,jdbcType=INTEGER}, #{oId,jdbcType=INTEGER}, #{dId,jdbcType=INTEGER}, 
+      #{dNumber,jdbcType=INTEGER})
+  </insert>
+    <insert id="dishesBind">
+      insert into order_dishes_bind (d_id,d_number,o_id)
+      values (#{param2.dId,jdbcType=INTEGER},#{param2.dNumber,jdbcType=INTEGER},#{param1,jdbcType=INTEGER})
+    </insert>
+</mapper>
