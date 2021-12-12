@@ -3,7 +3,7 @@
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Navbar</title>
+    <title>订单</title>
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/navbar.css">
@@ -65,25 +65,25 @@
             <th>联系方式</th>
             <th>状态</th>
             <th>内容</th>
-            <th>巴拉巴拉</th>
+            <th>操作</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr class="pure-table-odd">
-            <td>1</td>
-            <td>2001-01-01 00:00:00</td>
-            <td>陈瀛</td>
-            <td>21</td>
-            <td>18888888</td>
+        <tr class="pure-table-odd" th:each="order,a:${orderList}">
+            <td th:text="${a.account}"></td>
+            <td th:text="${order.oTime}"></td>
+            <td th:text="${order.oName}"></td>
+            <td th:text="${order.oPrice}"></td>
+            <td th:text="${order.oPhone}"></td>
 
-            <td>已支付</td>
-            <td>黄瓜炒饭+蛋+番茄炒饭</td>
+            <td th:text="${order.oStateName}"></td>
+            <td></td>
             <td>
-                <a href="#">
+                <a th:href="@{'/order/complete/id='+${order.id}}">
                     <button class="btn btn-primary login-btn">确认完成</button>
                 </a>
-                <a href="#">
+                <a th:href="@{'/order/cancel/id='+${order.id}}">
                     <button class="btn btn-primary login-btn">取消订单</button>
                 </a>
             </td>

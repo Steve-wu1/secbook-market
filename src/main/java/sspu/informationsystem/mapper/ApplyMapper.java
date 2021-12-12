@@ -12,7 +12,7 @@ public interface ApplyMapper {
 
     void addStoreRegisterApply(Integer storeId);
 
-    List<Apply> getAllApplyUndealed();
+    List<Apply> getAllApplyUndealt();
 
     String getStateNameForStore(Integer aState);
 

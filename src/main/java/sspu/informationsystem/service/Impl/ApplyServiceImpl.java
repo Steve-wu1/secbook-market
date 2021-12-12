@@ -27,8 +27,8 @@ public class ApplyServiceImpl implements ApplyService{
     }
 
     @Override
-    public List<Apply> getAllApplyUndealed() {
-        List<Apply> applyList = applyMapper.getAllApplyUndealed();
+    public List<Apply> getAllApplyUndealt() {
+        List<Apply> applyList = applyMapper.getAllApplyUndealt();
         for (Apply apply:applyList){
             apply.setStateName(applyMapper.getStateNameForStore(apply.getAState()));
             apply.setAName(applyMapper.getApplyNameForStore(apply.getAId()));

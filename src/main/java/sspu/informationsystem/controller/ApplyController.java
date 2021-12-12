@@ -20,7 +20,7 @@ public class ApplyController {
 
     @GetMapping("/apply/list")
     public String applyList(Model model){
-        model.addAttribute("applyList",applyService.getAllApplyUndealed());
+        model.addAttribute("applyList",applyService.getAllApplyUndealt());
         return "adminApply";
     }
 

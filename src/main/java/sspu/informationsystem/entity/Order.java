@@ -12,13 +12,21 @@ public class Order implements Serializable {
 
     private Integer oState;
 
+    private String oStateName;
+
     private Date oRequireTime;
 
     private Integer oUserId;
 
+    private String oNmae;
+
+    private String oPhone;
+
     private Integer oRank;
 
     private String oComment;
+
+    private Integer oPrice;
 
     private static final long serialVersionUID = 1L;
 }

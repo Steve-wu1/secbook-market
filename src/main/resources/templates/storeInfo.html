@@ -74,7 +74,7 @@
 
         、
         <tr class="pure-table-odd" th:each="dishes,a:${dishesList}">
-            <td th:text="${dishes.dishesId}" hidden></td>
+            <td hidden><input th:value="${dishes.dishesId}" th:id="id+${a.index}" hidden></td>
             <td th:text="${a.count}"></td>
             <td th:text="${dishes.dName}" style="color: #0a58ca" th:onmouseover="" th:onmouseout=""
                 th:onclick="modalOpen1([[${dishes.dName}]],[[${dishes.dPrice}]],[[${dishes.dDetails}]],[[${dishes.dishesId}]])"></td>
@@ -83,7 +83,7 @@
             <td>
                 数量: <input type="button" th:name="minus" value="-"
                            th:onclick="minus([[${a.index}]]);"><input type="text" oninput="total()" width="10px"
-                                                                      th:name="amount"
+                                                                      name="amount" th:id="amount+${a.index}"
                                                                       value="0"><input type="button" name="plus"
                                                                                        value="+"
                                                                                        th:onclick="plus([[${a.index}]])">
@@ -314,29 +314,35 @@
             alert("删除成功！！");
         }
     }
-    // $(document).ready(function(){
-    //     $("#btnSubmit").click(function () {
-    //         var result = getTableData();
-    //         console.log(result);
-    //         $("#hidTD").val(JSON.stringify(result));
-    //         $("#form").submit();
-    //     });
-    // });
-    //
-    // function getTableData() {
-    //     var tr = $("table tr");
-    //     var result = [];
-    //     for (var i = 0;i<tr.length;i++){
-    //         var tds = $(tr[i]).find("td");
-    //         if (tds.length>0){
-    //             result.push({'dId':$(tds[0]).html(),'dNumber':$(tds[3]).html()});
-    //         }
-    //
-    //     }
-    //
-    // }
-</script>
 
+</script>
+<script>
+    $("#btnSubmit").on("click",function () {
+        //封装表格中所需数据为json字符串
+        var table = document.getElementById("table");
+        var json = "[";
+        for(var i=0,rows = table.rows.length;i<rows-1;i++){
+            var id = "#id"+i;
+            var amount = "#amount"+i;
+            json += '{"dId":"' + $(id).val()
+                + '","dNumber":"' + $(amount).val() + '"},';
+        }
+        json= json.substr(0, json.length - 1);
+        json +="]";
+        console.log("获取数据为"+json);
+
+        $.ajax({
+            type:"POST",
+            url:"/order/submit",
+            contentType:"application/json",
+            dataType:"json",
+            data:JSON.stringify(json),
+            success:function () {
+                alert("上传成功！")
+            }
+        })
+    })
+</script>
 
 <nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
     <div class="container-fluid">

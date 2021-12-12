@@ -22,4 +22,22 @@
       #{oUserId,jdbcType=INTEGER}, #{oRank,jdbcType=INTEGER}, #{oComment,jdbcType=VARCHAR}
       )
   </insert>
+  <select id="getOrderByStoreId" resultMap="BaseResultMap">
+      select *
+      from `order`
+      where order_id in (select order_id
+                          from order_dishes_bind
+                           where d_id in (select dishes_id
+                                           from dishes
+                                           where d_store_id = #{storeId,jdbcType=INTEGER}))
+      order by o_state
+  </select>
+  <insert id="addOrder">
+    insert into `order`(o_time,o_state,o_user_id)
+    values (now(),0,#{userId,jdbcType=INTEGER})
+  </insert>
+  <select id="getLatestId" resultType="int">
+    select last_insert_ID()
+    from `order`
+  </select>
 </mapper>

@@ -26,7 +26,7 @@
     values (1, 0,now(),
     #{storeId,jdbcType=INTEGER} )
   </insert>
-  <select id="getAllApplyUndealed" resultMap="BaseResultMap">
+  <select id="getAllApplyUndealt" resultMap="BaseResultMap">
     select *
     from apply
     where a_type = 1 and a_state = 0;

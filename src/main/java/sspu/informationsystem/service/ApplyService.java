@@ -12,7 +12,7 @@ public interface ApplyService{
 
     void addStoreRegisterApply(Integer storeId);
 
-    List<Apply> getAllApplyUndealed();
+    List<Apply> getAllApplyUndealt();
 
     void setApplyPass(Integer applyId,Integer userId);
 
