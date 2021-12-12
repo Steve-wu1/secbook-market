@@ -26,7 +26,6 @@ public class ApplyController {
 
     @GetMapping("/apply/pass/id={applyId}")
     public String applyPass(@PathVariable("applyId")Integer applyId,HttpSession session){
-        log.debug("到达此方案！！！！！！！");
         User admin = (User) session.getAttribute("user");
         applyService.setApplyPass(applyId,admin.getUserId());
         return "redirect:/apply/list";
@@ -34,7 +33,6 @@ public class ApplyController {
 
     @GetMapping("/apply/deny/id={applyId}")
     public String applyDeny(@PathVariable("applyId")Integer applyId,HttpSession session){
-        log.debug("到达此方案！！！！！！！");
         User admin = (User) session.getAttribute("user");
         applyService.setApplyDeny(applyId,admin.getUserId());
         return "redirect:/apply/list";

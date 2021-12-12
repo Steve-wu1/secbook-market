@@ -18,15 +18,17 @@ public class Order implements Serializable {
 
     private Integer oUserId;
 
-    private String oNmae;
+    private String oName;
 
     private String oPhone;
+
+    private String oContent;
 
     private Integer oRank;
 
     private String oComment;
 
-    private Integer oPrice;
+    private Double oPrice;
 
     private static final long serialVersionUID = 1L;
 }

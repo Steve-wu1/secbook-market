@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import sspu.informationsystem.entity.Dishes;
+import sspu.informationsystem.entity.Order;
 import sspu.informationsystem.entity.Store;
 import sspu.informationsystem.service.ApplyService;
 import sspu.informationsystem.service.DishesService;
@@ -39,7 +40,6 @@ public class StoreController {
      */
     @PostMapping("/store/login")
     public String storeLogin(Store store, HttpSession session) {
-        log.debug("账号"+store.getSAccount()+"密码"+store.getSPassword());
         Store check = storeService.getStoreInfoByAccount(store.getSAccount());
         if (check.getStoreId()==null)
         {
@@ -131,7 +131,8 @@ public class StoreController {
     @GetMapping("/toStoreOrder")
     public String ToStoreOrder(Model model,HttpSession session) {
         Store store = (Store)session.getAttribute("store");
-//        model.addAttribute("orderList",orderService.getOrderByStoreId(store.getStoreId()));
+        List<Order> orderList = orderService.getOrderByStoreId(store.getStoreId());
+        model.addAttribute("orderList",orderList);
         return "storeOrders";
     }
 

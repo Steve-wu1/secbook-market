@@ -10,4 +10,6 @@ public interface DishesMapper {
     void updateDish(Dishes dishes);
 
     void deleteDish(Integer dishesId);
+
+    Dishes getInfo(Integer dId);
 }

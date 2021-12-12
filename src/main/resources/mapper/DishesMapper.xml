@@ -31,4 +31,9 @@
     delete from dishes
     where dishes_id = #{dishesId,jdbcType=INTEGER}
   </delete>
+    <select id="getInfo" resultMap="BaseResultMap">
+      select *
+      from dishes
+      where dishes_id = #{dId,jdbcType=INTEGER}
+    </select>
 </mapper>

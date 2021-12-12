@@ -10,7 +10,7 @@ public class Dishes implements Serializable {
 
     private String dName;
 
-    private BigDecimal dPrice;
+    private Double dPrice;
 
     private String dDetails;
 
