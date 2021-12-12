@@ -16,4 +16,7 @@ public interface OrderMapper {
 
     int getLatestId();
 
+    void orderComplete(Integer orderId);
+
+    void orderCancel(Integer orderId);
 }

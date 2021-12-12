@@ -1,11 +1,11 @@
 package sspu.informationsystem.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import sspu.informationsystem.entity.OrderDishesBind;
@@ -35,4 +35,16 @@ public class OrderController {
         return "redirect:/store/list";
     }
 
+    @GetMapping("/order/complete/id={orderId}")
+    public String orderComplete(@PathVariable("orderId")Integer orderId){
+        log.debug("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        orderService.orderComplete(orderId);
+        return "redirect:/toStoreOrder";
+    }
+
+    @GetMapping("/order/cancel/id={orderId}")
+    public String orderCancel(@PathVariable("orderId")Integer orderId){
+        orderService.orderCancel(orderId);
+        return "redirect:/toStoreOrder";
+    }
 }

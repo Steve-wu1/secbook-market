@@ -15,4 +15,8 @@ public interface OrderService{
     void addOrder(Integer userId,List<OrderDishesBind> dishesList);
 
     List<OrderDishesBind> checkDishesInOrder(List<OrderDishesBind> orderDishesBindList);
+
+    void orderComplete(Integer orderId);
+
+    void orderCancel(Integer orderId);
 }

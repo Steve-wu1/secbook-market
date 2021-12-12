@@ -12,9 +12,7 @@ import sspu.informationsystem.mapper.OrderMapper;
 import sspu.informationsystem.entity.Order;
 import sspu.informationsystem.mapper.UserMapper;
 import sspu.informationsystem.service.OrderService;
-import sun.rmi.runtime.Log;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,6 +88,16 @@ public class OrderServiceImpl implements OrderService{
             }
         });
         return dealtList;
+    }
+
+    @Override
+    public void orderComplete(Integer orderId) {
+        orderMapper.orderComplete(orderId);
+    }
+
+    @Override
+    public void orderCancel(Integer orderId) {
+        orderMapper.orderCancel(orderId);
     }
 
 }

@@ -33,7 +33,7 @@
                            href="/toDataAnalyze">数据分析</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #1a1e21" href="/toStoreOrder">历史订单</a>
+                        <a class="nav-link" style="color: #1a1e21" href="/toStoreOrder">订单查看</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" style="color: #1a1e21" href="#" id="offcanvasNavbarDropdown"
@@ -69,7 +69,7 @@
         </thead>
 
         <tbody>
-        <tr class="pure-table-odd" th:each="order,a:${orderList}">
+        <tr class="pure-table-odd" th:each="order,a:${orderList}" >
             <td th:text="${a.count}"></td>
             <td th:text="${order.oTime}"></td>
             <td th:text="${order.oName}"></td>
@@ -78,11 +78,11 @@
             <td th:text="${order.oStateName}"></td>
             <td th:text="${order.oContent}"></td>
             <td>
-                <a th:href="@{'/order/complete/id='+${order.orderId}}">
-                    <button class="btn btn-primary login-btn">确认完成</button>
+                <a th:href="@{'/order/complete/id='+${order.orderId}}" th:hidden="${order.oState}!=0?'true':'false'">
+                    <button class="btn btn-primary" type="button">确认完成</button>
                 </a>
-                <a th:href="@{'/order/cancel/id='+${order.orderId}}">
-                    <button class="btn btn-primary login-btn">取消订单</button>
+                <a th:href="@{'/order/cancel/id='+${order.orderId}}" th:hidden="${order.oState}!=0?'true':'false'">
+                    <button class="btn btn-danger" type="button" onclick="return confirm('是否取消该订单?此操作不可逆！')">取消订单</button>
                 </a>
             </td>
         </tr>

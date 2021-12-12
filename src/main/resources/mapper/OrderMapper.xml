@@ -40,4 +40,14 @@
     select last_insert_ID()
     from `order`
   </select>
+    <update id="orderComplete">
+        update `order`
+        set o_state = 1
+        where order_id = #{orderId,jdbcType=INTEGER}
+    </update>
+    <update id="orderCancel">
+        update `order`
+        set o_state = 3
+        where order_id = #{orderId,jdbcType=INTEGER}
+    </update>
 </mapper>
