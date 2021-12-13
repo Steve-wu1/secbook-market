@@ -50,6 +50,7 @@ public class OrderServiceImpl implements OrderService{
     public void addOrder(Integer userId,List<OrderDishesBind> dishesList) {
         orderMapper.addOrder(userId);
         Integer orderId = orderMapper.getLatestId();
+
         dishesList.forEach(item-> orderDishesBindMapper.dishesBind(orderId,item));
     }
 

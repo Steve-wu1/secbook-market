@@ -39,6 +39,7 @@
   <select id="getLatestId" resultType="int">
     select last_insert_ID()
     from `order`
+    limit 1
   </select>
     <update id="orderComplete">
         update `order`

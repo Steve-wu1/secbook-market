@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import sspu.informationsystem.entity.Dishes;
 import sspu.informationsystem.entity.Order;
 import sspu.informationsystem.entity.Store;
@@ -59,7 +60,8 @@ public class StoreController {
     }
 
     @PostMapping("/store/register")
-    public String userRegister(Store store){
+    public String userRegister(Store store,MultipartFile file){
+
         storeService.insert(store);
         applyService.addStoreRegisterApply(store.getStoreId());
         return "redirect:/store/registering";
