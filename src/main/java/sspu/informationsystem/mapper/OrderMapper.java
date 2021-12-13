@@ -27,4 +27,8 @@ public interface OrderMapper {
     void orderAccept(Integer orderId);
 
     void orderAddComment(Integer oRank, String oComment, Integer orderId);
+
+    void orderReceive(Integer orderId);
+
+    List<String> getStateList();
 }

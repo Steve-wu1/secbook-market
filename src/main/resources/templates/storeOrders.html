@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/mainpage.css">
+    <link rel="stylesheet" href="../css/modal.css">
     <link rel="stylesheet" href="/css/table.css">
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/vendor/jquery-1.12.4.js"></script>
     <script src="/js/navbar.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -87,20 +89,91 @@
                 <a th:href="@{'/order/cancel/id='+${order.orderId}}" th:hidden="${order.oState}!=0?'true':'false'">
                     <button class="btn btn-danger" type="button" onclick="return confirm('是否取消该订单?此操作不可逆！')">取消订单</button>
                 </a>
+                <a  th:hidden="${order.oState}!=3?'true':'false'">
+                    <button class="btn btn-primary" type="button" th:onclick="modalOpen1([[${order.oRank}]],[[${order.oComment}]])">查看评价</button>
+                </a>
             </td>
         </tr>
         </tbody>
     </table>
 
 </form>
+<div class="modal-box" id="modal"
+     style="margin: 0 auto; left: 15%;right: 15%;top: 15%; position: absolute; visibility: hidden">
+    <!--顶部-->
+    <div class="modal-box-top">
+        <div class="modal-box-title">订单评价</div>
+        <!--关闭按钮 &times;会被转义成乘号（×）看上去就是关闭符号-->
+        <!--关闭逻辑-->
+        <button onclick="modalClose()" class="modal-close">&times;
+        </button>
+    </div>
+    <!--主体-->
+    <form action="/order/addComment" method="post">
+        <div class="modal-box-content">
+            <label for="oRank"
+                   class="control-label"
+                   style="font-size: medium">评分:</label>
+            <p id="oRank" ></p>
+            <label for="oComment"
+                   class="control-label"
+                   style="font-size: medium">评价:</label>
+            <p id="oComment"
+               class="form-control "
+                      ></p>
+            <input name="orderId" id="orderId" hidden>
+        </div>
+        <!--底部-->
+        <div class="modal-box-bottom">
+        </div>
+    </form>
 
+</div>
 
+<div hidden></div>
 <nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
     <div class="container-fluid">
         <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">食堂预约系统</a>
     </div>
 </nav>
 </body>
+<script type="text/javascript">
+    $("#modal").modal("hide");
 
+    function modalOpen1(oRank,oComment) {
+        modalOpen();
+        inputData(oRank,oComment);
+    }
+
+    function modalOpen() {
+        //获取模态框对象   getElementsByClassName获取到的是一个数组对象
+        let modal = document.getElementsByClassName("modal-box")[0];
+        //获取浏览器当前宽高
+        let documentWidth = window.innerWidth;
+        let documentHeight = window.innerHeight;
+        //获取模态框宽度
+        let modalWidth = modal.offsetWidth;
+        //模态框距离浏览器右侧的距离就是（浏览器宽度-模态框宽）/ 2.0
+        //注意，需要把结果转为字符串类型
+        modal.style.left = ((documentWidth - modalWidth) / 2.0).toString();
+        //设置为可见
+        modal.style.visibility = "visible";
+    }
+
+    //模态框关闭
+    function modalClose() {
+        //获取模态框
+        let modal = document.getElementsByClassName("modal-box")[0];
+        //设置为不可见
+        modal.style.visibility = "hidden";
+    }
+
+    function inputData(oRank,oComment){
+        $(".modal-box #oRank").html(oRank);
+        $(".modal-box #oComment").html(oComment);
+    }
+
+
+</script>
 
 </html>

@@ -90,16 +90,8 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public void dealOrderInfo(Order order) {
         //下单状态解析
-        switch (order.getOState()){
-            case 0: order.setOStateName("已提交");
-                break;
-            case 1: order.setOStateName("已完成");
-                break;
-            case 2: order.setOStateName("已交付");
-                break;
-            case 3: order.setOStateName("已取消");
-                break;
-        }
+        List<String> stateList = orderMapper.getStateList();
+        order.setOStateName(stateList.get(order.getOState()));
         //订单总价及内含菜品解析
         final Double[] sumPrice = {0.0};
         final String[] content = {""};
@@ -125,6 +117,11 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public void orderAddComment(Integer oRank, String oComment, Integer orderId) {
         orderMapper.orderAddComment(oRank,oComment,orderId);
+    }
+
+    @Override
+    public void orderReceive(Integer orderId) {
+        orderMapper.orderReceive(orderId);
     }
 
 }

@@ -73,4 +73,15 @@
         set o_rank = #{param1,jdbcType=INTEGER},o_comment=#{param2,jdbcType=VARCHAR}
         where order_id = #{param3,jdbcType=INTEGER}
     </update>
+    <update id="orderReceive">
+        update `order`
+        set o_state = 3
+        where order_id = #{orderId,jdbcType=INTEGER}
+    </update>
+    <select id="getStateList" resultType="java.lang.String">
+        select state_name
+        from type_state_bind
+        where type_id = 2
+    </select>
+
 </mapper>
