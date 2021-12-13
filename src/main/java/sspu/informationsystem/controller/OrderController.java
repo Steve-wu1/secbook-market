@@ -47,7 +47,7 @@ public class OrderController {
         return "redirect:/toStoreOrder";
     }
 
-    @GetMapping("/order/complete/id='{orderId}")
+    @GetMapping("/order/complete/id={orderId}")
     public String orderComplete(@PathVariable("orderId")Integer orderId){
         orderService.orderComplete(orderId);
         return "redirect:/toStoreOrder";
