@@ -24,6 +24,7 @@
       set
       d_name = #{dName,jdbcType=VARCHAR},
       d_price = #{dPrice,jdbcType=DECIMAL},
+      <if test="dPhoto != null">d_photo = #{dPhoto,jdbcType=VARCHAR},</if>
       d_details = #{dDetails,jdbcType=VARCHAR}
       where dishes_id = #{dishesId,jdbcType=INTEGER}
     </update>

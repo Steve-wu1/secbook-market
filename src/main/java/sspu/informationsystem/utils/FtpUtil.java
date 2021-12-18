@@ -3,36 +3,12 @@ package sspu.informationsystem.utils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.UUID;
 
 @Component
 public class FtpUtil {
-
-//    public String upload(MultipartFile file){
-//        if (file.isEmpty()){
-//            return  null;
-//        }
-//        String fileName = file.getOriginalFilename();
-//        String suffixName = fileName.substring(fileName.lastIndexOf("."));
-//        String filePath = "D://study//file";
-//        fileName = UUID.randomUUID()+suffixName;
-//        File dest = new File(filePath + fileName);
-//        if (!dest.getParentFile().exists()){
-//            dest.getParentFile().mkdir();
-//        }
-//        try {
-//            file.transferTo(dest);
-//        } catch (IOException e){
-//            e.printStackTrace();
-//        }
-//        String filename = "/file/"+fileName;
-//        return "file";
-//    }
-
     public String uplaod(MultipartFile file) {//1. 接受上传的文件  @RequestParam("file") MultipartFile file
         String fileName1 = "";
         try {

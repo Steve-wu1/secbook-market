@@ -76,7 +76,7 @@
             <td hidden><input th:value="${dishes.dishesId}" th:id="id+${a.index}" hidden></td>
             <td th:text="${a.count}"></td>
             <td th:text="${dishes.dName}" style="color: #0a58ca" th:onmouseover="" th:onmouseout=""
-                th:onclick="modalOpen1([[${dishes.dName}]],[[${dishes.dPrice}]],[[${dishes.dDetails}]],[[${dishes.dishesId}]])"></td>
+                th:onclick="modalOpen1([[${dishes.dName}]],[[${dishes.dPrice}]],[[${dishes.dDetails}]],[[${dishes.dishesId}]],[[${dishes.dPhoto}]])"></td>
             <td hidden><input type="text" th:name="price" th:value="${dishes.dPrice}" hidden></td>
             <td><input type="text" th:id="price+${a.index}" th:value="${dishes.dPrice}"></td>
             <td>
@@ -110,7 +110,7 @@
     </div>
     <!--主体-->
     <div class="modal-box-photo" style=" left: 25%;right: 25%;">
-        <img src="/images/logo.jpg">
+        <img src="/images/logo.jpg" id="dPhoto" height="160">
     </div>
     <div class="modal-box-content">
         <label for="dName"
@@ -407,9 +407,9 @@
         document.getElementById("demo").innerHTML = txt;
     }
 
-    function modalOpen1(dName, dPrice, dDetail, dishesId) {
+    function modalOpen1(dName, dPrice, dDetail, dishesId,dPhoto) {
         modalOpen();
-        inputData(dName, dPrice, dDetail, dishesId);
+        inputData(dName, dPrice, dDetail, dishesId,dPhoto);
     }
 
     function modalOpen() {
@@ -435,11 +435,13 @@
         modal.style.visibility = "hidden";
     }
 
-    function inputData(dName, dPrice, dDetail, dishesId) {
+    function inputData(dName, dPrice, dDetail, dishesId,dPhoto) {
         $(".modal-box #dName").val(dName);
         $(".modal-box #dPrice").val(dPrice);
         $(".modal-box #dDetail").val(dDetail);
         $(".modal-box #dishesId").val(dishesId);
+        $(".modal-box #dPhoto").attr("src","/images/"+dPhoto);
+
     }
 
 </script>

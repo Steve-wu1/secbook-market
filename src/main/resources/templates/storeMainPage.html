@@ -77,7 +77,7 @@
             <td th:text="${dishes.dDetails}"></td>
             <td>
 
-                <input type="button" class="btn btn-primary" th:onclick="modalOpen1([[${dishes.dName}]],[[${dishes.dPrice}]],[[${dishes.dDetails}]],[[${dishes.dishesId}]])"  value="修改">
+                <input type="button" class="btn btn-primary" th:onclick="modalOpen1([[${dishes.dName}]],[[${dishes.dPrice}]],[[${dishes.dDetails}]],[[${dishes.dishesId}]],[[${dishes.dPhoto}]])"  value="修改">
                 <a th:href="@{'/store/deleteDish/id='+${dishes.dishesId}}" onclick="return confirm('是否删除该菜品?此操作不可逆！')"><button class="btn btn-danger" >删除</button></a>
             </td>
 
@@ -102,7 +102,10 @@
         </button>
     </div>
     <!--主体-->
-    <form th:action="@{'/store/alterDish/id='+${session.store.storeId}}" method="post">
+    <div class="modal-box-photo" style=" left: 25%;right: 25%;">
+        <img src="" id="dPhoto1"  height="160">
+    </div>
+    <form th:action="@{'/store/alterDish/id='+${session.store.storeId}}" method="post" enctype="multipart/form-data">
         <div class="modal-box-content">
             <label for="dName"
                    class="control-label"
@@ -128,6 +131,14 @@
                    class="form-control "
                    placeholder="">
             <input name="dishesId" id="dishesId" hidden/>
+            <div class="file-button">
+                选择文件
+                <input type="file"
+                       name="file"
+                       multiple="multiple"
+                       id="file"
+                       accept="image/*">
+            </div>
         </div>
         <!--底部-->
         <div class="modal-box-bottom">
@@ -161,9 +172,9 @@
         document.getElementById("demo").innerHTML = txt;
     }
 
-    function modalOpen1(dName,dPrice,dDetail,dishesId) {
+    function modalOpen1(dName,dPrice,dDetail,dishesId,dPhoto1) {
         modalOpen();
-        inputData(dName,dPrice,dDetail,dishesId);
+        inputData(dName,dPrice,dDetail,dishesId,dPhoto1);
     }
 
     function modalOpen() {
@@ -189,11 +200,12 @@
         modal.style.visibility = "hidden";
     }
 
-    function inputData(dName,dPrice,dDetail,dishesId){
+    function inputData(dName,dPrice,dDetail,dishesId,dPhoto1){
         $(".modal-box #dName").val(dName);
         $(".modal-box #dPrice").val(dPrice);
         $(".modal-box #dDetails").val(dDetail);
         $(".modal-box #dishesId").val(dishesId);
+        $(".modal-box #dPhoto1").attr("src","/images/"+dPhoto1);
     }
 
 

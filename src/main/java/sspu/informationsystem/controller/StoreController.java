@@ -144,12 +144,16 @@ public class StoreController {
     }
 
     @PostMapping("/store/alterDish/id={storeId}")
-    public String storeAlterDish(@PathVariable("storeId")Integer storeId,Dishes dishes){
+    public String storeAlterDish(@PathVariable("storeId")Integer storeId,Dishes dishes,MultipartFile file){
         if (dishes.getDishesId()==null){
+            dishes.setDPhoto(ftpUtil.uplaod(file));
             dishes.setDStoreId(storeId);
             dishesService.insert(dishes);
         }
         else {
+            if (!file.isEmpty()) {
+                dishes.setDPhoto(ftpUtil.uplaod(file));
+            }
             dishesService.updateDish(dishes);
         }
         return "redirect:/toStoreMain";
