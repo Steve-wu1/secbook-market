@@ -13,7 +13,7 @@ public interface StoreMapper {
 
     Store getStoreInfoByAccount(String account);
 
-    List<Store> getAllStore();
+    List<Store> getAllStorePassed();
 
     Store getStoreInfoById(Integer storeId);
 

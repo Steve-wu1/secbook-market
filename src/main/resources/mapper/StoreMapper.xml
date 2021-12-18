@@ -28,9 +28,12 @@
       from store
       where s_account = #{account,jdbcType=VARCHAR}
     </select>
-  <select id="getAllStore" resultMap="BaseResultMap">
+  <select id="getAllStorePassed" resultMap="BaseResultMap">
     select  *
     from store
+    where store_id in (select a_id
+                        from apply
+                        where a_type = 1 and a_state = 1)
   </select>
     <select id="getStoreInfoById" resultMap="BaseResultMap">
       select *

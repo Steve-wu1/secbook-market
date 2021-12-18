@@ -14,11 +14,16 @@ spring:
     servlet:
       content-type: text/html
 
+
   datasource:
    driver-class-name: com.mysql.cj.jdbc.Driver
    url: jdbc:mysql://localhost:3306/canteen?serverTimezone=UTC
    username: root
    password: 1234
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 110MB
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

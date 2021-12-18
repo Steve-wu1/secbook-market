@@ -28,8 +28,8 @@ public class StoreServiceImpl implements StoreService{
     }
 
     @Override
-    public List<Store> getAllStore() {
-        return storeMapper.getAllStore();
+    public List<Store> getAllStorePassed() {
+        return storeMapper.getAllStorePassed();
     }
 
     @Override

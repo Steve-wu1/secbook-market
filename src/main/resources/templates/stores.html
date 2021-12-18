@@ -68,7 +68,7 @@
 
     <div class="col" style="margin: 20px 0 20px 0" th:each="store:${storeList}" >
         <div class="card">
-            <img src="../images/chaofan.jpg" class="card-img-top" height="160" alt="...">
+            <img th:src="'../images/'+${store.sPhoto}" class="card-img-top" height="160" alt="...">
             <div class="card-body" style="height: 240px">
                 <a th:href="@{'/store/info/id='+ ${store.storeId}}">
                     <h5 class="card-title"  th:text="${store.sName}"></h5>
@@ -84,6 +84,7 @@
 
 </div>
 
+<div hidden></div>
 <nav class=" navbar fixed-bottom bg-success " style="margin: 0 0 0 0;">
     <div class="container-fluid">
         <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">食堂预约系统</a>

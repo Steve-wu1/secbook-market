@@ -15,6 +15,7 @@ import sspu.informationsystem.service.ApplyService;
 import sspu.informationsystem.service.DishesService;
 import sspu.informationsystem.service.OrderService;
 import sspu.informationsystem.service.StoreService;
+import sspu.informationsystem.utils.FtpUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -24,6 +25,8 @@ import java.util.List;
 @Controller
 public class StoreController {
 
+    @Resource
+    FtpUtil ftpUtil;
     @Resource
     StoreService storeService;
     @Resource
@@ -61,7 +64,9 @@ public class StoreController {
 
     @PostMapping("/store/register")
     public String userRegister(Store store,MultipartFile file){
-
+        String fileName = ftpUtil.uplaod(file);
+        store.setSPhoto(fileName);
+        log.debug("storeInfo is "+ store);
         storeService.insert(store);
         applyService.addStoreRegisterApply(store.getStoreId());
         return "redirect:/store/registering";
@@ -91,7 +96,7 @@ public class StoreController {
 
     @GetMapping("/store/list")
     public String toStoreList(Model model) {
-        List<Store> storeList = storeService.getAllStore();
+        List<Store> storeList = storeService.getAllStorePassed();
         storeList = storeService.getAddress(storeList);
         model.addAttribute("storeList",storeList);
         return "stores";
@@ -105,7 +110,7 @@ public class StoreController {
 
     @GetMapping("/toAdminStores")
     public String ToAdminStores(Model model) {
-        List<Store> storeList = storeService.getAllStore();
+        List<Store> storeList = storeService.getAllStorePassed();
         storeList = storeService.getAddress(storeList);
         model.addAttribute("storeList",storeList);
         return "adminStores";
@@ -156,5 +161,7 @@ public class StoreController {
         dishesService.deleteDishById(dishesId);
         return "redirect:/toStoreMain";
     }
+
+
 
 }
