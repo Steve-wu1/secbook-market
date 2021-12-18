@@ -24,9 +24,13 @@ public interface OrderService{
 
     void dealOrderInfo(Order order);
 
+    Double calSum(List<OrderDishesBind> dishesList);
+
     void orderAccept(Integer orderId);
 
     void orderAddComment(Integer oRank, String oComment, Integer orderId);
 
     void orderReceive(Integer orderId);
+
+
 }

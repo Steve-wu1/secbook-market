@@ -1,6 +1,7 @@
 package sspu.informationsystem.service;
 
 import sspu.informationsystem.entity.Dishes;
+import sspu.informationsystem.entity.OrderDishesBind;
 import sspu.informationsystem.entity.Store;
 
 import java.util.List;
@@ -27,4 +28,17 @@ public interface StoreService{
     Integer checkApplyState(Integer storeId);
 
     void deleteStore(Integer storeId);
+
+    double getRankById(Integer storeId);
+
+    Dishes getStarDishByIdForWeek(Integer storeId);
+
+    Double getSaleToday(Integer storeId);
+
+    Double getSaleSameAddressToday(String sAddress);
+
+    Double getSaleMonth(Integer storeId);
+
+    Double getSaleYear(Integer storeId);
+
 }

@@ -166,6 +166,25 @@ public class StoreController {
         return "redirect:/toStoreMain";
     }
 
-
+    @GetMapping("/toDataAnalyze")
+    public String ToDataAnalyze(Model model,HttpSession session) {
+        Store store = (Store) session.getAttribute("store");
+        //店铺评分
+        model.addAttribute("rank",storeService.getRankById(store.getStoreId()));
+        //本周明星产品
+        model.addAttribute("starDish",storeService.getStarDishByIdForWeek(store.getStoreId()));
+        //本日销售数据
+        model.addAttribute("saleToday",storeService.getSaleToday(store.getStoreId()));
+        //同一食堂本日销售额
+        String tempAddress = store.getSAddress();
+        tempAddress = tempAddress.substring(0,1);
+        tempAddress += "_";
+        model.addAttribute("saleSameAddressToday",storeService.getSaleSameAddressToday(tempAddress));
+        //本周销售额
+        model.addAttribute("saleMonth",storeService.getSaleMonth(store.getStoreId()));
+        //本月销售额
+        model.addAttribute("saleYear",storeService.getSaleYear(store.getStoreId()));
+        return "dataAnalyze";
+    }
 
 }

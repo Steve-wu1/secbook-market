@@ -2,6 +2,7 @@ package sspu.informationsystem.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import sspu.informationsystem.entity.Dishes;
+import sspu.informationsystem.entity.OrderDishesBind;
 import sspu.informationsystem.entity.Store;
 
 import java.util.List;
@@ -26,4 +27,16 @@ public interface StoreMapper {
     int checkApplyState(Integer storeId);
 
     void deleteStore(Integer storeId);
+
+    double getRankById(Integer storeId);
+
+    Dishes getStarDishByIdForWeek(Integer storeId);
+
+    List<OrderDishesBind> getSaleToday(Integer storeId);
+
+    List<OrderDishesBind> getSaleSameAddressToday(String sAddress);
+
+    List<OrderDishesBind> getSaleMonth(Integer storeId);
+
+    List<OrderDishesBind> getSaleYear(Integer storeId);
 }

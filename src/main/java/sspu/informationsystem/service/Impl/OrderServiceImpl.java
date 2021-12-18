@@ -111,6 +111,19 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    public Double calSum(List<OrderDishesBind> dishesList) {
+        final Double[] sumPrice = {0.0};
+        dishesList.forEach(dish->{
+            Dishes dishInfo = dishesMapper.getInfo(dish.getDId());
+            //价格解析求和
+            Double price = dishInfo.getDPrice();
+            price = price * dish.getDNumber();
+            sumPrice[0] += price;
+        });
+        return sumPrice[0];
+    }
+
+    @Override
     public void orderAccept(Integer orderId) {
         orderMapper.orderAccept(orderId);
     }

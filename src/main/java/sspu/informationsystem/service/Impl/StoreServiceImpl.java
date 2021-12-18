@@ -5,8 +5,11 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 import sspu.informationsystem.entity.Dishes;
+import sspu.informationsystem.entity.OrderDishesBind;
+import sspu.informationsystem.mapper.DishesMapper;
 import sspu.informationsystem.mapper.StoreMapper;
 import sspu.informationsystem.entity.Store;
+import sspu.informationsystem.service.OrderService;
 import sspu.informationsystem.service.StoreService;
 
 import java.util.List;
@@ -16,6 +19,10 @@ public class StoreServiceImpl implements StoreService{
 
     @Resource
     private StoreMapper storeMapper;
+    @Resource
+    private DishesMapper dishesMapper;
+    @Resource
+    private OrderService orderService;
 
     @Override
     public int insert(Store record) {
@@ -74,6 +81,42 @@ public class StoreServiceImpl implements StoreService{
     public void deleteStore(Integer storeId) {
         storeMapper.deleteStore(storeId);
     }
+
+    @Override
+    public double getRankById(Integer storeId) {
+        return storeMapper.getRankById(storeId);
+    }
+
+    @Override
+    public Dishes getStarDishByIdForWeek(Integer storeId) {
+        return storeMapper.getStarDishByIdForWeek(storeId);
+    }
+
+    @Override
+    public Double getSaleToday(Integer storeId) {
+        List<OrderDishesBind> dishesList = storeMapper.getSaleToday(storeId);
+        return orderService.calSum(dishesList);
+    }
+
+    @Override
+    public Double getSaleSameAddressToday(String sAddress) {
+        List<OrderDishesBind> dishesList = storeMapper.getSaleSameAddressToday(sAddress);
+        return orderService.calSum(dishesList);
+    }
+
+    @Override
+    public Double getSaleMonth(Integer storeId) {
+        List<OrderDishesBind> dishesList = storeMapper.getSaleMonth(storeId);
+        return orderService.calSum(dishesList);
+    }
+
+    @Override
+    public Double getSaleYear(Integer storeId) {
+        List<OrderDishesBind> dishesList = storeMapper.getSaleYear(storeId);
+        return orderService.calSum(dishesList);
+    }
+
+
 
 
 }
