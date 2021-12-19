@@ -39,4 +39,10 @@ public interface StoreMapper {
     List<OrderDishesBind> getSaleMonth(Integer storeId);
 
     List<OrderDishesBind> getSaleYear(Integer storeId);
+
+    List<Object> getStoreMCount(Integer storeId);
+
+    List<Object> getRecentFiveMonth();
+
+    List<Object> getAllAverageMCount();
 }

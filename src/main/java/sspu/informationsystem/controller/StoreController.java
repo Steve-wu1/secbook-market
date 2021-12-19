@@ -184,6 +184,16 @@ public class StoreController {
         model.addAttribute("saleMonth",storeService.getSaleMonth(store.getStoreId()));
         //本月销售额
         model.addAttribute("saleYear",storeService.getSaleYear(store.getStoreId()));
+        //近五个月
+        List<Object> month = storeService.getRecentFiveMonth();
+        model.addAttribute("monthes", month);
+        //近五个月销售额
+        List<Object> mcount = storeService.getStoreMCount(store.getStoreId());
+        model.addAttribute("mCount", mcount);
+        //近五个月本平台各食堂平均销售额
+        List<Object> acount = storeService.getAllAverageMCount();
+        model.addAttribute("aCount", mcount);
+
         return "dataAnalyze";
     }
 

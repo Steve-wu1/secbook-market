@@ -5,12 +5,12 @@
     <!--@Table store-->
     <id column="store_id" jdbcType="INTEGER" property="storeId" />
     <result column="s_name" jdbcType="VARCHAR" property="sName" />
-    <result column="s_phone" jdbcType="VARCHAR" property="sPhone" />
-    <result column="s_address" jdbcType="VARCHAR" property="sAddress" />
+    <result column="s_phone" jdbcType="VARCHAR" property="sPhone"/>
+      <result column="s_address" jdbcType="VARCHAR" property="sAddress" />
     <result column="s_details" jdbcType="VARCHAR" property="sDetails" />
-    <result column="s_account" jdbcType="VARCHAR" property="sAccount" />
+      <result column="s_account" jdbcType="VARCHAR" property="sAccount" />
     <result column="s_password" jdbcType="VARCHAR" property="sPassword" />
-    <result column="s_photo" jdbcType="VARCHAR" property="sPhoto" />
+    <result column="s_photo" jdbcType="VARCHAR" property="sPhoto"/>
   </resultMap>
   <sql id="Base_Column_List">
     store_id, s_name, s_phone, s_address, s_details, s_account, s_password, s_photo
@@ -123,4 +123,64 @@
                  from `order`
                  where YEAR(o_time) = YEAR(NOW()))
   </select>
+
+
+    <select id="getRecentFiveMonth" resultType="java.lang.Object">
+       select v.month from (
+    SELECT DATE_FORMAT(CURDATE(), '%Y-%m-01') AS `month`
+    UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 1 MONTH), '%Y-%m-01') AS `month`
+    UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 2 MONTH), '%Y-%m-01') AS `month`
+    UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 3 MONTH), '%Y-%m-01') AS `month`
+    UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 4 MONTH), '%Y-%m-01') AS `month`
+    UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 5 MONTH), '%Y-%m-01') AS `month`
+    ) v
+     GROUP BY month
+    </select>
+
+    <select id="getStoreMCount" resultType="java.lang.Object">
+        select ifnull(b.count,0) count from (
+        SELECT DATE_FORMAT(CURDATE(), '%Y-%m') AS `month`
+        UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 1 MONTH), '%Y-%m') AS `month`
+        UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 2 MONTH), '%Y-%m') AS `month`
+        UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 3 MONTH), '%Y-%m') AS `month`
+        UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 4 MONTH), '%Y-%m') AS `month`
+        UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 5 MONTH), '%Y-%m') AS `month`
+        ) as v
+        left join
+        (select
+        left(o_time,7) as 'month',count(*) as count
+        from `order`,order_dishes_bind
+        where DATE_FORMAT(`order`.o_time,'%Y-%m')>
+        DATE_FORMAT(date_sub(curdate(), interval 5 month),'%Y-%m')
+        and order_dishes_bind.o_id = order.order_id
+        and order_dishes_bind.d_id in (select dishes_id
+        from dishes
+        where d_store_id = #{storeId,jdbcType=INTEGER})
+        GROUP BY month
+        ) as b
+        on v.month = b.month group by v.month
+    </select>
+
+    <select id="getAllAverageMCount" resultType="java.lang.Object">
+         select ifnull(b.count,0)  count from (
+    SELECT DATE_FORMAT(CURDATE(), '%Y-%m') AS `month`
+    UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 1 MONTH), '%Y-%m') AS `month`
+    UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 2 MONTH), '%Y-%m') AS `month`
+    UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 3 MONTH), '%Y-%m') AS `month`
+    UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 4 MONTH), '%Y-%m') AS `month`
+    UNION SELECT DATE_FORMAT((CURDATE() - INTERVAL 5 MONTH), '%Y-%m') AS `month`
+		  ) as v
+    left join
+    (select
+    left(o_time,7) as 'month',count(*)/(SELECT count(*) FROM store) as count
+    from `order`,order_dishes_bind
+    where DATE_FORMAT(`order`.o_time,'%Y-%m')>
+    DATE_FORMAT(date_sub(curdate(), interval 5 month),'%Y-%m')
+     and order_dishes_bind.o_id = order.order_id
+        and order_dishes_bind.d_id in (select dishes_id
+        from dishes)
+    GROUP BY month
+    ) as b
+    on v.month = b.month group by v.month
+    </select>
 </mapper>

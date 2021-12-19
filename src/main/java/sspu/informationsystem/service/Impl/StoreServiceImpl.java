@@ -1,18 +1,17 @@
 package sspu.informationsystem.service.Impl;
 
-import com.sun.xml.internal.ws.runtime.config.TubelineFeatureReader;
 import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-
 import sspu.informationsystem.entity.Dishes;
 import sspu.informationsystem.entity.OrderDishesBind;
+import sspu.informationsystem.entity.Store;
 import sspu.informationsystem.mapper.DishesMapper;
 import sspu.informationsystem.mapper.StoreMapper;
-import sspu.informationsystem.entity.Store;
 import sspu.informationsystem.service.OrderService;
 import sspu.informationsystem.service.StoreService;
 
+import javax.annotation.Resource;
 import java.util.List;
+
 
 @Service
 public class StoreServiceImpl implements StoreService{
@@ -117,6 +116,19 @@ public class StoreServiceImpl implements StoreService{
     }
 
 
+    @Override
+    public List<Object> getStoreMCount(Integer storeId) {
+        return storeMapper.getStoreMCount(storeId);
+    }
 
 
+    @Override
+    public List<Object> getRecentFiveMonth() {
+        return storeMapper.getRecentFiveMonth();
+    }
+
+    @Override
+    public List<Object> getAllAverageMCount() {
+        return storeMapper.getAllAverageMCount();
+    }
 }

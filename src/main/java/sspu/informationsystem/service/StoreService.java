@@ -1,7 +1,6 @@
 package sspu.informationsystem.service;
 
 import sspu.informationsystem.entity.Dishes;
-import sspu.informationsystem.entity.OrderDishesBind;
 import sspu.informationsystem.entity.Store;
 
 import java.util.List;
@@ -41,4 +40,9 @@ public interface StoreService{
 
     Double getSaleYear(Integer storeId);
 
+    List<Object> getStoreMCount(Integer storeId);
+
+    List<Object> getRecentFiveMonth();
+
+    List<Object> getAllAverageMCount();
 }

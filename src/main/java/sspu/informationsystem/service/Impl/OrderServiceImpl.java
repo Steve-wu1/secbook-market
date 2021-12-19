@@ -1,15 +1,16 @@
 package sspu.informationsystem.service.Impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-
 import sspu.informationsystem.entity.*;
 import sspu.informationsystem.mapper.*;
 import sspu.informationsystem.service.OrderService;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class OrderServiceImpl implements OrderService{
 
@@ -36,21 +37,22 @@ public class OrderServiceImpl implements OrderService{
         List<Order> orderList = orderMapper.getOrderByStoreId(storeId);
         orderList.forEach(item->{
             //下单用户信息解析
-           User user = userMapper.getUserInfoById(item.getOUserId());
-           item.setOName(user.getUName());
-           item.setOPhone(user.getUPhone());
+            User user = userMapper.getUserInfoById(item.getOUserId());
+            item.setOName(user.getUName());
+            item.setOPhone(user.getUPhone());
 
-           orderService.dealOrderInfo(item);
+            orderService.dealOrderInfo(item);
         });
 
         return orderList;
     }
 
     @Override
-    public void addOrder(Integer userId,List<OrderDishesBind> dishesList) {
+    public void addOrder(Integer userId, List<OrderDishesBind> dishesList) {
         orderMapper.addOrder(userId);
         Integer orderId = orderMapper.getLatestId();
-
+        log.debug("获取最新注入的Id" + orderId);
+        log.debug("订单绑定菜品列表" + dishesList);
         dishesList.forEach(item-> orderDishesBindMapper.dishesBind(orderId,item));
     }
 
