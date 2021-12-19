@@ -18,7 +18,7 @@ public class FtpUtil {
             fileName1 = fileName;
             //3.通过req.getServletContext().getRealPath("") 获取当前项目的真实路径，然后拼接前面的文件名
 //            String destFileName = req.getServletContext().getRealPath("") + "uploaded" + File.separator + fileName;
-            String destFileName = "D:\\idea project\\information-system\\src\\main\\resources\\static\\images\\"+fileName;
+            String destFileName = "D:\\information-system\\src\\main\\resources\\static\\images\\" + fileName;
             //4.第一次运行的时候，这个文件所在的目录往往是不存在的，这里需要创建一下目录（创建到了webapp下uploaded文件夹下）
             File destFile = new File(destFileName);
             destFile.getParentFile().mkdirs();

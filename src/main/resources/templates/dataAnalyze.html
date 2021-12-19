@@ -75,7 +75,7 @@
         </div>
     </div>
     <div class="col-6">
-        <div class="card">
+        <div class="card" style="height: 260px">
             <div class="card-header">
                 <h4>明星产品</h4>
             </div>
@@ -86,7 +86,7 @@
         </div>
     </div>
     <div class="col-6">
-        <div class="card">
+        <div class="card" style="height: 260px">
             <div class="card-header">
                 <h4>销售额对比</h4>
             </div>
@@ -171,7 +171,14 @@
         <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">食堂预约系统</a>
     </div>
 </nav>
-
+<script th:inline="javascript">
+    let month = [[${month}]]
+    console.log(month);
+    let acount = [[${acount}]]
+    console.log(acount);
+    let mcount = [[${mcount}]]
+    console.log(mcount);
+</script>
 <script language="javascript">
     // var chart = c3.generate({
     //     bindto: '#chart',
@@ -259,33 +266,55 @@
     });
     var chart5 = c3.generate({
         bindto: '#chart5',
+        // data: {
+        //     x: '章节',
+        //     columns: [
+        //         ['章节', '2021-10-25', '2021-10-26', '2021-10-27', '2021-10-28', '2021-10-29'],
+        //         ['班平均学习次数', 2, 3, 2, 3, 2],
+        //         ['我的学习次数', 2, 2, 1, 2, 3]
+        //     ],
+        //     type: 'bar'
+        //
+        // },
+        // grid: {
+        //     y: {
+        //         lines: [{value: 0}]
+        //     }
+        // },
+        // axis: {
+        //     x: {
+        //         type: 'timeseries',
+        //         // if true, treat x value as localtime (Default)
+        //         // if false, convert to UTC internally
+        //         localtime: false,
+        //         tick: {
+        //             format: '%Y-%m-%d'
+        //         }
+        //     }
+        // }
         data: {
-            x: '章节',
+            x: 'x',
             columns: [
-                ['章节', '2021-10-25', '2021-10-26', '2021-10-27', '2021-10-28', '2021-10-29'],
-                ['班平均学习次数', 2, 3, 2, 3, 2],
-                ['我的学习次数', 2, 2, 1, 2, 3]
+                month, mcount, acount
             ],
-            type: 'bar'
-
-        },
-        grid: {
-            y: {
-                lines: [{value: 0}]
+            type: 'bar',
+            types: {
+                '食堂商家平均订单数': 'line',
             }
         },
         axis: {
             x: {
                 type: 'timeseries',
-                // if true, treat x value as localtime (Default)
-                // if false, convert to UTC internally
-                localtime: false,
                 tick: {
-                    format: '%Y-%m-%d'
+                    format: '%Y-%m'
                 }
             }
+        },
+        bar: {
+            width: {
+                ratio: 0.5 // this makes bar width 50% of length between ticks
+            }
         }
-
 
     });
 
