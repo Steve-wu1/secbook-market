@@ -57,8 +57,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h2 class="card-title" th:text="${session.store.sName}+'销售额一栏'"></h2>
-                <h5>综合评分：<code></code></h5>
+                <h2 class="card-title" th:text="${session.store.sName}+'销售额一览'"></h2>
+                <h5>综合评分：<code th:text="${rank}"></code></h5>
             </div>
         </div>
     </div>
@@ -77,20 +77,25 @@
     <div class="col-6">
         <div class="card">
             <div class="card-header">
-                <h4>明星产品：</h4>
+                <h4>明星产品</h4>
             </div>
             <br/>
-            <h4 style="text-align: center"></h4>
+            <h4 style="text-align: center"><img th:src="'/images/'+${starDish.dPhoto}" class="col-6"></h4>
+            <h5 th:text="${starDish.dName}" style="text-align: center"></h5>
             <br/>
         </div>
     </div>
     <div class="col-6">
         <div class="card">
             <div class="card-header">
-                <h4>销售额对比：</h4>
+                <h4>销售额对比</h4>
             </div>
             <br/>
-            <h4 style="text-align: center"></h4>
+            <h4></h4>
+            <h4 th:text="'本日销售额:'+${saleToday}+'元'"></h4>
+            <h4 th:text="'本周销售额:'+${saleMonth}+'元'"></h4>
+            <h4 th:text="'本月销售额:'+${saleYear}+'元'"></h4>
+            <h4></h4>
             <br/>
         </div>
     </div>

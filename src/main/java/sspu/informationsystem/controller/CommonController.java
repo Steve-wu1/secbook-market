@@ -55,16 +55,6 @@ public class CommonController {
         return "storeRegister";
     }
 
-
-
-
-
-    @GetMapping("/toDataAnalyze")
-    public String ToDataAnalyze() {
-        return "dataAnalyze";
-    }
-
-
     @GetMapping("/toAdminStoreInfo")
     public String ToAdminStoreInfo() {
         return "adminStoreInfo";

@@ -81,7 +81,8 @@
                                               where d_store_id = #{storeId,jdbcType=INTEGER})
                          group by d_id
                          order by d_number desc
-                         limit 1)
+                         )
+      limit 1
   </select>
   <select id="getSaleToday" resultType="sspu.informationsystem.entity.OrderDishesBind">
     select *
