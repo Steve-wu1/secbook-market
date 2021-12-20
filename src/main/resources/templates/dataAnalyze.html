@@ -100,6 +100,33 @@
             <br/>
         </div>
     </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    订单评分分布分析
+                </h4>
+            </div>
+            <div class="sparkline11-graph">
+                <h4 style="text-align: center">&nbsp;</h4>
+                <div id="chart"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    菜品月销售top3
+                </h4>
+            </div>
+            <h4 style="text-align: center">&nbsp;</h4>
+            <div class="sparkline11-graph">
+                <div id="chart2"></div>
+            </div>
+        </div>
+
+    </div>
     <div class="col-md-8 position-relative" style="visibility: hidden">
         <input type="text" class="form-control" required>
         <div class="valid-tooltip">
@@ -179,6 +206,28 @@
     console.log(acount);
     let mcount = [[${mcount}]]
     console.log(mcount);
+    let rankData1 = [[${rankData1}]]
+    console.log(rankData1);
+    let rankData2 = [[${rankData2}]]
+    console.log(rankData2);
+    let rankData3 = [[${rankData3}]]
+    console.log(rankData3);
+    let rankData4 = [[${rankData4}]]
+    console.log(rankData4);
+    let rankData5 = [[${rankData5}]]
+    console.log(rankData5);
+    let starDishName = [[${starDish.dName}]]
+    console.log(starDishName);
+    let saleStarDish = [[${saleStarDish}]]
+    console.log(saleStarDish);
+    let secDishName = [[${secDish.dName}]]
+    console.log(secDishName);
+    let saleSecDish = [[${saleSecDish}]]
+    console.log(saleSecDish);
+    let thrDishName = [[${thrDish.dName}]]
+    console.log(thrDishName);
+    let saleThrDish = [[${saleThrDish}]]
+    console.log(saleThrDish);
 </script>
 <script language="javascript">
     // var chart = c3.generate({
@@ -203,6 +252,8 @@
     //         }
     //     }
     // });
+
+
     var chart1 = c3.generate({
         bindto: '#chart',
         data: {
@@ -229,11 +280,11 @@
     setTimeout(function () {
         chart1.load({
             columns: [
-                ["90-100", 1],
-                ["80-90", 0],
-                ["70-80", 0],
-                ["60-70", 2],
-                ["60以下", 1],
+                ["1分", rankData1],
+                ["2分", rankData2],
+                ["3分", rankData3],
+                ["4分", rankData4],
+                ["5分", rankData5],
             ]
         });
     }, 1500);
@@ -247,6 +298,47 @@
         });
     }, 2500);
 
+    var chart2 = c3.generate({
+        bindto: '#chart2',
+        data: {
+            // iris data from R
+            columns: [
+                ['data1', 30],
+                ['data2', 120],
+            ],
+            type: 'pie',
+            onclick: function (d, i) {
+                console.log("onclick", d, i);
+            },
+            onmouseover: function (d, i) {
+                console.log("onmouseover", d, i);
+            },
+            onmouseout: function (d, i) {
+                console.log("onmouseout", d, i);
+            }
+        },
+        size: {
+            height: 242
+        }
+    });
+    setTimeout(function () {
+        chart2.load({
+            columns: [
+                [starDishName, saleStarDish],
+                [secDishName, saleSecDish],
+                [thrDishName, saleThrDish]
+            ]
+        });
+    }, 1500);
+
+    setTimeout(function () {
+        chart2.unload({
+            ids: 'data1'
+        });
+        chart2.unload({
+            ids: 'data2'
+        });
+    }, 2500);
 
 
     var chart3 = c3.generate({
@@ -320,39 +412,6 @@
     });
 
 
-    var chart2 = c3.generate({
-        bindto: '#chart2',
-        data: {
-            columns: [
-                ['data4', 91.4]
-            ],
-            type: 'gauge',
-            onclick: function (d, i) {
-                console.log("onclick", d, i);
-            },
-            onmouseover: function (d, i) {
-                console.log("onmouseover", d, i);
-            },
-            onmouseout: function (d, i) {
-                console.log("onmouseout", d, i);
-            }
-        },
-        gauge: {},
-        color: {
-            pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'], // the three color levels for the percentage values.
-            threshold: {
-//            unit: 'value', // percentage is default
-//            max: 200, // 100 is default
-                values: [30, 60, 90, 100]
-            }
-        },
-        size: {
-            height: 80
-        }
-    });
-    setTimeout(function () {
-        chart5.transform('area-spline', '我的学习次数');
-    }, 1000);
 </script>
 </body>
 </html>
