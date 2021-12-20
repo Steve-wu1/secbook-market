@@ -87,8 +87,8 @@ public class StoreServiceImpl implements StoreService{
     }
 
     @Override
-    public Dishes getStarDishByIdForWeek(Integer storeId) {
-        return storeMapper.getStarDishByIdForWeek(storeId);
+    public Dishes getStarDishByIdForMonth(Integer storeId) {
+        return storeMapper.getStarDishByIdForMonth(storeId);
     }
 
     @Override
@@ -110,8 +110,8 @@ public class StoreServiceImpl implements StoreService{
     }
 
     @Override
-    public Double getSaleYear(Integer storeId) {
-        List<OrderDishesBind> dishesList = storeMapper.getSaleYear(storeId);
+    public Double getSaleWeek(Integer storeId) {
+        List<OrderDishesBind> dishesList = storeMapper.getSaleWeek(storeId);
         return orderService.calSum(dishesList);
     }
 
@@ -130,5 +130,25 @@ public class StoreServiceImpl implements StoreService{
     @Override
     public List<Object> getAllAverageMCount() {
         return storeMapper.getAllAverageMCount();
+    }
+
+    @Override
+    public Double getMonthStarDishSale(Integer dishesId) {
+        return storeMapper.getMonthStarDishSale(dishesId);
+    }
+
+    @Override
+    public Integer getOrderCountToday(Integer storeId) {
+        return storeMapper.getOrderCountToday(storeId);
+    }
+
+    @Override
+    public Integer getOrderCountWeek(Integer storeId) {
+        return storeMapper.getOrderCountWeek(storeId);
+    }
+
+    @Override
+    public Integer getOrderCountMonth(Integer storeId) {
+        return storeMapper.getOrderCountMonth(storeId);
     }
 }

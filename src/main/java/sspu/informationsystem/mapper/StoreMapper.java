@@ -30,7 +30,7 @@ public interface StoreMapper {
 
     double getRankById(Integer storeId);
 
-    Dishes getStarDishByIdForWeek(Integer storeId);
+    Dishes getStarDishByIdForMonth(Integer storeId);
 
     List<OrderDishesBind> getSaleToday(Integer storeId);
 
@@ -38,11 +38,19 @@ public interface StoreMapper {
 
     List<OrderDishesBind> getSaleMonth(Integer storeId);
 
-    List<OrderDishesBind> getSaleYear(Integer storeId);
+    List<OrderDishesBind> getSaleWeek(Integer storeId);
 
     List<Object> getStoreMCount(Integer storeId);
 
     List<Object> getRecentFiveMonth();
 
     List<Object> getAllAverageMCount();
+
+    Double getMonthStarDishSale(Integer dishesId);
+
+    Integer getOrderCountToday(Integer storeId);
+
+    Integer getOrderCountWeek(Integer storeId);
+
+    Integer getOrderCountMonth(Integer storeId);
 }

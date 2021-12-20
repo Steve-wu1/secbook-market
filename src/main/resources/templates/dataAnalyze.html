@@ -80,8 +80,9 @@
                 <h4>明星产品</h4>
             </div>
             <br/>
+            <input hidden>
             <h4 style="text-align: center"><img th:src="'/images/'+${starDish.dPhoto}" class="col-6"></h4>
-            <h5 th:text="${starDish.dName}" style="text-align: center"></h5>
+            <h5 th:text="${starDish.dName}+'   销售额:'+${saleStarDish}+'元'" style="text-align: center"></h5>
             <br/>
         </div>
     </div>
@@ -92,9 +93,9 @@
             </div>
             <br/>
             <h4></h4>
-            <h4 th:text="'本日销售额:'+${saleToday}+'元'"></h4>
-            <h4 th:text="'本周销售额:'+${saleMonth}+'元'"></h4>
-            <h4 th:text="'本月销售额:'+${saleYear}+'元'"></h4>
+            <h4 style="text-align: center" th:text="'本日销售额:'+${saleToday}+'元;订单数:'+${orderCountToday}"></h4>
+            <h4 style="text-align: center" th:text="'本周销售额:'+${saleWeek}+'元;订单数:'+${orderCountWeek}"></h4>
+            <h4 style="text-align: center" th:text="'本月销售额:'+${saleMonth}+'元;订单数:'+${orderCountMonth}"></h4>
             <h4></h4>
             <br/>
         </div>

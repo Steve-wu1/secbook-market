@@ -30,7 +30,7 @@ public interface StoreService{
 
     double getRankById(Integer storeId);
 
-    Dishes getStarDishByIdForWeek(Integer storeId);
+    Dishes getStarDishByIdForMonth(Integer storeId);
 
     Double getSaleToday(Integer storeId);
 
@@ -38,11 +38,21 @@ public interface StoreService{
 
     Double getSaleMonth(Integer storeId);
 
-    Double getSaleYear(Integer storeId);
+    Double getSaleWeek(Integer storeId);
 
     List<Object> getStoreMCount(Integer storeId);
 
     List<Object> getRecentFiveMonth();
 
     List<Object> getAllAverageMCount();
+
+    Double getMonthStarDishSale(Integer dishesId);
+
+    Integer getOrderCountToday(Integer storeId);
+
+    Integer getOrderCountWeek(Integer storeId);
+
+    Integer getOrderCountMonth(Integer storeId);
+
+
 }

@@ -171,21 +171,24 @@ public class StoreController {
         Store store = (Store) session.getAttribute("store");
         //店铺评分
         model.addAttribute("rank",storeService.getRankById(store.getStoreId()));
-        //本周明星产品
-        model.addAttribute("starDish",storeService.getStarDishByIdForWeek(store.getStoreId()));
-        //本日销售数据
+        //本月明星产品
+        Dishes starDish = storeService.getStarDishByIdForMonth(store.getStoreId());
+        model.addAttribute("starDish",starDish);
+        model.addAttribute("saleStarDish",storeService.getMonthStarDishSale(starDish.getDishesId()));
+        //本日销售数据及订单数
         model.addAttribute("saleToday",storeService.getSaleToday(store.getStoreId()));
+        model.addAttribute("orderCountToday",storeService.getOrderCountToday(store.getStoreId()));
         //同一食堂本日销售额
         String tempAddress = store.getSAddress();
         tempAddress = tempAddress.substring(0,1);
         tempAddress += "_";
         model.addAttribute("saleSameAddressToday",storeService.getSaleSameAddressToday(tempAddress));
-        //本周销售额
+        //本周销售额及订单数
+        model.addAttribute("saleWeek",storeService.getSaleWeek(store.getStoreId()));
+        model.addAttribute("orderCountWeek",storeService.getOrderCountWeek(store.getStoreId()));
+        //本月销售额及订单数
         model.addAttribute("saleMonth",storeService.getSaleMonth(store.getStoreId()));
-        //本月销售额
-
-
-        model.addAttribute("saleYear",storeService.getSaleYear(store.getStoreId()));
+        model.addAttribute("orderCountMonth",storeService.getOrderCountMonth(store.getStoreId()));
         //近五个月
         List<Object> month = storeService.getRecentFiveMonth();
         month.add(0, 'x');

@@ -71,7 +71,7 @@
                                           from dishes
                                           where d_store_id = #{storeId,jdbcType=INTEGER}))
     </select>
-  <select id="getStarDishByIdForWeek" resultType="sspu.informationsystem.entity.Dishes">
+  <select id="getStarDishByIdForMonth" resultType="sspu.informationsystem.entity.Dishes">
     select *
     from dishes
     where dishes_id in (select d_id
@@ -79,6 +79,10 @@
                          where d_id in (select dishes_id
                                               from dishes
                                               where d_store_id = #{storeId,jdbcType=INTEGER})
+                         and o_id in (select order_id
+                                      from `order`
+                                      where o_state = 3
+                                      and DATE_FORMAT( o_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ))
                          group by d_id
                          order by d_number desc
                          )
@@ -92,7 +96,8 @@
                     where d_store_id = #{storeId,jdbcType=INTEGER})
       and o_id in (select order_id
                     from `order`
-                    where to_days(o_time) = to_days(now()))
+                    where to_days(o_time) = to_days(now())
+                    and o_state = 3)
   </select>
   <select id="getSaleSameAddressToday" resultType="sspu.informationsystem.entity.OrderDishesBind">
     select *
@@ -102,6 +107,9 @@
                     where d_store_id in (select store_id
                                           from store
                                           where s_address like #{sAddress,jdbcType=VARCHAR}))
+    and o_id in (select order_id
+                 from `order`
+                 where o_state = 3)
   </select>
   <select id="getSaleMonth" resultType="sspu.informationsystem.entity.OrderDishesBind">
     select *
@@ -111,9 +119,10 @@
                     where d_store_id = #{storeId,jdbcType=INTEGER})
     and o_id in (select order_id
                   from `order`
-                  where DATE_FORMAT( o_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ))
+                  where DATE_FORMAT( o_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+                  and o_state = 3)
   </select>
-  <select id="getSaleYear" resultType="sspu.informationsystem.entity.OrderDishesBind">
+  <select id="getSaleWeek" resultType="sspu.informationsystem.entity.OrderDishesBind">
     select *
     from order_dishes_bind
     where d_id in (select dishes_id
@@ -121,7 +130,8 @@
                     where d_store_id = #{storeId,jdbcType=INTEGER})
     and o_id in (select order_id
                  from `order`
-                 where YEAR(o_time) = YEAR(NOW()))
+                 where YEARWEEK(date_format(o_time,'%Y-%m-%d')) = YEARWEEK(now())
+                 and o_state = 3)
   </select>
 
 
@@ -179,5 +189,47 @@
     GROUP BY month
     ) as b
     on v.month = b.month group by v.month
+    </select>
+    <select id="getMonthStarDishSale" resultType="java.lang.Double">
+        select sum(d_number)
+        from order_dishes_bind
+        where d_id = #{dishesId,jdbcType=INTEGER}
+        and o_id in (select order_id
+                      from `order`
+                      where DATE_FORMAT( o_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+                      and o_state = 3)
+    </select>
+    <select id="getOrderCountToday" resultType="java.lang.Integer">
+        select count(*)
+        from `order`
+        where to_days(o_time) = to_days(now())
+        and order_id in (select o_id
+                          from order_dishes_bind
+                          where d_id in (select dishes_id
+                                          from dishes
+                                          where d_store_id = #{storeId,jdbcType=INTEGER}))
+        and o_state = 3
+    </select>
+    <select id="getOrderCountWeek" resultType="java.lang.Integer">
+        select count(*)
+        from `order`
+        where YEARWEEK(date_format(o_time,'%Y-%m-%d')) = YEARWEEK(now())
+        and order_id in (select o_id
+                          from order_dishes_bind
+                          where d_id in (select dishes_id
+                                          from dishes
+                                          where d_store_id = #{storeId,jdbcType=INTEGER}))
+        and o_state = 3
+    </select>
+    <select id="getOrderCountMonth" resultType="java.lang.Integer">
+        select count(*)
+        from `order`
+        where DATE_FORMAT( o_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+        and order_id in (select o_id
+                         from order_dishes_bind
+                         where d_id in (select dishes_id
+                                         from dishes
+                                         where d_store_id = #{storeId,jdbcType=INTEGER}))
+        and o_state = 3
     </select>
 </mapper>
