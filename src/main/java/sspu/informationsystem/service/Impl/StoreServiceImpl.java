@@ -151,4 +151,9 @@ public class StoreServiceImpl implements StoreService{
     public Integer getOrderCountMonth(Integer storeId) {
         return storeMapper.getOrderCountMonth(storeId);
     }
+
+    @Override
+    public List<Integer> getRankData(Integer storeId,Integer rank) {
+        return storeMapper.getRankData(storeId,rank);
+    }
 }

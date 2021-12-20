@@ -198,17 +198,20 @@ public class StoreController {
         List<Object> month = storeService.getRecentFiveMonth();
         month.add(0, 'x');
         model.addAttribute("month", month);
-        log.debug("ces" + month);
         //近五个月销售额
         List<Object> mcount = storeService.getStoreMCount(store.getStoreId());
         mcount.add(0, "本店订单数");
         model.addAttribute("mcount", mcount);
-        log.debug("ces" + mcount);
         //近五个月本平台各食堂平均销售额
         List<Object> acount = storeService.getAllAverageMCount();
         acount.add(0, "食堂商家平均订单数");
         model.addAttribute("acount", acount);
-        log.debug("ces" + acount);
+        //评分数据
+        model.addAttribute("rankData1",storeService.getRankData(store.getStoreId(),1));
+        model.addAttribute("rankData2",storeService.getRankData(store.getStoreId(),2));
+        model.addAttribute("rankData3",storeService.getRankData(store.getStoreId(),3));
+        model.addAttribute("rankData4",storeService.getRankData(store.getStoreId(),4));
+        model.addAttribute("rankData5",storeService.getRankData(store.getStoreId(),5));
         return "dataAnalyze";
     }
 

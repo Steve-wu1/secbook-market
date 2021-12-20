@@ -233,4 +233,15 @@
                                          where d_store_id = #{storeId,jdbcType=INTEGER}))
         and o_state = 3
     </select>
+    <select id="getRankData" resultType="java.lang.Integer">
+        select count(*)
+        from `order`
+        where order_id in (select o_id
+                            from order_dishes_bind
+                            where d_id in (select dishes_id
+                                            from dishes
+                                            where d_store_id = #{param1,jdbcType=INTEGER}))
+        and o_state = 3
+        and o_rank = #{param2,jdbcType=INTEGER}
+    </select>
 </mapper>

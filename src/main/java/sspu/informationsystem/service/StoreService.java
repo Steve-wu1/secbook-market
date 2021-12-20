@@ -54,5 +54,5 @@ public interface StoreService{
 
     Integer getOrderCountMonth(Integer storeId);
 
-
+    List<Integer> getRankData(Integer storeId,Integer rank);
 }

@@ -53,4 +53,6 @@ public interface StoreMapper {
     Integer getOrderCountWeek(Integer storeId);
 
     Integer getOrderCountMonth(Integer storeId);
+
+    List<Integer> getRankData(Integer storeId,Integer rank);
 }
