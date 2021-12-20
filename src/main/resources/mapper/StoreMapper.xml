@@ -161,6 +161,7 @@
         where DATE_FORMAT(`order`.o_time,'%Y-%m')>
         DATE_FORMAT(date_sub(curdate(), interval 5 month),'%Y-%m')
         and order_dishes_bind.o_id = order.order_id
+        and order.o_state=3
         and order_dishes_bind.d_id in (select dishes_id
         from dishes
         where d_store_id = #{storeId,jdbcType=INTEGER})
@@ -184,6 +185,7 @@
     where DATE_FORMAT(`order`.o_time,'%Y-%m')>
     DATE_FORMAT(date_sub(curdate(), interval 5 month),'%Y-%m')
      and order_dishes_bind.o_id = order.order_id
+             and order.o_state=3
         and order_dishes_bind.d_id in (select dishes_id
         from dishes)
     GROUP BY month

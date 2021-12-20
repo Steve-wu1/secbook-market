@@ -94,9 +94,8 @@
     </table>
     <div class="col-md-8 position-relative" style=" margin: 20px 0 0 550px;">
         <input hidden name="table_data" value="" id="hidTD">
-        <button class="btn btn-primary" onclick="return confirm('确认下此订单？')" id="btnSubmit" type="button">提交订单</button>
+        <button class="btn btn-primary" onclick="change()" id="btnSubmit" type="button">提交订单</button>
     </div>
-
     <div class="col-md-8 position-relative" style="visibility: hidden">
         <input type="text" class="form-control" required>
         <div class="valid-tooltip">
@@ -318,8 +317,8 @@
             del.parentNode.removeChild(del);
             alert("删除成功！！");
         }
-    }
 
+    }
 </script>
 <script>
     $("#btnSubmit").on("click",function () {
@@ -406,8 +405,8 @@
 
     function change() {
         var txt;
-        if (confirm("确认上传")) {
-            alert("上传成功");
+        if (confirm("确认下此订单")) {
+            alert("下单成功");
         } else {
         }
         document.getElementById("demo").innerHTML = txt;
