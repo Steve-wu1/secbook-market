@@ -68,10 +68,10 @@
 
         </tr>
         </thead>
+        <thead>
+        <h5>点单界面</h5>
+        </thead>
         <tbody>
-
-
-        、
         <tr class="pure-table-odd" th:each="dishes,a:${dishesList}">
             <td hidden><input th:value="${dishes.dishesId}" th:id="id+${a.index}" hidden></td>
             <td th:text="${a.count}"></td>
