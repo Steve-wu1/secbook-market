@@ -87,8 +87,8 @@ public class StoreServiceImpl implements StoreService{
     }
 
     @Override
-    public Dishes getStarDishByIdForMonth(Integer storeId) {
-        return storeMapper.getStarDishByIdForMonth(storeId);
+    public List<Dishes>  getDishesOrderByCountForMonth(Integer storeId) {
+        return  storeMapper.getDishesOrderByCountForMonth(storeId);
     }
 
     @Override

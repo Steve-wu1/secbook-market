@@ -71,7 +71,7 @@
                                           from dishes
                                           where d_store_id = #{storeId,jdbcType=INTEGER}))
     </select>
-  <select id="getStarDishByIdForMonth" resultType="sspu.informationsystem.entity.Dishes">
+  <select id="getDishesOrderByCountForMonth" resultType="sspu.informationsystem.entity.Dishes">
     select *
     from dishes
     where dishes_id in (select d_id
@@ -86,7 +86,6 @@
                          group by d_id
                          order by d_number desc
                          )
-      limit 1
   </select>
   <select id="getSaleToday" resultType="sspu.informationsystem.entity.OrderDishesBind">
     select *

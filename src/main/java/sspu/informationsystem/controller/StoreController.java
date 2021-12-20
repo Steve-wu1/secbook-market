@@ -172,9 +172,14 @@ public class StoreController {
         //店铺评分
         model.addAttribute("rank",storeService.getRankById(store.getStoreId()));
         //本月明星产品
-        Dishes starDish = storeService.getStarDishByIdForMonth(store.getStoreId());
-        model.addAttribute("starDish",starDish);
-        model.addAttribute("saleStarDish",storeService.getMonthStarDishSale(starDish.getDishesId()));
+        List<Dishes> dishesList = storeService.getDishesOrderByCountForMonth(store.getStoreId());
+        model.addAttribute("starDish",dishesList.get(0));
+        model.addAttribute("saleStarDish",storeService.getMonthStarDishSale(dishesList.get(0).getDishesId()));
+        //TOP3产品
+        model.addAttribute("secDish",dishesList.get(1));
+        model.addAttribute("saleSecDish",storeService.getMonthStarDishSale(dishesList.get(1).getDishesId()));
+        model.addAttribute("thrDish",dishesList.get(2));
+        model.addAttribute("saleThrDish",storeService.getMonthStarDishSale(dishesList.get(2).getDishesId()));
         //本日销售数据及订单数
         model.addAttribute("saleToday",storeService.getSaleToday(store.getStoreId()));
         model.addAttribute("orderCountToday",storeService.getOrderCountToday(store.getStoreId()));

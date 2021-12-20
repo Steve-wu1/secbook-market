@@ -85,7 +85,7 @@
                 <a th:href="@{'/store/info/id='+ ${order.oStoreId}}" th:hidden="${order.oState}!=3?'true':'false'">
                     <button class="btn btn-primary login-btn" type="button">再来一单</button>
                 </a>
-                <a th:href="@{'/order/cancel/id='+${order.orderId}}" th:hidden="${order.oState}!=0?'true':'false'">
+                <a th:href="@{'/userOrder/cancel/id='+${order.orderId}}" th:hidden="${order.oState}!=0?'true':'false'">
                     <button class="btn btn-danger" type="button" onclick="return confirm('是否取消该订单?此操作不可逆！')">取消订单</button>
                 </a>
                 <a th:hidden="${order.oState}!=2?'true':'false'">

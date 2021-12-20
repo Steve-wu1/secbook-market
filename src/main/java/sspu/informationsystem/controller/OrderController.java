@@ -41,6 +41,12 @@ public class OrderController {
         return "redirect:/toStoreOrder";
     }
 
+    @GetMapping("/userOrder/cancel/id={orderId}")
+    public String userOrderCancel(@PathVariable("orderId")Integer orderId){
+        orderService.orderCancel(orderId);
+        return "redirect:/toMyOrders";
+    }
+
     @GetMapping("/order/accept/id={orderId}")
     public String orderAccept(@PathVariable("orderId")Integer orderId){
         orderService.orderAccept(orderId);

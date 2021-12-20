@@ -30,7 +30,7 @@ public interface StoreMapper {
 
     double getRankById(Integer storeId);
 
-    Dishes getStarDishByIdForMonth(Integer storeId);
+    List<Dishes> getDishesOrderByCountForMonth(Integer storeId);
 
     List<OrderDishesBind> getSaleToday(Integer storeId);
 

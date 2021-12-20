@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/table.css">
     <link rel="stylesheet" href="/css/mainpage.css">
+    <link rel="stylesheet" href="/css/modal.css">
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/vendor/jquery-1.12.4.js"></script>
     <script src="/js/navbar.js"></script>
 </head>
 <body>
@@ -36,7 +38,7 @@
                         <a class="nav-link" style="color: #1a1e21" href="/toAdminStores">商家管理</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #1a1e21" href="/toAdminApply">申请管理</a>
+                        <a class="nav-link" style="color: #1a1e21" href="/apply/list">申请管理</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" style="color: #1a1e21" href="/login">退出登录</a>
@@ -67,7 +69,7 @@
         <tbody>
         <tr class="pure-table-odd" th:each="dishes,a:${dishesList}">
             <td th:text="${a.count}"></td>
-            <td th:text="${dishes.dName}"></td>
+            <td th:text="${dishes.dName}" style="color: #0a58ca" th:onclick="modalOpen1([[${dishes.dName}]],[[${dishes.dPrice}]],[[${dishes.dDetails}]],[[${dishes.dishesId}]],[[${dishes.dPhoto}]])"></td>
             <td th:text="${dishes.dPrice}"></td>
             <td th:text="${dishes.dDetails}"></td>
         </tr>
@@ -93,7 +95,49 @@
         $("#table1").append($tr);
     }
 </script>
+<div class="modal-box" id="modal"
+     style="margin: 0 auto; left: 15%;right: 15%;top: 15%; position: absolute; visibility: hidden">
+    <!--顶部-->
+    <div class="modal-box-top">
+        <div class="modal-box-title">菜品信息</div>
+        <!--关闭按钮 &times;会被转义成乘号（×）看上去就是关闭符号-->
+        <!--关闭逻辑-->
+        <button onclick="modalClose()" class="modal-close">&times;
+        </button>
+    </div>
+    <!--主体-->
+    <div class="modal-box-photo" style=" left: 25%;right: 25%;">
+        <img src="/images/logo.jpg" id="dPhoto" height="160">
+    </div>
+    <div class="modal-box-content">
+        <label for="dName"
+               class="control-label"
+               style="font-size: medium">菜名:</label>
+        <input name="dName"
+               id="dName"
+               type="text"
+               class="form-control " readonly="readonly"
+               placeholder=" "/>
+        <label for="dPrice"
+               class="control-label"
+               style="font-size: medium">价格:</label>
+        <input name="dPrice"
+               id="dPrice"
+               type="text"
+               class="form-control " readonly="readonly"
+               placeholder=" "/>
+        <label for="dDetail"
+               class="control-label"
+               style="font-size: medium">简介:</label>
+        <input name="dDetail"
+               id="dDetail"
+               class="form-control " readonly="readonly"
+               placeholder="">
+        <input name="dishesId" id="dishesId" hidden/>
+    </div>
 
+
+</div>
 
 <nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
     <div class="container-fluid">
@@ -101,4 +145,44 @@
     </div>
 </nav>
 </body>
+<script>
+    $("#modal").modal("hide");
+
+    function modalOpen1(dName, dPrice, dDetail, dishesId,dPhoto) {
+        modalOpen();
+        inputData(dName, dPrice, dDetail, dishesId,dPhoto);
+    }
+
+    function modalOpen() {
+        //获取模态框对象   getElementsByClassName获取到的是一个数组对象
+        let modal = document.getElementsByClassName("modal-box")[0];
+        //获取浏览器当前宽高
+        let documentWidth = window.innerWidth;
+        let documentHeight = window.innerHeight;
+        //获取模态框宽度
+        let modalWidth = modal.offsetWidth;
+        //模态框距离浏览器右侧的距离就是（浏览器宽度-模态框宽）/ 2.0
+        //注意，需要把结果转为字符串类型
+        modal.style.left = ((documentWidth - modalWidth) / 2.0).toString();
+        //设置为可见
+        modal.style.visibility = "visible";
+    }
+
+    //模态框关闭
+    function modalClose() {
+        //获取模态框
+        let modal = document.getElementsByClassName("modal-box")[0];
+        //设置为不可见
+        modal.style.visibility = "hidden";
+    }
+
+    function inputData(dName, dPrice, dDetail, dishesId,dPhoto) {
+        $(".modal-box #dName").val(dName);
+        $(".modal-box #dPrice").val(dPrice);
+        $(".modal-box #dDetail").val(dDetail);
+        $(".modal-box #dishesId").val(dishesId);
+        $(".modal-box #dPhoto").attr("src","/images/"+dPhoto);
+
+    }
+</script>
 </html>

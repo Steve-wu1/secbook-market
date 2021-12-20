@@ -30,7 +30,7 @@ public interface StoreService{
 
     double getRankById(Integer storeId);
 
-    Dishes getStarDishByIdForMonth(Integer storeId);
+    List<Dishes> getDishesOrderByCountForMonth(Integer storeId);
 
     Double getSaleToday(Integer storeId);
 
