@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<html xmlns:th="http://www.thymeleaf.org" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/mainpage.css">
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/vendor/jquery-1.12.4.js"></script>
+    <script src="/js/navbar.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-dark fixed-top bg-success">
+    <div class="container-fluid">
+        <img src="/images/logo.jpg" alt="" width="138" height="44" class="d-inline-block align-text-top">
+    </div>
+</nav>
+<div style=" margin: 0 auto; left: 65%; position: absolute; margin: 0 0 0 -650px;height: 100%;">
+    <form class="main-panel row g-3 needs-validation" novalidate id="registerForm" method="post" action="/store/register" enctype="multipart/form-data">
+
+        <div class="col-md-4 position-relative">
+            <label for="validationTooltip01" class="form-label">店铺名</label>
+            <input type="text" class="form-control" id="validationTooltip01" name="sName"  required>
+        </div>
+
+        <div class="col-md-8 position-relative" style="visibility: hidden">
+        </div>
+
+        <div class="col-md-8 position-relative">
+            <label for="validationTooltip01" class="form-label">账号</label>
+            <input type="text" class="form-control" id="sAccount" name="sAccount" required>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <p class="checkPoint" id="checkPointAccount">请输入账号</p>
+                <p class="errorPoint" id="errorPointAccount" style="color: red"></p>
+            </div>
+        </div>
+
+        <div class="col-md-1 position-relative" style="visibility: hidden">
+        </div>
+
+        <div class="col-md-4 position-relative">
+            <label for="validationTooltip01" class="form-label">密码</label>
+            <input type="text" class="form-control" id="password1" name="sPassword" required>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <p class="errorPoint" id="errorPointPassword1" style="color: red" ></p>
+            </div>
+        </div>
+        <div class="col-md-4 position-relative">
+            <label for="validationTooltip01" class="form-label" >再次输入密码</label>
+            <input type="text" class="form-control" id="password2"  required>
+            <div class="valid-tooltip">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <p class="checkPoint" id="checkPointPassword2">两次输入不一致</p>
+                <p class="errorPoint" id="errorPointPassword2" style="color: red" ></p>
+            </div>
+        </div>
+
+        <div class="col-md-8 position-relative">
+            <label for="validationTooltip01" class="form-label">联系方式</label>
+            <input type="text" class="form-control" id="sPhone" name="sPhone" required>
+            <div class="valid-tooltip">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <p class="checkPoint" id="checkPointPhone">请输入11位的手机号码</p>
+                <p class="errorPoint" id="errorPointPhone" style="color: red"></p>
+            </div>
+        </div>
+        <div class="col-md-8 position-relative" id="address">
+            <label for="validationTooltip01" class="form-label">地址</label>
+                <input type="text" class="form-control" id="sAddress" name="sAddress" required>
+        </div>
+
+        <div class="col-md-8 position-relative" id="detail1">
+            <p>店铺简介</p>
+            <textarea id="detail" name="sDetails" style="min-height: 100px;min-width: 756px;"></textarea>
+            <div class="valid-tooltip">
+            </div>
+        </div>
+
+        <div class="col-md-8 position-relative" id="photo">
+            <label for="validationTooltip01" class="form-label">照片</label>
+
+
+            <div class="file-button">
+                选择文件
+                <input type="file"
+                       name="file"
+                       multiple="multiple"
+                       id="file"
+                       accept="image/*">
+            </div>
+
+            <div class="valid-tooltip">
+            </div>
+        </div>
+
+
+        <div class="col-md-8 position-relative" style="  margin: 20px 0 0 350px;">
+            <button class="btn btn-primary" type="submit">注册</button>
+        </div>
+
+        <div class="col-md-8 position-relative" style="visibility: hidden">
+            <label for="validationTooltip01" class="form-label"></label>
+            <input type="text" class="form-control" required>
+            <div class="valid-tooltip">
+            </div>
+        </div>
+
+    </form>
+
+
+    <nav class=" navbar fixed-bottom bg-success " style="margin: 0 0 0 0;">
+        <div class="container-fluid">
+            <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">二手书交易系统</a>
+        </div>
+    </nav>
+</div>
+</body>
+<script th:inline="javascript">
+    $(document).ready(function () {
+
+        //验证用户名
+        $("#sAccount").blur(function () {
+            var account = $(this).val();
+            var checkAccount = [[${accountList}]];
+            if (account == '') {
+                $("#checkPointAccount").hide();
+                $("#errorPointAccount").text("账号不能为空");
+                $("#errorPointAccount").show();
+            } else {
+                $(checkAccount).each(function (i, item) {
+                    if (item == account) {
+                        $("#checkPointAccount").hide();
+                        $("#errorPointAccount").text("账号重复");
+                        $("#errorPointAccount").show();
+                        return false;
+                    } else {
+                        $("#errorPointAccount").hide();
+                        $("#checkPointAccount").text("输入正确");
+                        $("#checkPointAccount").css('color', 'green');
+                        $("#checkPointAccount").show();
+
+                    }
+                })
+            }
+        })
+
+        $("#sPhone").blur(function () {
+            var Phone = $(this).val();
+            var checkPhone = [[${phoneList}]];
+
+            if (Phone == '') {
+                $("#checkPointPhone").hide();
+                $("#errorPointPhone").text("请输入11位的手机号码");
+                $("#errorPointPhone").show();
+            } else {
+                $(checkPhone).each(function (i, item) {
+                    if (item == Phone) {
+                        $("#checkPointPhone").hide();
+                        $("#errorPointPhone").text("手机号已存在");
+                        $("#errorPointPhone").show();
+                        return false;
+                    } else {
+                        if(Phone.length != 11){
+                            $("#checkPointPhone").hide();
+                            $("#errorPointPhone").text("请输入正确的手机号码");
+                            $("#errorPointPhone").show();
+                        }
+                        else{
+                            $("#errorPointPhone").hide();
+                            $("#checkPointPhone").text("输入正确");
+                            $("#checkPointPhone").css('color', 'green');
+                            $("#checkPointPhone").show();
+                        }
+                    }
+                })
+            }
+
+        })
+
+        $("#password1").blur(function () {
+            var password1 = $(this).val();
+            if (password1 == "") {
+                $("#checkPointPassword1").hide();
+                $("#errorPointPassword1").text("密码不能为空");
+                $("#errorPointPassword1").show();
+            } else {
+                $("#errorPointPassword1").hide();
+                $("#checkPointPassword1").text("密码可行");
+                $("#checkPointPassword1").css('color', 'green');
+                $("#checkPointPassword1").show();
+            }
+        })
+
+        //验证重写密码
+        $("#password2").blur(function () {
+            var password2 = $(this).val();
+            var password1 = $("#password1").val();
+            if (password2 == "") {
+                $("#checkPointPassword2").hide();
+                $("#errorPointPassword2").text("验证密码不能为空");
+                $("#errorPointPassword2").show();
+            } else {
+                if (password1 != password2) {
+                    $("#checkPointPassword2").hide();
+                    $("#errorPointPassword2").text("两次密码输入不一致");
+                    $("#errorPointPassword2").show();
+                    return false;
+                } else {
+                    $("#errorPointPassword2").hide();
+                    $("#checkPointPassword2").text("输入正确");
+                    $("#checkPointPassword2").css('color', 'green');
+                    $("#checkPointPassword2").show();
+                }
+            }
+        })
+    })
+</script>
+
+</html>

@@ -24,7 +24,7 @@
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">食堂预约管理系统</h5>
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">二手书交易系统</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
             </div>
@@ -57,7 +57,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h2 class="card-title" th:text="${session.store.sName}+'销售数据分析'"></h2>
+                <h2 class="card-title" th:text="${session.store.SName}+'销售数据分析'"></h2>
                 <h5>综合评分：<code th:text="${rank}"></code></h5>
             </div>
         </div>
@@ -81,8 +81,9 @@
             </div>
             <br/>
             <input hidden>
-            <h4 style="text-align: center"><img th:src="'/images/'+${starDish.dPhoto}" class="col-6" height="120px"></h4>
-            <h5 th:text="${starDish.dName}+'   销售量:'+${saleStarDish}+'份'" style="text-align: center"></h5>
+            <h4 style="text-align: center"><img th:src="'/images/'+${starBook.getBPhoto}" class="col-6" height="120px">
+            </h4>
+            <h5 th:text="${starBook.getBName}+'   销售量:'+${saleStarBook}+'份'" style="text-align: center"></h5>
             <br/>
         </div>
     </div>
@@ -117,7 +118,7 @@
         <div class="card">
             <div class="card-header">
                 <h4>
-                    菜品月销售top3
+                    书籍月销售top3
                 </h4>
             </div>
             <h4 style="text-align: center">&nbsp;</h4>
@@ -196,7 +197,7 @@
 </div>
 <nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
     <div class="container-fluid">
-        <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">食堂预约系统</a>
+        <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">二手书交易系统</a>
     </div>
 </nav>
 <script th:inline="javascript">
@@ -216,17 +217,17 @@
     console.log(rankData4);
     let rankData5 = [[${rankData5}]]
     console.log(rankData5);
-    let starDishName = [[${starDish.dName}]]
+    let starDishName = [[${starBook.bName}]]
     console.log(starDishName);
-    let saleStarDish = [[${saleStarDish}]]
+    let saleStarDish = [[${saleStarBook}]]
     console.log(saleStarDish);
-    let secDishName = [[${secDish.dName}]]
+    let secDishName = [[${secBook.bName}]]
     console.log(secDishName);
-    let saleSecDish = [[${saleSecDish}]]
+    let saleSecDish = [[${saleSecBook}]]
     console.log(saleSecDish);
-    let thrDishName = [[${thrDish.dName}]]
+    let thrDishName = [[${thrBook.bName}]]
     console.log(thrDishName);
-    let saleThrDish = [[${saleThrDish}]]
+    let saleThrDish = [[${saleThrBook}]]
     console.log(saleThrDish);
 </script>
 <script language="javascript">

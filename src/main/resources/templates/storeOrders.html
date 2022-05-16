@@ -24,7 +24,7 @@
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">食堂预约管理系统</h5>
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">二手书交易系统</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
             </div>
@@ -55,17 +55,20 @@
 <br/><br/>
 
 <form class="main-panel row g-3 needs-validation"
-      style=" margin: 0 auto; left: 15%;right: 15%; position: absolute; margin: 0 0 0 0;" novalidate>
+      style=" margin: 0 auto; left: 3%;right: 3%; position: absolute; margin: 0 0 0 0;" novalidate>
     <table class="pure-table">
         <thead>
         <tr>
             <th>#</th>
-            <th>订餐时间</th>
+            <th>下单时间</th>
             <th>用户</th>
             <th>价格</th>
             <th>联系方式</th>
+            <th>地址</th>
             <th>状态</th>
             <th>内容</th>
+            <th>快递</th>
+            <th>快递编号</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -79,18 +82,24 @@
             <td th:text="${order.oName}"></td>
             <td th:text="${order.oPrice}"></td>
             <td th:text="${order.oPhone}"></td>
+            <td th:text="${order.oUserAddress}"></td>
             <td th:text="${order.oStateName}"></td>
             <td th:text="${order.oContent}"></td>
+            <td th:text="${order.oDelieverName}"></td>
+            <td th:text="${order.ODelieverNum}"></td>
             <td>
                 <a th:href="@{'/order/accept/id='+${order.orderId}}" th:hidden="${order.oState}!=0?'true':'false'">
                     <button class="btn btn-primary" type="button">接受订单</button>
                 </a>
-                <a th:href="@{'/order/complete/id='+${order.orderId}}" th:hidden="${order.oState}!=1?'true':'false'">
-                    <button class="btn btn-primary" type="button">确认完成</button>
+                <a th:hidden="${order.oState}!=1?'true':'false'">
+                    <button th:onclick="modalOpen3([[${order.orderId}]])" class="btn btn-primary" type="button">
+                        确认发货（请填写快递）
+                    </button>
                 </a>
                 <a th:href="@{'/order/cancel/id='+${order.orderId}}" th:hidden="${order.oState}!=0?'true':'false'">
                     <button class="btn btn-danger" type="button" onclick="return confirm('是否取消该订单?此操作不可逆！')">取消订单</button>
                 </a>
+
                 <a  th:hidden="${order.oState}!=3?'true':'false'">
                     <button class="btn btn-primary" type="button" th:onclick="modalOpen1([[${order.oRank}]],[[${order.oComment}]])">查看评价</button>
                 </a>
@@ -135,25 +144,97 @@
     </form>
 
 </div>
+<div class="modal-box" id="modal2"
+     style="margin: 0 auto; left: 15%;right: 15%;top: 15%; position: absolute; visibility: hidden">
+    <!--顶部-->
+    <div class="modal-box-top">
+        <div class="modal-box-title">快递信息提交</div>
+        <!--关闭按钮 &times;会被转义成乘号（×）看上去就是关闭符号-->
+        <!--关闭逻辑-->
+        <button onclick="modalClose2()" class="modal-close">&times;
+        </button>
+    </div>
+    <!--主体-->
+    <form action="/order/complete" method="post">
+        <div class="modal-box-content">
+            <label for="oDelieverName"
+                   class="control-label"
+                   style="font-size: medium">快递种类:</label>
+            <textarea name="oDelieverName"
+                      id="oDelieverName"
+                      type="text"
+                      class="form-control "
+                      placeholder="请输入快递种类（圆通、顺丰等）"></textarea>
+
+            <label for="oDelieverNum"
+                   class="control-label"
+                   style="font-size: medium">快递编号:</label>
+            <textarea name="oDelieverNum"
+                      id="oDelieverNum"
+                      type="text"
+                      class="form-control "
+                      placeholder="请输入编号"></textarea>
+
+            <input name="orderId" id="orderId" hidden>
+        </div>
+        <div class="modal-box-bottom">
+            <a>
+                <button type="submit" class="btn btn-success" onclick="change()">提交</button>
+            </a>
+        </div>
+        <!--底部-->
+
+    </form>
+
+</div>
 
 <div hidden></div>
 <nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
     <div class="container-fluid">
-        <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">食堂预约系统</a>
+        <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">二手书交易系统</a>
     </div>
 </nav>
 </body>
 <script type="text/javascript">
     $("#modal").modal("hide");
+    $("#modal2").modal("hide");
 
     function modalOpen1(oRank,oComment) {
         modalOpen();
         inputData(oRank,oComment);
     }
 
+    function modalOpen3(orderId) {
+        modalOpen2();
+        inputData2(orderId);
+    }
+
+    function change() {
+        var txt;
+        if (confirm("确认上传")) {
+            alert("上传成功");
+        } else {
+        }
+        document.getElementById("demo").innerHTML = txt;
+    }
     function modalOpen() {
         //获取模态框对象   getElementsByClassName获取到的是一个数组对象
-        let modal = document.getElementsByClassName("modal-box")[0];
+        let modal = document.getElementById("modal");
+        //获取浏览器当前宽高
+        let documentWidth = window.innerWidth;
+        let documentHeight = window.innerHeight;
+        //获取模态框宽度
+        let modalWidth = modal.offsetWidth;
+        //模态框距离浏览器右侧的距离就是（浏览器宽度-模态框宽）/ 2.0
+        //注意，需要把结果转为字符串类型
+        modal.style.left = ((documentWidth - modalWidth) / 2.0).toString();
+        //设置为可见
+        modal.style.visibility = "visible";
+    }
+
+    function modalOpen2() {
+        //获取模态框对象   getElementsByClassName获取到的是一个数组对象
+        let modal = document.getElementById("modal2");
         //获取浏览器当前宽高
         let documentWidth = window.innerWidth;
         let documentHeight = window.innerHeight;
@@ -174,9 +255,21 @@
         modal.style.visibility = "hidden";
     }
 
+    function modalClose2() {
+        //获取模态框
+        let modal = document.getElementsByClassName("modal-box")[1];
+        //设置为不可见
+        modal.style.visibility = "hidden";
+    }
+
     function inputData(oRank,oComment){
         $(".modal-box #oRank").html(oRank);
         $(".modal-box #oComment").html(oComment);
+    }
+
+    function inputData2(orderId) {
+
+        $(".modal-box #orderId").val(orderId);
     }
 
 

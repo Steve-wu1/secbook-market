@@ -40,10 +40,10 @@
       from store
       where store_id = #{storeId,jdbcType=INTEGER}
     </select>
-  <select id="getDishesById" resultType="sspu.informationsystem.entity.Dishes">
+    <select id="getBookById" resultType="sspu.informationsystem.entity.Book">
     select *
-    from dishes
-    where d_store_id = #{storeId,jdbcType=INTEGER}
+        from book
+        where b_store_id = #{storeId,jdbcType=INTEGER}
   </select>
   <select id="getALlPhone" resultType="java.lang.String">
     select s_phone
@@ -66,67 +66,67 @@
       select avg (o_rank)
       from `order`
       where order_id in (select order_id
-                          from order_dishes_bind
-                          where d_id in (select dishes_id
-                                          from dishes
-                                          where d_store_id = #{storeId,jdbcType=INTEGER}))
+        from order_book_bind
+        where b_id in (select book_id
+        from book
+        where b_store_id = #{storeId,jdbcType=INTEGER}))
     </select>
-  <select id="getDishesOrderByCountForMonth" resultType="sspu.informationsystem.entity.Dishes">
+    <select id="getBookOrderByCountForMonth" resultType="sspu.informationsystem.entity.Book">
     select *
-    from dishes
-    where dishes_id in (select d_id
-                         from order_dishes_bind
-                         where d_id in (select dishes_id
-                                              from dishes
-                                              where d_store_id = #{storeId,jdbcType=INTEGER})
+        from book
+        where book_id in (select b_id
+        from order_book_bind
+        where b_id in (select book_id
+        from book
+        where b_store_id = #{storeId,jdbcType=INTEGER})
                          and o_id in (select order_id
                                       from `order`
                                       where o_state = 3
                                       and DATE_FORMAT( o_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ))
-                         group by d_id
-                         order by d_number desc
+        group by b_id
+        order by b_number desc
                          )
   </select>
-  <select id="getSaleToday" resultType="sspu.informationsystem.entity.OrderDishesBind">
+    <select id="getSaleToday" resultType="sspu.informationsystem.entity.OrderBookBind">
     select *
-    from order_dishes_bind
-    where d_id in (select dishes_id
-                    from dishes
-                    where d_store_id = #{storeId,jdbcType=INTEGER})
+        from order_book_bind
+        where b_id in (select book_id
+        from book
+        where b_store_id = #{storeId,jdbcType=INTEGER})
       and o_id in (select order_id
                     from `order`
                     where to_days(o_time) = to_days(now())
                     and o_state = 3)
   </select>
-  <select id="getSaleSameAddressToday" resultType="sspu.informationsystem.entity.OrderDishesBind">
+    <select id="getSaleSameAddressToday" resultType="sspu.informationsystem.entity.OrderBookBind">
     select *
-    from order_dishes_bind
-    where d_id in (select dishes_id
-                    from dishes
-                    where d_store_id in (select store_id
+        from order_book_bind
+        where b_id in (select book_id
+        from book
+        where b_store_id in (select store_id
                                           from store
                                           where s_address like #{sAddress,jdbcType=VARCHAR}))
     and o_id in (select order_id
                  from `order`
                  where o_state = 3)
   </select>
-  <select id="getSaleMonth" resultType="sspu.informationsystem.entity.OrderDishesBind">
+    <select id="getSaleMonth" resultType="sspu.informationsystem.entity.OrderBookBind">
     select *
-    from order_dishes_bind
-    where d_id in (select dishes_id
-                    from dishes
-                    where d_store_id = #{storeId,jdbcType=INTEGER})
+        from order_book_bind
+        where b_id in (select book_id
+        from book
+        where b_store_id = #{storeId,jdbcType=INTEGER})
     and o_id in (select order_id
                   from `order`
                   where DATE_FORMAT( o_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
                   and o_state = 3)
   </select>
-  <select id="getSaleWeek" resultType="sspu.informationsystem.entity.OrderDishesBind">
+    <select id="getSaleWeek" resultType="sspu.informationsystem.entity.OrderBookBind">
     select *
-    from order_dishes_bind
-    where d_id in (select dishes_id
-                    from dishes
-                    where d_store_id = #{storeId,jdbcType=INTEGER})
+        from order_book_bind
+        where b_id in (select book_id
+        from book
+        where b_store_id = #{storeId,jdbcType=INTEGER})
     and o_id in (select order_id
                  from `order`
                  where YEARWEEK(date_format(o_time,'%Y-%m-%d')) = YEARWEEK(now())
@@ -156,14 +156,14 @@
         left join
         (select
         left(o_time,7) as 'month',count(*) as count
-        from `order`,order_dishes_bind
+        from `order`,order_book_bind
         where DATE_FORMAT(`order`.o_time,'%Y-%m')>
         DATE_FORMAT(date_sub(curdate(), interval 5 month),'%Y-%m')
-        and order_dishes_bind.o_id = order.order_id
+        and order_book_bind.o_id = order.order_id
         and order.o_state=3
-        and order_dishes_bind.d_id in (select dishes_id
-        from dishes
-        where d_store_id = #{storeId,jdbcType=INTEGER})
+        and order_book_bind.b_id in (select book_id
+        from book
+        where b_store_id = #{storeId,jdbcType=INTEGER})
         GROUP BY month
         ) as b
         on v.month = b.month group by v.month
@@ -180,35 +180,35 @@
     left join
     (select
     left(o_time,7) as 'month',count(*)/(SELECT count(*) FROM store) as count
-    from `order`,order_dishes_bind
+    from `order`,order_book_bind
     where DATE_FORMAT(`order`.o_time,'%Y-%m')>
     DATE_FORMAT(date_sub(curdate(), interval 5 month),'%Y-%m')
-     and order_dishes_bind.o_id = order.order_id
+     and order_book_bind.o_id = order.order_id
              and order.o_state=3
-        and order_dishes_bind.d_id in (select dishes_id
-        from dishes)
+        and order_book_bind.b_id in (select book_id
+        from book)
     GROUP BY month
     ) as b
     on v.month = b.month group by v.month
     </select>
     <select id="getMonthStarDishSale" resultType="java.lang.Double">
-        select sum(d_number)
-        from order_dishes_bind
-        where d_id = #{dishesId,jdbcType=INTEGER}
+        select sum(b_number)
+        from order_book_bind
+        where b_id = #{bookId,jdbcType=INTEGER}
         and o_id in (select order_id
-                      from `order`
-                      where DATE_FORMAT( o_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
-                      and o_state = 3)
+        from `order`
+        where DATE_FORMAT( o_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+        and o_state = 3)
     </select>
     <select id="getOrderCountToday" resultType="java.lang.Integer">
         select count(*)
         from `order`
         where to_days(o_time) = to_days(now())
         and order_id in (select o_id
-                          from order_dishes_bind
-                          where d_id in (select dishes_id
-                                          from dishes
-                                          where d_store_id = #{storeId,jdbcType=INTEGER}))
+        from order_book_bind
+        where b_id in (select book_id
+        from book
+        where b_store_id = #{storeId,jdbcType=INTEGER}))
         and o_state = 3
     </select>
     <select id="getOrderCountWeek" resultType="java.lang.Integer">
@@ -216,10 +216,10 @@
         from `order`
         where YEARWEEK(date_format(o_time,'%Y-%m-%d')) = YEARWEEK(now())
         and order_id in (select o_id
-                          from order_dishes_bind
-                          where d_id in (select dishes_id
-                                          from dishes
-                                          where d_store_id = #{storeId,jdbcType=INTEGER}))
+        from order_book_bind
+        where b_id in (select book_id
+        from book
+        where b_store_id = #{storeId,jdbcType=INTEGER}))
         and o_state = 3
     </select>
     <select id="getOrderCountMonth" resultType="java.lang.Integer">
@@ -227,20 +227,20 @@
         from `order`
         where DATE_FORMAT( o_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
         and order_id in (select o_id
-                         from order_dishes_bind
-                         where d_id in (select dishes_id
-                                         from dishes
-                                         where d_store_id = #{storeId,jdbcType=INTEGER}))
+        from order_book_bind
+        where b_id in (select book_id
+        from book
+        where b_store_id = #{storeId,jdbcType=INTEGER}))
         and o_state = 3
     </select>
     <select id="getRankData" resultType="java.lang.Integer">
         select count(*)
         from `order`
         where order_id in (select o_id
-                            from order_dishes_bind
-                            where d_id in (select dishes_id
-                                            from dishes
-                                            where d_store_id = #{param1,jdbcType=INTEGER}))
+        from order_book_bind
+        where b_id in (select book_id
+        from book
+        where b_store_id = #{param1,jdbcType=INTEGER}))
         and o_state = 3
         and o_rank = #{param2,jdbcType=INTEGER}
     </select>

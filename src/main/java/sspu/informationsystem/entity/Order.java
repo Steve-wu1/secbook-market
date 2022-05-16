@@ -1,9 +1,9 @@
 package sspu.informationsystem.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-
-import lombok.Data;
 
 @Data
 public class Order implements Serializable {
@@ -34,6 +34,12 @@ public class Order implements Serializable {
     private String oComment;
 
     private Double oPrice;
+
+    private String oUserAddress;
+
+    private String oDelieverName;
+
+    private String oDelieverNum;
 
     private static final long serialVersionUID = 1L;
 }

@@ -24,7 +24,7 @@
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">食堂预约管理系统</h5>
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">二手书交易系统</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
             </div>
@@ -32,7 +32,7 @@
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
                         <a class="nav-link active" style="color: #1a1e21" aria-current="page"
-                           href="/store/list">食堂商家</a>
+                           href="/store/list">书城商家</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" style="color: #1a1e21" href="/toMyOrders">我的订单</a>
@@ -61,7 +61,7 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>菜名</th>
+            <th>书名</th>
             <th>价格</th>
             <th>数量</th>
             <th>总价</th>
@@ -74,14 +74,13 @@
         <tbody>
 
 
-
-        <tr class="pure-table-odd" th:each="dishes,a:${dishesList}">
-            <td hidden><input th:value="${dishes.dishesId}" th:id="id+${a.index}" hidden></td>
+        <tr class="pure-table-odd" th:each="book,a:${bookList}">
+            <td hidden><input th:value="${book.bookId}" th:id="id+${a.index}" hidden></td>
             <td th:text="${a.count}"></td>
-            <td th:text="${dishes.dName}" style="color: #0a58ca" th:onmouseover="" th:onmouseout=""
-                th:onclick="modalOpen1([[${dishes.dName}]],[[${dishes.dPrice}]],[[${dishes.dDetails}]],[[${dishes.dishesId}]],[[${dishes.dPhoto}]])"></td>
-            <td hidden><input type="text" th:name="price" th:value="${dishes.dPrice}" hidden></td>
-            <td><input type="text" th:id="price+${a.index}" th:value="${dishes.dPrice}"></td>
+            <td th:text="${book.bName}" style="color: #0a58ca" th:onmouseover="" th:onmouseout=""
+                th:onclick="modalOpen1([[${book.bName}]],[[${book.bPrice}]],[[${book.bDetail}]],[[${book.bookId}]],[[${book.bPhoto}]])"></td>
+            <td hidden><input type="text" th:name="price" th:value="${book.bPrice}" hidden></td>
+            <td><input type="text" th:id="price+${a.index}" th:value="${book.bPrice}"></td>
             <td>
                 数量: <input type="button" th:name="minus" value="-"
                            th:onclick="minus([[${a.index}]]);"><input type="text" oninput="total()" width="10px"
@@ -118,33 +117,33 @@
     </div>
     <!--主体-->
     <div class="modal-box-photo" style=" left: 25%;right: 25%;">
-        <img src="/images/logo.jpg" id="dPhoto" height="160">
+        <img src="/images/logo.jpg" id="bPhoto" height="160">
     </div>
     <div class="modal-box-content">
-        <label for="dName"
+        <label for="bName"
                class="control-label"
-               style="font-size: medium">菜名:</label>
-        <input name="dName"
-               id="dName"
+               style="font-size: medium">书名:</label>
+        <input name="bName"
+               id="bName"
                type="text"
                class="form-control " readonly="readonly"
                placeholder=" "/>
-        <label for="dPrice"
+        <label for="bPrice"
                class="control-label"
                style="font-size: medium">价格:</label>
-        <input name="dPrice"
-               id="dPrice"
+        <input name="bPrice"
+               id="bPrice"
                type="text"
                class="form-control " readonly="readonly"
                placeholder=" "/>
-        <label for="dDetail"
+        <label for="bDetail"
                class="control-label"
                style="font-size: medium">简介:</label>
-        <input name="dDetail"
-               id="dDetail"
+        <input name="bDetail"
+               id="bDetail"
                class="form-control " readonly="readonly"
                placeholder="">
-        <input name="dishesId" id="dishesId" hidden/>
+        <input name="bookId" id="bookId" hidden/>
     </div>
 
 
@@ -331,8 +330,8 @@
         for(var i=0,rows = table.rows.length;i<rows-1;i++){
             var id = "#id"+i;
             var amount = "#amount"+i;
-            json += '{"dId":"' + $(id).val()
-                + '","dNumber":"' + $(amount).val() + '"},';
+            json += '{"bId":"' + $(id).val()
+                + '","bNumber":"' + $(amount).val() + '"},';
         }
         json= json.substr(0, json.length - 1);
         json +="]";
@@ -353,7 +352,7 @@
 
 <nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
     <div class="container-fluid">
-        <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">食堂预约系统</a>
+        <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">二手书交易系统</a>
     </div>
 </nav>
 </body>
@@ -415,9 +414,9 @@
         document.getElementById("demo").innerHTML = txt;
     }
 
-    function modalOpen1(dName, dPrice, dDetail, dishesId,dPhoto) {
+    function modalOpen1(bName, bPrice, bDetail, bookId, bPhoto) {
         modalOpen();
-        inputData(dName, dPrice, dDetail, dishesId,dPhoto);
+        inputData(bName, bPrice, bDetail, bookId, bPhoto);
     }
 
     function modalOpen() {
@@ -443,12 +442,12 @@
         modal.style.visibility = "hidden";
     }
 
-    function inputData(dName, dPrice, dDetail, dishesId,dPhoto) {
-        $(".modal-box #dName").val(dName);
-        $(".modal-box #dPrice").val(dPrice);
-        $(".modal-box #dDetail").val(dDetail);
-        $(".modal-box #dishesId").val(dishesId);
-        $(".modal-box #dPhoto").attr("src","/images/"+dPhoto);
+    function inputData(bName, bPrice, bDetail, bookId, bPhoto) {
+        $(".modal-box #bName").val(bName);
+        $(".modal-box #bPrice").val(bPrice);
+        $(".modal-box #bDetail").val(bDetail);
+        $(".modal-box #bookId").val(bookId);
+        $(".modal-box #bPhoto").attr("src", "/images/" + bPhoto);
 
     }
 

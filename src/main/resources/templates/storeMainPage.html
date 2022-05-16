@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/modal.css">
     <link rel="stylesheet" href="../css/mainpage.css">
     <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/vendor/jquery-1.12.4.js"></script>
+    <script src="../js/vendor/jquery-1.12.4.js"></script>
     <script src="../js/navbar.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -25,7 +25,7 @@
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">食堂预约管理系统</h5>
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">二手书交易管理系统</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
             </div>
@@ -63,9 +63,10 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>菜名</th>
+            <th>书名</th>
             <th>价格</th>
             <th>简介</th>
+
             <th>管理</th>
         </tr>
         </thead>
@@ -73,15 +74,20 @@
         <h5>商家主页</h5>
         </thead>
         <tbody>
-        <tr class="pure-table-odd" th:each="dishes,a:${dishesList}">
+        <tr class="pure-table-odd" th:each="book,a:${bookList}">
             <td th:text="${a.count}"></td>
-            <td th:text="${dishes.dName}"></td>
-            <td th:text="${dishes.dPrice}"></td>
-            <td th:text="${dishes.dDetails}"></td>
+            <td th:text="${book.bName}"></td>
+            <td th:text="${book.bPrice}"></td>
+            <td th:text="${book.bDetail}"></td>
+
             <td>
 
-                <input type="button" class="btn btn-primary" th:onclick="modalOpen1([[${dishes.dName}]],[[${dishes.dPrice}]],[[${dishes.dDetails}]],[[${dishes.dishesId}]],[[${dishes.dPhoto}]])"  value="修改">
-                <a th:href="@{'/store/deleteDish/id='+${dishes.dishesId}}" onclick="return confirm('是否删除该菜品?此操作不可逆！')"><button class="btn btn-danger" >删除</button></a>
+                <input type="button" class="btn btn-primary"
+                       th:onclick="modalOpen1([[${book.bName}]],[[${book.bPrice}]],[[${book.bDetail}]],[[${book.bookId}]],[[${book.bPhoto}]])"
+                       value="修改">
+                <a th:href="@{'/store/deleteBook/id='+${book.bookId}}" onclick="return confirm('是否删除该书目?此操作不可逆！')">
+                    <button class="btn btn-danger">删除</button>
+                </a>
             </td>
 
         </tr>
@@ -90,7 +96,7 @@
 
 
     <div class="col-md-8 position-relative" style="  margin: 20px 0 0 500px;">
-        <input type="button" class="btn btn-primary" onclick="modalOpen()"  value="添加">
+        <input type="button" class="btn btn-primary" onclick="modalOpen2()" value="添加">
     </div>
     <div class="col-md-8 position-relative" style="visibility: hidden">
         <input type="text" class="form-control" required>
@@ -102,7 +108,7 @@
      style="margin: 0 auto; left: 15%;right: 15%;top: 15%; position: absolute; visibility: hidden">
     <!--顶部-->
     <div class="modal-box-top">
-        <div class="modal-box-title">菜品信息</div>
+        <div class="modal-box-title">书籍信息</div>
         <!--关闭按钮 &times;会被转义成乘号（×）看上去就是关闭符号-->
         <!--关闭逻辑-->
         <button onclick="modalClose()" class="modal-close">&times;
@@ -110,34 +116,36 @@
     </div>
     <!--主体-->
     <div class="modal-box-photo" style=" left: 25%;right: 25%;">
-        <img src="" id="dPhoto1"  height="160">
+        <img src="" id="bPhoto3" height="160">
     </div>
-    <form th:action="@{'/store/alterDish/id='+${session.store.storeId}}" method="post" enctype="multipart/form-data">
+
+    <form th:action="@{'/store/alterBook/id='+${session.store.storeId}}" method="post" enctype="multipart/form-data">
         <div class="modal-box-content">
-            <label for="dName"
+            <label for="bName"
                    class="control-label"
-                   style="font-size: medium">菜名:</label>
-            <input name="dName"
-                   id="dName"
+                   style="font-size: medium">书名:</label>
+            <input name="bName"
+                   id="bName"
                    type="text"
                    class="form-control "
                    placeholder=" "/>
-            <label for="dPrice"
+            <label for="bPrice"
                    class="control-label"
                    style="font-size: medium">价格:</label>
-            <input name="dPrice"
-                   id="dPrice"
+            <input name="bPrice"
+                   id="bPrice"
                    type="text"
                    class="form-control "
                    placeholder=" "/>
-            <label for="dDetails"
+            <label for="bDetail"
                    class="control-label"
                    style="font-size: medium">简介:</label>
-            <input name="dDetails"
-                   id="dDetails"
+            <input name="bDetail"
+                   id="bDetail"
                    class="form-control "
                    placeholder="">
-            <input name="dishesId" id="dishesId" hidden/>
+            <input name="bookId" id="bookId" hidden/>
+            <input name="bPhoto2" id="bPhoto2"/>
             <div class="file-button">
                 选择文件
                 <input type="file"
@@ -160,7 +168,7 @@
 
 <nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
     <div class="container-fluid">
-        <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">食堂预约系统</a>
+        <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">二手书交易系统</a>
     </div>
 </nav>
 
@@ -180,14 +188,29 @@
         document.getElementById("demo").innerHTML = txt;
     }
 
-    function modalOpen1(dName,dPrice,dDetail,dishesId,dPhoto1) {
+
+    function modalOpen1(bName, bPrice, bDetail, bookId, bPhoto2) {
         modalOpen();
-        inputData(dName,dPrice,dDetail,dishesId,dPhoto1);
+        inputData(bName, bPrice, bDetail, bookId, bPhoto2);
+    }
+
+    function modalOpen2(bName, bPrice, bDetail, bookId, bPhoto2) {
+        modalOpen();
+        inputData();
     }
 
     function modalOpen() {
         //获取模态框对象   getElementsByClassName获取到的是一个数组对象
-        let modal = document.getElementsByClassName("modal-box")[0];
+        $('body').on('hidden.bs.modal', function () {
+            // 踩过的坑555...
+            // $('.modal').modal('hide')
+            // $(this).removeData('bs.modal');
+            // $(this).find('.modal-body').empty();
+            // $('.modal-body').html("")
+            // 找到 modal-body下面的form表单，并且重置
+            $('.modal-box').trigger('reset');
+        });
+
         //获取浏览器当前宽高
         let documentWidth = window.innerWidth;
         let documentHeight = window.innerHeight;
@@ -200,6 +223,7 @@
         modal.style.visibility = "visible";
     }
 
+
     //模态框关闭
     function modalClose() {
         //获取模态框
@@ -208,12 +232,17 @@
         modal.style.visibility = "hidden";
     }
 
-    function inputData(dName,dPrice,dDetail,dishesId,dPhoto1){
-        $(".modal-box #dName").val(dName);
-        $(".modal-box #dPrice").val(dPrice);
-        $(".modal-box #dDetails").val(dDetail);
-        $(".modal-box #dishesId").val(dishesId);
-        $(".modal-box #dPhoto1").attr("src","/images/"+dPhoto1);
+    function inputData(bName, bPrice, bDetail, bookId, bPhoto2) {
+        $(".modal-box #bName").val(bName);
+        $(".modal-box #bPrice").val(bPrice);
+        $(".modal-box #bDetail").val(bDetail);
+        $(".modal-box #bookId").val(bookId);
+        $(".modal-box #bPhoto2").val(bPhoto2);
+        var txt;
+        txt = document.getElementById("bPhoto2").value;
+        document.images.bPhoto3.src = txt;
+
+
     }
 
 

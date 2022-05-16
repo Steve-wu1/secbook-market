@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import sspu.informationsystem.entity.OrderDishesBind;
+import sspu.informationsystem.entity.OrderBookBind;
 import sspu.informationsystem.entity.User;
 import sspu.informationsystem.service.OrderService;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -28,10 +29,10 @@ public class OrderController {
         //json解析
         request = request.substring(1,request.length()-1);
         String dealtRequest = StringEscapeUtils.unescapeJavaScript(request);
-        List<OrderDishesBind> orderDishesBindList = JSONArray.parseArray(dealtRequest,OrderDishesBind.class);
+        List<OrderBookBind> orderBookBindList = JSONArray.parseArray(dealtRequest, OrderBookBind.class);
         //订单创建绑定和检验
-        orderDishesBindList = orderService.checkDishesInOrder(orderDishesBindList);
-        orderService.addOrder(user.getUserId(),orderDishesBindList);
+        orderBookBindList = orderService.checkBookInOrder(orderBookBindList);
+        orderService.addOrder(user.getUserId(), orderBookBindList);
         return "redirect:/store/list";
     }
 
@@ -46,16 +47,24 @@ public class OrderController {
         orderService.orderCancel(orderId);
         return "redirect:/toMyOrders";
     }
-
     @GetMapping("/order/accept/id={orderId}")
     public String orderAccept(@PathVariable("orderId")Integer orderId){
         orderService.orderAccept(orderId);
         return "redirect:/toStoreOrder";
     }
 
-    @GetMapping("/order/complete/id={orderId}")
-    public String orderComplete(@PathVariable("orderId")Integer orderId){
-        orderService.orderComplete(orderId);
+    //    @GetMapping("/order/complete/id={orderId}oDName={oDelieverName}oDNum={oDelieverNum}")
+//
+//    public String orderComplete(@PathVariable("orderId")Integer orderId,@PathVariable("oDelieverName")String oDelieverName,@PathVariable("oDelieverNum")String oDelieverNum){
+//        log.debug(oDelieverName+oDelieverNum);
+//
+//        orderService.orderComplete(orderId,oDelieverName,oDelieverNum);
+//        return "redirect:/toStoreOrder";
+//    }
+    @PostMapping("/order/complete")
+
+    public String orderComplete(Integer orderId, String oDelieverName, String oDelieverNum) {
+        orderService.orderComplete(orderId, oDelieverName, oDelieverNum);
         return "redirect:/toStoreOrder";
     }
 

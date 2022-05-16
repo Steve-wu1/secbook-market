@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>sspu</groupId>
-    <artifactId>information-system</artifactId>
+    <artifactId>20191113227dazuoye</artifactId>
     <version>0.1</version>
-    <name>information-system</name>
+    <name>20191113227dazuoye</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>

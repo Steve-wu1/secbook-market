@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sspu.informationsystem.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="sspu.informationsystem.entity.Order">
+    <!--@Table `order`-->
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="o_time" jdbcType="TIMESTAMP" property="oTime" />
+    <result column="o_state" jdbcType="INTEGER" property="oState" />
+    <result column="o_require_time" jdbcType="TIMESTAMP" property="oRequireTime" />
+    <result column="o_user_id" jdbcType="INTEGER" property="oUserId" />
+    <result column="o_rank" jdbcType="INTEGER" property="oRank" />
+    <result column="o_comment" jdbcType="VARCHAR" property="oComment" />
+      <result column="o_delievername" jdbcType="VARCHAR" property="oDelieverName" />
+      <result column="o_delievernum" jdbcType="VARCHAR" property="oDelieverNum" />
+      <result column="o_u_address" jdbcType="VARCHAR" property="oUserAddress" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, o_time, o_state, o_require_time, o_user_id, o_rank, o_comment,o_delievername,o_delievernum,o_u_address
+  </sql>
+  <insert id="insert" keyColumn="order_id" keyProperty="orderId" parameterType="sspu.informationsystem.entity.Order" useGeneratedKeys="true">
+    insert into `order` (o_time, o_state, o_require_time,
+      o_user_id, o_rank, o_comment,o_delievername,o_delievernum,o_u_address
+      )
+    values (#{oTime,jdbcType=TIMESTAMP}, #{oState,jdbcType=INTEGER}, #{oRequireTime,jdbcType=TIMESTAMP}, 
+      #{oUserId,jdbcType=INTEGER}, #{oRank,jdbcType=INTEGER}, #{oComment,jdbcType=VARCHAR},#{oDelieverName,jdbcType=VARCHAR},#{oDelieverNum,jdbcType=VARCHAR},
+      (select u_address from user where user_id =#{oUserId,jdbcType=INTEGER})
+      )
+  </insert>
+  <select id="getOrderByStoreId" resultMap="BaseResultMap">
+      select *
+      from `order`
+      where order_id in (select order_id
+                          from order_book_bind
+                           where b_id in (select book_id
+                                           from book
+                                           where b_store_id = #{storeId,jdbcType=INTEGER}))
+      order by o_state
+  </select>
+  <insert id="addOrder">
+    insert into `order`( o_time,o_state,o_user_id,o_u_address)
+    values (now(),0,#{userId,jdbcType=INTEGER},(select u_address from user where user_id =#{userId,jdbcType=INTEGER}))
+  </insert>
+  <select id="getLatestId" resultType="int">
+    select last_insert_ID()
+    from `order`
+    limit 1
+  </select>
+    <update id="orderComplete">
+        update `order`
+        set o_state = 2,o_delievername=#{oDelieverName,jdbcType=VARCHAR},o_delievernum=#{oDelieverNum,jdbcType=VARCHAR}
+        where order_id = #{orderId,jdbcType=INTEGER}
+    </update>
+    <update id="orderCancel">
+        update `order`
+        set o_state = 4
+        where order_id = #{orderId,jdbcType=INTEGER}
+    </update>
+    <select id="getOrderByUserId" resultMap="BaseResultMap">
+        select *
+        from `order`
+        where o_user_id = #{userId,jdbcType=INTEGER}
+    </select>
+    <select id="getStoreId" resultType="java.lang.Integer">
+        select b_store_id
+        from book
+        where book_id in (select b_id
+                             from order_book_bind
+                             where o_id = #{orderId,jdbcType=INTEGER})
+        limit 1
+    </select>
+    <update id="orderAccept">
+        update `order`
+        set o_state = 1
+        where order_id = #{orderId,jdbcType=INTEGER}
+    </update>
+    <update id="orderAddComment">
+        update `order`
+        set o_rank = #{param1,jdbcType=INTEGER},o_comment=#{param2,jdbcType=VARCHAR}
+        where order_id = #{param3,jdbcType=INTEGER}
+    </update>
+    <update id="orderReceive">
+        update `order`
+        set o_state = 3
+        where order_id = #{orderId,jdbcType=INTEGER}
+    </update>
+    <select id="getStateList" resultType="java.lang.String">
+        select state_name
+        from type_state_bind
+        where type_id = 2
+    </select>
+
+</mapper>

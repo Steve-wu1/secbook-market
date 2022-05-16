@@ -1,10 +1,10 @@
 package sspu.informationsystem.service.Impl;
 
 import org.springframework.stereotype.Service;
-import sspu.informationsystem.entity.Dishes;
-import sspu.informationsystem.entity.OrderDishesBind;
+import sspu.informationsystem.entity.Book;
+import sspu.informationsystem.entity.OrderBookBind;
 import sspu.informationsystem.entity.Store;
-import sspu.informationsystem.mapper.DishesMapper;
+import sspu.informationsystem.mapper.BookMapper;
 import sspu.informationsystem.mapper.StoreMapper;
 import sspu.informationsystem.service.OrderService;
 import sspu.informationsystem.service.StoreService;
@@ -19,7 +19,7 @@ public class StoreServiceImpl implements StoreService{
     @Resource
     private StoreMapper storeMapper;
     @Resource
-    private DishesMapper dishesMapper;
+    private BookMapper bookMapper;
     @Resource
     private OrderService orderService;
 
@@ -44,7 +44,9 @@ public class StoreServiceImpl implements StoreService{
     }
 
     @Override
-    public List<Dishes> getDishesById(int storeId) { return storeMapper.getDishesById(storeId); }
+    public List<Book> getBookById(int storeId) {
+        return storeMapper.getBookById(storeId);
+    }
 
     @Override
     public List<String> getALlPhone() { return storeMapper.getALlPhone(); }
@@ -52,24 +54,6 @@ public class StoreServiceImpl implements StoreService{
     @Override
     public List<String> getAllAccount() { return storeMapper.getAllAccount(); }
 
-    @Override
-    public List<Store> getAddress(List<Store> storeList) {
-        for (Store store:storeList){
-            switch (store.getSAddress()){
-                case "W1": store.setSAddress("西食堂一楼");
-                    break;
-                case "W2": store.setSAddress("西食堂二楼");
-                    break;
-                case "E1": store.setSAddress("东食堂一楼");
-                    break;
-                case "E2": store.setSAddress("东食堂二楼");
-                    break;
-                case "E3": store.setSAddress("东食堂三楼");
-            }
-
-        }
-        return storeList;
-    }
 
     @Override
     public Integer checkApplyState(Integer storeId) {
@@ -87,31 +71,31 @@ public class StoreServiceImpl implements StoreService{
     }
 
     @Override
-    public List<Dishes>  getDishesOrderByCountForMonth(Integer storeId) {
-        return  storeMapper.getDishesOrderByCountForMonth(storeId);
+    public List<Book> getBookOrderByCountForMonth(Integer storeId) {
+        return storeMapper.getBookOrderByCountForMonth(storeId);
     }
 
     @Override
     public Double getSaleToday(Integer storeId) {
-        List<OrderDishesBind> dishesList = storeMapper.getSaleToday(storeId);
+        List<OrderBookBind> dishesList = storeMapper.getSaleToday(storeId);
         return orderService.calSum(dishesList);
     }
 
     @Override
     public Double getSaleSameAddressToday(String sAddress) {
-        List<OrderDishesBind> dishesList = storeMapper.getSaleSameAddressToday(sAddress);
+        List<OrderBookBind> dishesList = storeMapper.getSaleSameAddressToday(sAddress);
         return orderService.calSum(dishesList);
     }
 
     @Override
     public Double getSaleMonth(Integer storeId) {
-        List<OrderDishesBind> dishesList = storeMapper.getSaleMonth(storeId);
+        List<OrderBookBind> dishesList = storeMapper.getSaleMonth(storeId);
         return orderService.calSum(dishesList);
     }
 
     @Override
     public Double getSaleWeek(Integer storeId) {
-        List<OrderDishesBind> dishesList = storeMapper.getSaleWeek(storeId);
+        List<OrderBookBind> dishesList = storeMapper.getSaleWeek(storeId);
         return orderService.calSum(dishesList);
     }
 
@@ -133,7 +117,7 @@ public class StoreServiceImpl implements StoreService{
     }
 
     @Override
-    public Double getMonthStarDishSale(Integer dishesId) {
+    public Double getMonthStarBookSale(Integer dishesId) {
         return storeMapper.getMonthStarDishSale(dishesId);
     }
 

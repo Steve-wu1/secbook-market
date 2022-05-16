@@ -23,9 +23,9 @@ public class OrderServiceImpl implements OrderService{
     @Resource
     private StoreMapper storeMapper;
     @Resource
-    private DishesMapper dishesMapper;
+    private BookMapper bookMapper;
     @Resource
-    private OrderDishesBindMapper orderDishesBindMapper;
+    private OrderBookBindMapper orderBookBindMapper;
 
     @Override
     public int insert(Order record) {
@@ -48,19 +48,19 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public void addOrder(Integer userId, List<OrderDishesBind> dishesList) {
+    public void addOrder(Integer userId, List<OrderBookBind> dishesList) {
         orderMapper.addOrder(userId);
         Integer orderId = orderMapper.getLatestId();
         log.debug("获取最新注入的Id" + orderId);
         log.debug("订单绑定菜品列表" + dishesList);
-        dishesList.forEach(item-> orderDishesBindMapper.dishesBind(orderId,item));
+        dishesList.forEach(item -> orderBookBindMapper.bookBind(orderId, item));
     }
 
     @Override
-    public List<OrderDishesBind> checkDishesInOrder(List<OrderDishesBind> orderDishesBindList) {
-        List<OrderDishesBind> dealtList = new ArrayList<>();
-        orderDishesBindList.forEach(item->{
-            if (item.getDNumber()!=0){
+    public List<OrderBookBind> checkBookInOrder(List<OrderBookBind> orderBookBindList) {
+        List<OrderBookBind> dealtList = new ArrayList<>();
+        orderBookBindList.forEach(item -> {
+            if (item.getBNumber() != 0) {
                 dealtList.add(item);
             }
         });
@@ -68,8 +68,8 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public void orderComplete(Integer orderId) {
-        orderMapper.orderComplete(orderId);
+    public void orderComplete(Integer orderId, String oDelieverName, String oDelieverNum) {
+        orderMapper.orderComplete(orderId, oDelieverName, oDelieverNum);
     }
 
     @Override
@@ -98,28 +98,28 @@ public class OrderServiceImpl implements OrderService{
         //订单总价及内含菜品解析
         final Double[] sumPrice = {0.0};
         final String[] content = {""};
-        List<OrderDishesBind> dishesList = orderDishesBindMapper.getDishesList(order.getOrderId());
+        List<OrderBookBind> dishesList = orderBookBindMapper.getBookList(order.getOrderId());
         dishesList.forEach(dish->{
-            Dishes dishInfo = dishesMapper.getInfo(dish.getDId());
+            Book dishInfo = bookMapper.getInfo(dish.getBId());
             //价格解析求和
-            Double price = dishInfo.getDPrice();
-            price = price * dish.getDNumber();
+            Double price = dishInfo.getBPrice();
+            price = price * dish.getBNumber();
             sumPrice[0] += price;
             //点餐内容解析
-            content[0] += dishInfo.getDName()+"x"+dish.getDNumber();
+            content[0] += dishInfo.getBName() + "x" + dish.getBNumber();
         });
         order.setOPrice(sumPrice[0]);
         order.setOContent(content[0]);
     }
 
     @Override
-    public Double calSum(List<OrderDishesBind> dishesList) {
+    public Double calSum(List<OrderBookBind> dishesList) {
         final Double[] sumPrice = {0.0};
         dishesList.forEach(dish->{
-            Dishes dishInfo = dishesMapper.getInfo(dish.getDId());
+            Book dishInfo = bookMapper.getInfo(dish.getBId());
             //价格解析求和
-            Double price = dishInfo.getDPrice();
-            price = price * dish.getDNumber();
+            Double price = dishInfo.getBPrice();
+            price = price * dish.getBNumber();
             sumPrice[0] += price;
         });
         return sumPrice[0];

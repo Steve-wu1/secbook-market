@@ -23,7 +23,7 @@
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">食堂预约管理系统</h5>
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">二手书交易系统</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
             </div>
@@ -31,7 +31,7 @@
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
                         <a class="nav-link active" style="color: #1a1e21" aria-current="page"
-                           href="/store/list">食堂商家</a>
+                           href="/store/list">书城商家</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" style="color: #1a1e21" href="/toMyOrders">我的订单</a>
@@ -88,6 +88,14 @@
             </div>
         </div>
 
+        <div class="col-md-8 position-relative">
+            <label for="validationTooltip01" class="form-label">地址</label>
+            <input type="text" class="form-control" id="validationTooltip08" th:value="${user.uAddress}" name="uAddress"
+                   required>
+            <div class="valid-tooltip">
+            </div>
+        </div>
+
 
         <div class="col-md-9 position-relative" style="  margin: 150px 0 0 290px;">
             <button class="btn btn-primary" type="submit" onclick="return confirm('确认提交注册信息？')">修改</button>
@@ -102,7 +110,7 @@
     </div>
     <nav class=" navbar fixed-bottom bg-success " style="margin: 0 0 0 0;">
         <div class="container-fluid">
-            <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">食堂预约系统</a>
+            <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">二手书交易系统</a>
         </div>
     </nav>
 </div>

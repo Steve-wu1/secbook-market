@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sspu.informationsystem.mapper.BookMapper">
+    <resultMap id="BaseResultMap" type="sspu.informationsystem.entity.Book">
+        <!--@Table book-->
+        <id column="book_id" jdbcType="INTEGER" property="bookId"/>
+        <result column="b_name" jdbcType="VARCHAR" property="bName"/>
+        <result column="b_price" jdbcType="DECIMAL" property="bPrice"/>
+        <result column="b_detail" jdbcType="VARCHAR" property="bDetail"/>
+        <result column="b_photo" jdbcType="VARCHAR" property="bPhoto"/>
+        <result column="b_store_id" jdbcType="INTEGER" property="bStoreId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    book_id,b_name,b_price,b_detail,b_photo,b_store_id
+  </sql>
+    <insert id="insert" keyColumn="book_id" keyProperty="bookId" parameterType="sspu.informationsystem.entity.Book"
+            useGeneratedKeys="true">
+        insert into book (b_name, b_price, b_detail,
+        b_photo, b_store_id)
+        values (#{bName,jdbcType=VARCHAR}, #{bPrice,jdbcType=DECIMAL}, #{bDetail,jdbcType=VARCHAR},
+        #{bPhoto,jdbcType=VARCHAR}, #{bStoreId,jdbcType=INTEGER})
+    </insert>
+    <update id="updateBook">
+        update book
+        set
+        b_name = #{bName,jdbcType=VARCHAR},
+        b_price = #{bPrice,jdbcType=DECIMAL},
+        <if test="bPhoto != null">b_photo = #{bPhoto,jdbcType=VARCHAR},</if>
+        b_detail = #{bDetail,jdbcType=VARCHAR}
+        where book_id = #{bookId,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteBook">
+        delete from book
+        where book_id = #{bookId,jdbcType=INTEGER}
+    </delete>
+    <select id="getInfo" resultMap="BaseResultMap">
+        select *
+        from book
+        where book_id = #{bId,jdbcType=INTEGER}
+    </select>
+</mapper>

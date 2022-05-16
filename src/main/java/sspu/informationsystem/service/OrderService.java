@@ -1,7 +1,7 @@
 package sspu.informationsystem.service;
 
 import sspu.informationsystem.entity.Order;
-import sspu.informationsystem.entity.OrderDishesBind;
+import sspu.informationsystem.entity.OrderBookBind;
 
 import java.util.List;
 
@@ -12,11 +12,11 @@ public interface OrderService{
 
     List<Order> getOrderByStoreId(Integer storeId);
 
-    void addOrder(Integer userId,List<OrderDishesBind> dishesList);
+    void addOrder(Integer userId, List<OrderBookBind> dishesList);
 
-    List<OrderDishesBind> checkDishesInOrder(List<OrderDishesBind> orderDishesBindList);
+    List<OrderBookBind> checkBookInOrder(List<OrderBookBind> orderBookBindList);
 
-    void orderComplete(Integer orderId);
+    void orderComplete(Integer orderId, String oDelieverName, String oDelieverNum);
 
     void orderCancel(Integer orderId);
 
@@ -24,7 +24,7 @@ public interface OrderService{
 
     void dealOrderInfo(Order order);
 
-    Double calSum(List<OrderDishesBind> dishesList);
+    Double calSum(List<OrderBookBind> dishesList);
 
     void orderAccept(Integer orderId);
 

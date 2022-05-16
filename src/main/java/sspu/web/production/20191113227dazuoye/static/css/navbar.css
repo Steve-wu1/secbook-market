@@ -1,0 +1,24 @@
+.navbar-custom {
+    background-color: #95bf48;
+}
+
+.nav-item {
+    margin-left: 10px;
+}
+
+.product-category {
+    color: gray;
+}
+
+#invalid-price-info {
+    display: none;
+}
+
+.footer-nav {
+    height: 70px;
+    padding: 5px;
+    bottom: 1px;
+    width: 100%;
+    font-size: x-small;
+    background-color: lightgrey !important;
+}

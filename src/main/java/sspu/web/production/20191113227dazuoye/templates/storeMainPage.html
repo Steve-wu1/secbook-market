@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商家主页</title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/table.css">
+    <link rel="stylesheet" href="../css/modal.css">
+    <link rel="stylesheet" href="../css/mainpage.css">
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/vendor/jquery-1.12.4.js"></script>
+    <script src="../js/navbar.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<nav class="navbar navbar-dark fixed-top bg-success">
+    <div class="container-fluid">
+        <img src="/images/logo.jpg" alt="" width="138" height="44" class="d-inline-block align-text-top">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">二手书交易管理系统</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" style="color: #1a1e21" aria-current="page"
+                           href="/toDataAnalyze">数据分析</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #1a1e21" href="/toStoreOrder">订单查看</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: #1a1e21" href="#" id="offcanvasNavbarDropdown"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${session.store.sName}">
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                            <li><a class="dropdown-item" href="/toStoreMain">商家主页</a></li>
+                            <li><a class="dropdown-item" href="/login">退出账号</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<br><br>
+
+
+<div class="main-panel row g-3 needs-validation"
+      style=" margin: 0 auto; left: 15%;right: 15%; position: absolute; margin: 0 0 0 0;" novalidate>
+    <table class="pure-table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>书名</th>
+            <th>价格</th>
+            <th>简介</th>
+
+            <th>管理</th>
+        </tr>
+        </thead>
+        <thead>
+        <h5>商家主页</h5>
+        </thead>
+        <tbody>
+        <tr class="pure-table-odd" th:each="book,a:${bookList}">
+            <td th:text="${a.count}"></td>
+            <td th:text="${book.bName}"></td>
+            <td th:text="${book.bPrice}"></td>
+            <td th:text="${book.bDetail}"></td>
+
+            <td>
+
+                <input type="button" class="btn btn-primary" th:onclick="modalOpen1([[${book.bName}]],[[${book.bPrice}]],[[${book.bDetail}]],[[${book.bookId}]],[[${book.bPhoto}]])"  value="修改">
+                <a th:href="@{'/store/deleteBook/id='+${book.bookId}}" onclick="return confirm('是否删除该书目?此操作不可逆！')"><button class="btn btn-danger" >删除</button></a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div class="col-md-8 position-relative" style="  margin: 20px 0 0 500px;">
+        <input type="button" class="btn btn-primary" onclick="modalOpen2()"  value="添加">
+    </div>
+    <div class="col-md-8 position-relative" style="visibility: hidden">
+        <input type="text" class="form-control" required>
+        <div class="valid-tooltip">
+        </div>
+    </div>
+</div>
+<div class="modal-box" id="modal"
+     style="margin: 0 auto; left: 15%;right: 15%;top: 15%; position: absolute; visibility: hidden">
+    <!--顶部-->
+    <div class="modal-box-top">
+        <div class="modal-box-title">书籍信息</div>
+        <!--关闭按钮 &times;会被转义成乘号（×）看上去就是关闭符号-->
+        <!--关闭逻辑-->
+        <button onclick="modalClose()" class="modal-close">&times;
+        </button>
+    </div>
+    <!--主体-->
+    <div class="modal-box-photo" style=" left: 25%;right: 25%;">
+        <img src="" id="bPhoto3"  height="160">
+    </div>
+
+    <form th:action="@{'/store/alterBook/id='+${session.store.storeId}}" method="post" enctype="multipart/form-data">
+        <div class="modal-box-content">
+            <label for="bName"
+                   class="control-label"
+                   style="font-size: medium">书名:</label>
+            <input name="bName"
+                   id="bName"
+                   type="text"
+                   class="form-control "
+                   placeholder=" "/>
+            <label for="bPrice"
+                   class="control-label"
+                   style="font-size: medium">价格:</label>
+            <input name="bPrice"
+                   id="bPrice"
+                   type="text"
+                   class="form-control "
+                   placeholder=" "/>
+            <label for="bDetail"
+                   class="control-label"
+                   style="font-size: medium">简介:</label>
+            <input name="bDetail"
+                   id="bDetail"
+                   class="form-control "
+                   placeholder="">
+            <input name="bookId" id="bookId" hidden/>
+            <input name="bPhoto2" id="bPhoto2"/>
+            <div class="file-button">
+                选择文件
+                <input type="file"
+                       name="file"
+                       multiple="multiple"
+                       id="file"
+                       accept="image/*">
+            </div>
+        </div>
+        <!--底部-->
+        <div class="modal-box-bottom">
+            <a>
+                <button type="submit" class="btn btn-success" onclick="change()">提交</button>
+            </a>
+        </div>
+    </form>
+
+</div>
+
+
+<nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
+    <div class="container-fluid">
+        <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">二手书交易系统</a>
+    </div>
+</nav>
+
+</body>
+
+
+
+<script type="text/javascript">
+    $("#modal").modal("hide");
+
+    function change() {
+        var txt;
+        if (confirm("确认上传")) {
+            alert("上传成功");
+        } else {
+        }
+        document.getElementById("demo").innerHTML = txt;
+    }
+
+
+
+    function modalOpen1(bName, bPrice, bDetail, bookId, bPhoto2) {
+        modalOpen();
+        inputData(bName, bPrice, bDetail, bookId, bPhoto2);
+    }
+    function modalOpen2(bName, bPrice, bDetail, bookId, bPhoto2) {
+        modalOpen();
+        inputData();
+    }
+
+    function modalOpen() {
+        //获取模态框对象   getElementsByClassName获取到的是一个数组对象
+        $('body').on('hidden.bs.modal', function () {
+            // 踩过的坑555...
+            // $('.modal').modal('hide')
+            // $(this).removeData('bs.modal');
+            // $(this).find('.modal-body').empty();
+            // $('.modal-body').html("")
+            // 找到 modal-body下面的form表单，并且重置
+            $('.modal-box').trigger('reset');
+        });
+
+        //获取浏览器当前宽高
+        let documentWidth = window.innerWidth;
+        let documentHeight = window.innerHeight;
+        //获取模态框宽度
+        let modalWidth = modal.offsetWidth;
+        //模态框距离浏览器右侧的距离就是（浏览器宽度-模态框宽）/ 2.0
+        //注意，需要把结果转为字符串类型
+        modal.style.left = ((documentWidth - modalWidth) / 2.0).toString();
+        //设置为可见
+        modal.style.visibility = "visible";
+    }
+
+
+
+    //模态框关闭
+    function modalClose() {
+        //获取模态框
+        let modal = document.getElementsByClassName("modal-box")[0];
+        //设置为不可见
+        modal.style.visibility = "hidden";
+    }
+
+    function inputData(bName, bPrice, bDetail, bookId, bPhoto2) {
+        $(".modal-box #bName").val(bName);
+        $(".modal-box #bPrice").val(bPrice);
+        $(".modal-box #bDetail").val(bDetail);
+        $(".modal-box #bookId").val(bookId);
+        $(".modal-box #bPhoto2").val(bPhoto2);
+        var txt;
+        txt =document.getElementById("bPhoto2").value ;
+        document.images.bPhoto3.src=txt;
+
+
+    }
+
+
+</script>
+</html>

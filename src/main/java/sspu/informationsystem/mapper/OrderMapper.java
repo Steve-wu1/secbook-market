@@ -2,9 +2,7 @@ package sspu.informationsystem.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import sspu.informationsystem.entity.Order;
-import sspu.informationsystem.entity.OrderDishesBind;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Mapper
@@ -17,7 +15,7 @@ public interface OrderMapper {
 
     int getLatestId();
 
-    void orderComplete(Integer orderId);
+    void orderComplete(Integer orderId, String oDelieverName, String oDelieverNum);
 
     void orderCancel(Integer orderId);
 

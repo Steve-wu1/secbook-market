@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import sspu.informationsystem.entity.Dishes;
+import sspu.informationsystem.entity.Book;
 import sspu.informationsystem.entity.Order;
 import sspu.informationsystem.entity.Store;
 import sspu.informationsystem.service.ApplyService;
-import sspu.informationsystem.service.DishesService;
+import sspu.informationsystem.service.BookService;
 import sspu.informationsystem.service.OrderService;
 import sspu.informationsystem.service.StoreService;
 import sspu.informationsystem.utils.FtpUtil;
@@ -32,7 +32,7 @@ public class StoreController {
     @Resource
     ApplyService applyService;
     @Resource
-    DishesService dishesService;
+    BookService bookService;
     @Resource
     OrderService orderService;
 
@@ -97,21 +97,21 @@ public class StoreController {
     @GetMapping("/store/list")
     public String toStoreList(Model model) {
         List<Store> storeList = storeService.getAllStorePassed();
-        storeList = storeService.getAddress(storeList);
+
         model.addAttribute("storeList",storeList);
         return "stores";
     }
 
     @GetMapping("/store/info/id={storeId}")
     public String toStoreInfo(@PathVariable("storeId")Integer storeId, Model model){
-        model.addAttribute("dishesList",storeService.getDishesById(storeId));
+        model.addAttribute("bookList", storeService.getBookById(storeId));
         return "storeInfo";
     }
 
     @GetMapping("/toAdminStores")
     public String ToAdminStores(Model model) {
         List<Store> storeList = storeService.getAllStorePassed();
-        storeList = storeService.getAddress(storeList);
+
         model.addAttribute("storeList",storeList);
         return "adminStores";
     }
@@ -119,7 +119,7 @@ public class StoreController {
     @GetMapping("/toStoreMain")
     public String ToStoreMain(Model model, HttpSession session) {
         Store store = (Store) session.getAttribute("store");
-        model.addAttribute("dishesList",storeService.getDishesById(store.getStoreId()));
+        model.addAttribute("bookList", storeService.getBookById(store.getStoreId()));
         return "storeMainPage";
     }
 
@@ -131,7 +131,7 @@ public class StoreController {
 
     @GetMapping("/store/infoForAdmin/id={storeId}")
     public String storeInfoForAdmin(@PathVariable("storeId")Integer storeId,Model model){
-        model.addAttribute("dishesList",storeService.getDishesById(storeId));
+        model.addAttribute("bookList", storeService.getBookById(storeId));
         return "adminStoreInfo";
     }
 
@@ -143,26 +143,26 @@ public class StoreController {
         return "storeOrders";
     }
 
-    @PostMapping("/store/alterDish/id={storeId}")
-    public String storeAlterDish(@PathVariable("storeId")Integer storeId,Dishes dishes,MultipartFile file){
-        if (dishes.getDishesId()==null){
-            dishes.setDPhoto(ftpUtil.uplaod(file));
-            dishes.setDStoreId(storeId);
-            dishesService.insert(dishes);
+    @PostMapping("/store/alterBook/id={storeId}")
+    public String storeAlterBook(@PathVariable("storeId") Integer storeId, Book book, MultipartFile file) {
+        if (book.getBookId() == null) {
+            book.setBPhoto(ftpUtil.uplaod(file));
+            book.setBStoreId(storeId);
+            bookService.insert(book);
         }
         else {
             if (!file.isEmpty()) {
-                dishes.setDPhoto(ftpUtil.uplaod(file));
+                book.setBPhoto(ftpUtil.uplaod(file));
             }
-            dishesService.updateDish(dishes);
+            bookService.updateBook(book);
         }
         return "redirect:/toStoreMain";
 
     }
 
-    @GetMapping("/store/deleteDish/id={dishesId}")
-    public String storeDeleteDish(@PathVariable("dishesId")Integer dishesId){
-        dishesService.deleteDishById(dishesId);
+    @GetMapping("/store/deleteBook/id={dishesId}")
+    public String storeDeleteBook(@PathVariable("dishesId") Integer dishesId) {
+        bookService.deleteBookById(dishesId);
         return "redirect:/toStoreMain";
     }
 
@@ -172,46 +172,49 @@ public class StoreController {
         //店铺评分
         model.addAttribute("rank",storeService.getRankById(store.getStoreId()));
         //本月明星产品
-        List<Dishes> dishesList = storeService.getDishesOrderByCountForMonth(store.getStoreId());
-        model.addAttribute("starDish",dishesList.get(0));
-        model.addAttribute("saleStarDish",storeService.getMonthStarDishSale(dishesList.get(0).getDishesId()));
-        //TOP3产品
-        model.addAttribute("secDish",dishesList.get(1));
-        model.addAttribute("saleSecDish",storeService.getMonthStarDishSale(dishesList.get(1).getDishesId()));
-        model.addAttribute("thrDish",dishesList.get(2));
-        model.addAttribute("saleThrDish",storeService.getMonthStarDishSale(dishesList.get(2).getDishesId()));
-        //本日销售数据及订单数
-        model.addAttribute("saleToday",storeService.getSaleToday(store.getStoreId()));
-        model.addAttribute("orderCountToday",storeService.getOrderCountToday(store.getStoreId()));
-        //同一食堂本日销售额
-        String tempAddress = store.getSAddress();
-        tempAddress = tempAddress.substring(0,1);
-        tempAddress += "_";
-        model.addAttribute("saleSameAddressToday",storeService.getSaleSameAddressToday(tempAddress));
-        //本周销售额及订单数
-        model.addAttribute("saleWeek",storeService.getSaleWeek(store.getStoreId()));
-        model.addAttribute("orderCountWeek",storeService.getOrderCountWeek(store.getStoreId()));
-        //本月销售额及订单数
-        model.addAttribute("saleMonth",storeService.getSaleMonth(store.getStoreId()));
-        model.addAttribute("orderCountMonth",storeService.getOrderCountMonth(store.getStoreId()));
-        //近五个月
-        List<Object> month = storeService.getRecentFiveMonth();
-        month.add(0, 'x');
-        model.addAttribute("month", month);
-        //近五个月销售额
-        List<Object> mcount = storeService.getStoreMCount(store.getStoreId());
-        mcount.add(0, "本店订单数");
-        model.addAttribute("mcount", mcount);
-        //近五个月本平台各食堂平均销售额
-        List<Object> acount = storeService.getAllAverageMCount();
-        acount.add(0, "食堂商家平均订单数");
-        model.addAttribute("acount", acount);
-        //评分数据
-        model.addAttribute("rankData1",storeService.getRankData(store.getStoreId(),1));
-        model.addAttribute("rankData2",storeService.getRankData(store.getStoreId(),2));
-        model.addAttribute("rankData3",storeService.getRankData(store.getStoreId(),3));
-        model.addAttribute("rankData4",storeService.getRankData(store.getStoreId(),4));
-        model.addAttribute("rankData5",storeService.getRankData(store.getStoreId(),5));
+        List<Book> bookList = storeService.getBookOrderByCountForMonth(store.getStoreId());
+        if (bookList != null && bookList.size() > 0) {
+            model.addAttribute("starBook", bookList.get(0));
+
+            model.addAttribute("saleStarBook", storeService.getMonthStarBookSale(bookList.get(0).getBookId()));
+            //TOP3产品
+            model.addAttribute("secBook", bookList.get(1));
+            model.addAttribute("saleSecBook", storeService.getMonthStarBookSale(bookList.get(1).getBookId()));
+            model.addAttribute("thrBook", bookList.get(2));
+            model.addAttribute("saleThrBook", storeService.getMonthStarBookSale(bookList.get(2).getBookId()));
+            //本日销售数据及订单数
+            model.addAttribute("saleToday",storeService.getSaleToday(store.getStoreId()));
+            model.addAttribute("orderCountToday",storeService.getOrderCountToday(store.getStoreId()));
+            //同一食堂本日销售额
+            String tempAddress = store.getSAddress();
+            tempAddress = tempAddress.substring(0,1);
+            tempAddress += "_";
+            model.addAttribute("saleSameAddressToday",storeService.getSaleSameAddressToday(tempAddress));
+            //本周销售额及订单数
+            model.addAttribute("saleWeek",storeService.getSaleWeek(store.getStoreId()));
+            model.addAttribute("orderCountWeek",storeService.getOrderCountWeek(store.getStoreId()));
+            //本月销售额及订单数
+            model.addAttribute("saleMonth",storeService.getSaleMonth(store.getStoreId()));
+            model.addAttribute("orderCountMonth",storeService.getOrderCountMonth(store.getStoreId()));
+            //近五个月
+            List<Object> month = storeService.getRecentFiveMonth();
+            month.add(0, 'x');
+            model.addAttribute("month", month);
+            //近五个月销售额
+            List<Object> mcount = storeService.getStoreMCount(store.getStoreId());
+            mcount.add(0, "本店订单数");
+            model.addAttribute("mcount", mcount);
+            //近五个月本平台各书店平均销售额
+            List<Object> acount = storeService.getAllAverageMCount();
+            acount.add(0, "二手书店商家平均订单数");
+            model.addAttribute("acount", acount);
+            //评分数据
+            model.addAttribute("rankData1",storeService.getRankData(store.getStoreId(),1));
+            model.addAttribute("rankData2",storeService.getRankData(store.getStoreId(),2));
+            model.addAttribute("rankData3",storeService.getRankData(store.getStoreId(),3));
+            model.addAttribute("rankData4",storeService.getRankData(store.getStoreId(),4));
+            model.addAttribute("rankData5",storeService.getRankData(store.getStoreId(),5));
+        }
         return "dataAnalyze";
     }
 

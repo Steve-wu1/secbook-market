@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sspu.informationsystem.mapper.OrderBookBindMapper">
+  <resultMap id="BaseResultMap" type="sspu.informationsystem.entity.OrderBookBind">
+    <!--@Table order_book_bind-->
+    <id column="order_book_id" jdbcType="INTEGER" property="orderBookId" />
+    <result column="o_id" jdbcType="INTEGER" property="oId" />
+    <result column="b_id" jdbcType="INTEGER" property="bId" />
+    <result column="b_number" jdbcType="INTEGER" property="bNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_book_id, o_id, b_id, b_number
+  </sql>
+  <insert id="insert" parameterType="sspu.informationsystem.entity.OrderBookBind">
+    insert into order_book_bind (order_book_id, o_id, b_id,
+      b_number)
+    values (#{orderBookId,jdbcType=INTEGER}, #{oId,jdbcType=INTEGER}, #{bId,jdbcType=INTEGER},
+      #{bNumber,jdbcType=INTEGER})
+  </insert>
+    <insert id="bookBind">
+      insert into order_book_bind (b_id,b_number,o_id)
+      values (#{param2.bId,jdbcType=INTEGER},#{param2.bNumber,jdbcType=INTEGER},#{param1,jdbcType=INTEGER})
+    </insert>
+  <select id="getBookList" resultMap="BaseResultMap">
+    select b_id,b_number
+    from order_book_bind
+    where o_id = #{orderId,jdbcType=INTEGER}
+  </select>
+</mapper>

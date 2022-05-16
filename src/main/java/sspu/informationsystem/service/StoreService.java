@@ -1,6 +1,6 @@
 package sspu.informationsystem.service;
 
-import sspu.informationsystem.entity.Dishes;
+import sspu.informationsystem.entity.Book;
 import sspu.informationsystem.entity.Store;
 
 import java.util.List;
@@ -16,13 +16,13 @@ public interface StoreService{
 
     Store getStoreInfoById(Integer storeId);
 
-    List<Dishes> getDishesById(int storeId);
+    List<Book> getBookById(int storeId);
 
     List<String> getALlPhone();
 
     List<String> getAllAccount();
 
-    List<Store> getAddress(List<Store> storeList);
+
 
     Integer checkApplyState(Integer storeId);
 
@@ -30,7 +30,7 @@ public interface StoreService{
 
     double getRankById(Integer storeId);
 
-    List<Dishes> getDishesOrderByCountForMonth(Integer storeId);
+    List<Book> getBookOrderByCountForMonth(Integer storeId);
 
     Double getSaleToday(Integer storeId);
 
@@ -46,7 +46,7 @@ public interface StoreService{
 
     List<Object> getAllAverageMCount();
 
-    Double getMonthStarDishSale(Integer dishesId);
+    Double getMonthStarBookSale(Integer dishesId);
 
     Integer getOrderCountToday(Integer storeId);
 

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<html xmlns:th="http://www.thymeleaf.org" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <title>数据分析</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/dataanalyze.css">
+    <link href="/css/c3/c3.min.css" rel="stylesheet">
+    <script src="/js/c3-charts/d3.min.js" charset="utf-8"></script>
+    <script src="/js/c3-charts/c3.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/navbar.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-dark fixed-top bg-success">
+    <div class="container-fluid">
+        <img src="/images/logo.jpg" alt="" width="138" height="44" class="d-inline-block align-text-top">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">二手书交易系统</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" style="color: #1a1e21" aria-current="page"
+                           href="/toDataAnalyze">数据分析</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #1a1e21" href="/toStoreOrder">订单查看</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: #1a1e21" href="#" id="offcanvasNavbarDropdown"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${session.store.sName}">
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                            <li><a class="dropdown-item" href="/toStoreMain">商家主页</a></li>
+                            <li><a class="dropdown-item" href="/login">退出账号</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="main-panel row row-cols-1 row-cols-md-5 g-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title" th:text="${session.store.SName}+'销售数据分析'"></h2>
+                <h5>综合评分：<code th:text="${rank}"></code></h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    商家每月销售订单数分析
+                </h4>
+            </div>
+            <div class="sparkline11-graph">
+                <div id="chart5"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card" style="height: 260px">
+            <div class="card-header">
+                <h4>明星产品</h4>
+            </div>
+            <br/>
+            <input hidden>
+            <h4 style="text-align: center"><img th:src="'/images/'+${starBook.getBPhoto}" class="col-6" height="120px"></h4>
+            <h5 th:text="${starBook.getBName}+'   销售量:'+${saleStarBook}+'份'" style="text-align: center"></h5>
+            <br/>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card" style="height: 260px">
+            <div class="card-header">
+                <h4>日/周/月销售额</h4>
+            </div>
+            <br/>
+            <h4></h4>
+            <h4 style="text-align: center" th:text="'本日销售额:'+${saleToday}+'元;订单数:'+${orderCountToday}"></h4>
+            <h4 style="text-align: center" th:text="'本周销售额:'+${saleWeek}+'元;订单数:'+${orderCountWeek}"></h4>
+            <h4 style="text-align: center" th:text="'本月销售额:'+${saleMonth}+'元;订单数:'+${orderCountMonth}"></h4>
+            <h4></h4>
+            <br/>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    订单评分分布分析
+                </h4>
+            </div>
+            <div class="sparkline11-graph">
+                <h4 style="text-align: center">&nbsp;</h4>
+                <div id="chart"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    书籍月销售top3
+                </h4>
+            </div>
+            <h4 style="text-align: center">&nbsp;</h4>
+            <div class="sparkline11-graph">
+                <div id="chart2"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-8 position-relative" style="visibility: hidden">
+        <input type="text" class="form-control" required>
+        <div class="valid-tooltip">
+        </div>
+    </div>
+
+    <!--<div class="col-3">-->
+    <!--<div class="card">-->
+        <!--<div class="card-header">-->
+            <!--<h4>签到：</h4>-->
+        <!--</div>-->
+        <!--<br/>-->
+        <!--<h4 style="text-align: center">2/2</h4>-->
+        <!--<br/>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-3">-->
+        <!--<div class="card">-->
+            <!--<div class="card-header">-->
+                <!--<h4>讨论：</h4>-->
+            <!--</div>-->
+            <!--<br/>-->
+            <!--<h4 style="text-align: center">1/1</h4>-->
+            <!--<br/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-6">-->
+        <!--<div class="card">-->
+            <!--<div class="card-header">-->
+                <!--<h4>-->
+                    <!--章节学习统计-->
+                <!--</h4>-->
+            <!--</div>-->
+            <!--<h4 style="text-align: center">&nbsp;</h4>-->
+            <!--<h2 style="text-align: center">您的章节完成进度：</h2>-->
+            <!--<div class="sparkline11-graph">-->
+                <!--<div id="chart2"></div>-->
+            <!--</div>-->
+            <!--<br/>-->
+            <!--<h4 style="text-align: center">您的章节完成个数：4个</h4>-->
+            <!--<h4 style="text-align: center">班级平均完成个数：2个</h4>-->
+            <!--<h4 style="text-align: center">班级最高完成个数：4个</h4>-->
+            <!--<br/>-->
+        <!--</div>-->
+
+    <!--</div>-->
+    <!--<div class="col-6">-->
+        <!--<div class="card">-->
+            <!--<div class="card-header">-->
+                <!--<h4>-->
+                    <!--考试成绩分布-->
+                <!--</h4>-->
+            <!--</div>-->
+            <!--<div class="sparkline11-graph">-->
+                <!--<h4 style="text-align: center">&nbsp;</h4>-->
+                <!--<h3 style="text-align: center">您的考试成绩为：98分</h3>-->
+                <!--<div id="chart"></div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-8 position-relative" style="visibility: hidden">-->
+        <!--<label for="" class="form-label"></label>-->
+        <!--<input type="text" class="form-control" required>-->
+        <!--<div class="valid-tooltip">-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+<nav class=" navbar fixed-bottom bg-success" style="margin: 0 0 0 0;">
+    <div class="container-fluid">
+        <a style="display:inline-block; width:1700px; text-align:center; color: #dde0e3">二手书交易系统</a>
+    </div>
+</nav>
+<script th:inline="javascript">
+    let month = [[${month}]]
+    console.log(month);
+    let acount = [[${acount}]]
+    console.log(acount);
+    let mcount = [[${mcount}]]
+    console.log(mcount);
+    let rankData1 = [[${rankData1}]]
+    console.log(rankData1);
+    let rankData2 = [[${rankData2}]]
+    console.log(rankData2);
+    let rankData3 = [[${rankData3}]]
+    console.log(rankData3);
+    let rankData4 = [[${rankData4}]]
+    console.log(rankData4);
+    let rankData5 = [[${rankData5}]]
+    console.log(rankData5);
+    let starDishName = [[${starBook.bName}]]
+    console.log(starDishName);
+    let saleStarDish = [[${saleStarBook}]]
+    console.log(saleStarDish);
+    let secDishName = [[${secBook.bName}]]
+    console.log(secDishName);
+    let saleSecDish = [[${saleSecBook}]]
+    console.log(saleSecDish);
+    let thrDishName = [[${thrBook.bName}]]
+    console.log(thrDishName);
+    let saleThrDish = [[${saleThrBook}]]
+    console.log(saleThrDish);
+</script>
+<script language="javascript">
+    // var chart = c3.generate({
+    //     bindto: '#chart',
+    //     data: {
+    //         columns: [
+    //             ["90-100", 40],
+    //             ["80-90", 20],
+    //             ["70-80", 20],
+    //             ["60-70", 20],
+    //             ["60以下", 20],
+    //         ],
+    //         type: 'pie',
+    //         onclick: function (d, i) {
+    //             console.log("onclick", d, i);
+    //         },
+    //         onmouseover: function (d, i) {
+    //             console.log("onmouseover", d, i);
+    //         },
+    //         onmouseout: function (d, i) {
+    //             console.log("onmouseout", d, i);
+    //         }
+    //     }
+    // });
+
+
+    var chart1 = c3.generate({
+        bindto: '#chart',
+        data: {
+            // iris data from R
+            columns: [
+                ['data1', 30],
+                ['data2', 120],
+            ],
+            type: 'pie',
+            onclick: function (d, i) {
+                console.log("onclick", d, i);
+            },
+            onmouseover: function (d, i) {
+                console.log("onmouseover", d, i);
+            },
+            onmouseout: function (d, i) {
+                console.log("onmouseout", d, i);
+            }
+        },
+        size: {
+            height: 242
+        }
+    });
+    setTimeout(function () {
+        chart1.load({
+            columns: [
+                ["1分", rankData1],
+                ["2分", rankData2],
+                ["3分", rankData3],
+                ["4分", rankData4],
+                ["5分", rankData5],
+            ]
+        });
+    }, 1500);
+
+    setTimeout(function () {
+        chart1.unload({
+            ids: 'data1'
+        });
+        chart1.unload({
+            ids: 'data2'
+        });
+    }, 2500);
+
+    var chart2 = c3.generate({
+        bindto: '#chart2',
+        data: {
+            // iris data from R
+            columns: [
+                ['data1', 30],
+                ['data2', 120],
+            ],
+            type: 'pie',
+            onclick: function (d, i) {
+                console.log("onclick", d, i);
+            },
+            onmouseover: function (d, i) {
+                console.log("onmouseover", d, i);
+            },
+            onmouseout: function (d, i) {
+                console.log("onmouseout", d, i);
+            }
+        },
+        size: {
+            height: 242
+        }
+    });
+    setTimeout(function () {
+        chart2.load({
+            columns: [
+                [starDishName, saleStarDish],
+                [secDishName, saleSecDish],
+                [thrDishName, saleThrDish]
+            ]
+        });
+    }, 1500);
+
+    setTimeout(function () {
+        chart2.unload({
+            ids: 'data1'
+        });
+        chart2.unload({
+            ids: 'data2'
+        });
+    }, 2500);
+
+
+    var chart3 = c3.generate({
+        bindto: '#chart3',
+        data: {
+            x: '月份',
+            columns: [
+                ['月份', '7', '8', '9', '10', '11'],
+                ['学习次数', 2, 2, 5, 1, 6]
+            ],
+            type: 'bar'
+        },
+        axis: {
+            x: {
+                label: '月'
+            }
+        }
+    });
+    var chart5 = c3.generate({
+        bindto: '#chart5',
+        // data: {
+        //     x: '章节',
+        //     columns: [
+        //         ['章节', '2021-10-25', '2021-10-26', '2021-10-27', '2021-10-28', '2021-10-29'],
+        //         ['班平均学习次数', 2, 3, 2, 3, 2],
+        //         ['我的学习次数', 2, 2, 1, 2, 3]
+        //     ],
+        //     type: 'bar'
+        //
+        // },
+        // grid: {
+        //     y: {
+        //         lines: [{value: 0}]
+        //     }
+        // },
+        // axis: {
+        //     x: {
+        //         type: 'timeseries',
+        //         // if true, treat x value as localtime (Default)
+        //         // if false, convert to UTC internally
+        //         localtime: false,
+        //         tick: {
+        //             format: '%Y-%m-%d'
+        //         }
+        //     }
+        // }
+        data: {
+            x: 'x',
+            columns: [
+                month, mcount, acount
+            ],
+            type: 'bar',
+            types: {
+                '食堂商家平均订单数': 'line',
+            }
+        },
+        axis: {
+            x: {
+                type: 'timeseries',
+                tick: {
+                    format: '%Y-%m'
+                }
+            }
+        },
+        bar: {
+            width: {
+                ratio: 0.5 // this makes bar width 50% of length between ticks
+            }
+        }
+
+    });
+
+
+</script>
+</body>
+</html>

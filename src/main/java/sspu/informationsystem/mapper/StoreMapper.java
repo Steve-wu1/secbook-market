@@ -1,8 +1,8 @@
 package sspu.informationsystem.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import sspu.informationsystem.entity.Dishes;
-import sspu.informationsystem.entity.OrderDishesBind;
+import sspu.informationsystem.entity.Book;
+import sspu.informationsystem.entity.OrderBookBind;
 import sspu.informationsystem.entity.Store;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public interface StoreMapper {
 
     Store getStoreInfoById(Integer storeId);
 
-    List<Dishes> getDishesById(int storeId);
+    List<Book> getBookById(int storeId);
 
     List<String> getALlPhone();
 
@@ -30,15 +30,15 @@ public interface StoreMapper {
 
     double getRankById(Integer storeId);
 
-    List<Dishes> getDishesOrderByCountForMonth(Integer storeId);
+    List<Book> getBookOrderByCountForMonth(Integer storeId);
 
-    List<OrderDishesBind> getSaleToday(Integer storeId);
+    List<OrderBookBind> getSaleToday(Integer storeId);
 
-    List<OrderDishesBind> getSaleSameAddressToday(String sAddress);
+    List<OrderBookBind> getSaleSameAddressToday(String sAddress);
 
-    List<OrderDishesBind> getSaleMonth(Integer storeId);
+    List<OrderBookBind> getSaleMonth(Integer storeId);
 
-    List<OrderDishesBind> getSaleWeek(Integer storeId);
+    List<OrderBookBind> getSaleWeek(Integer storeId);
 
     List<Object> getStoreMCount(Integer storeId);
 
@@ -46,7 +46,7 @@ public interface StoreMapper {
 
     List<Object> getAllAverageMCount();
 
-    Double getMonthStarDishSale(Integer dishesId);
+    Double getMonthStarDishSale(Integer bookId);
 
     Integer getOrderCountToday(Integer storeId);
 
