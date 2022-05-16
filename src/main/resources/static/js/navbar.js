@@ -21,6 +21,7 @@ $(window).bind("load", function () {
         } else {
             $footer.css({position: "static"});
 
+
         }
     }
 
