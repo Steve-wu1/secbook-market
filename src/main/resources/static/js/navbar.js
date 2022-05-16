@@ -20,6 +20,7 @@ $(window).bind("load", function () {
             $footer.css({position: "absolute"}).stop().animate({top: footerTop});
         } else {
             $footer.css({position: "static"});
+
         }
     }
 
